@@ -2,9 +2,18 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('header/', views.header, name='header'),
-    path('footer/', views.footer, name='footer'),
-    path('home/', views.homepage, name='home'),
+    path('', views.homepage, name='home'),
+    path('about/', views.aboutpage, name='about'),
+    path('agents/', views.agentspage, name='agents'),
+    path('blog/', views.blogpage, name='blog'),
+    path('blogdetails/', views.blogdetailspage, name='blogdetails'),
+    path('buy/', views.buypage, name='buy'),
+    path('contact/', views.contactpage, name='contact'),
+    path('property-details/', views.propertyDetailsPage, name='property-details'),
+    path('register/', views.registerpage, name='register'),
+    path('rent/', views.rentpage, name='rent'),
+    path('sell/', views.sellpage, name='sell'),
+    path('properties/', views.buySaleRentPage, name='buysalerent'),
 
 
 ]

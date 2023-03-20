@@ -1,94 +1,170 @@
-{% extends 'header.html' %}
-<title>{% block title %} Home {% endblock %}</title>
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <title> {% block title %} Home {% endblock %}</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/style.css' %}" />
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="{% static 'assets/bootstrap/js/bootstrap.js' %}"></script>
+  <script src="{% static 'assets/script.js' %}"></script>
+
+  <!-- Owl stylesheet -->
+  <link rel="stylesheet" href="{% static 'assets/owl-carousel/owl.carousel.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/owl-carousel/owl.theme.css' %}">
+  <script src="{% static 'assets/owl-carousel/owl.carousel.js' %}"></script>
+  <!-- Owl stylesheet -->
+
+
+  <!-- slitslider -->
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/slitslider/css/style.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/slitslider/css/custom.css' %}" />
+  <script type="text/javascript" src="{% static 'assets/slitslider/js/modernizr.custom.79639.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/slitslider/js/jquery.ba-cond.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/slitslider/js/jquery.slitslider.js' %}"></script>
+  <!-- slitslider -->
+</head>
 
 <body>
-  <div class="">
-    <div id="slider" class="sl-slider-wrapper">
+  {% block subheader %}
+  <!-- Header Starts -->
+  <div class="navbar-wrapper">
 
-      <div class="sl-slider">
-
-        <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25"
-          data-slice1-scale="2" data-slice2-scale="2">
-          <div class="sl-slide-inner">
-            <div class="bg-img bg-img-1"></div>
-            <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
-            <blockquote>
-              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
-              <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
-              </p>
-              <cite>Rs. 20,000,000</cite>
-            </blockquote>
-          </div>
+    <div class="navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
         </div>
 
-        <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15"
-          data-slice1-scale="1.5" data-slice2-scale="1.5">
-          <div class="sl-slide-inner">
-            <div class="bg-img bg-img-2"></div>
-            <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
-            <blockquote>
-              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
-              <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
-              </p>
-              <cite>Rs. 20,000,000</cite>
-            </blockquote>
-          </div>
+        <!-- Nav Starts -->
+        <div class="navbar-collapse  collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'agents' %}">Agents</a></li>
+            <li><a href="{% url 'blog' %}">Blog</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+          </ul>
         </div>
+        <!-- #Nav Ends -->
 
-        <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3"
-          data-slice1-scale="2" data-slice2-scale="1">
-          <div class="sl-slide-inner">
-            <div class="bg-img bg-img-3"></div>
-            <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
-            <blockquote>
-              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
-              <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
-              </p>
-              <cite>Rs. 20,000,000</cite>
-            </blockquote>
-          </div>
+      </div>
+    </div>
+  </div>
+  <!-- #Header Starts -->
+
+  <div class="container">
+
+    <!-- Header Starts -->
+    <div class="header">
+      <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Realestate"></a>
+
+      <ul class="pull-right">
+        <li><a href="{% url 'buy' %}">Buy</a></li>
+        <li><a href="{% url 'sell' %}">Sell</a></li>
+        <li><a href="{% url 'rent' %}">Rent</a></li>
+      </ul>
+    </div>
+    <!-- #Header Starts -->
+  </div>
+  {% endblock %}
+
+  {% block content %}
+  <div id="slider" class="sl-slider-wrapper">
+
+    <div class="sl-slider">
+
+      <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25"
+        data-slice1-scale="2" data-slice2-scale="2">
+        <div class="sl-slide-inner">
+          <div class="bg-img bg-img-1"></div>
+          <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+          <blockquote>
+            <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
+            <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
+            </p>
+            <cite>Rs. 2,00,00,000</cite>
+          </blockquote>
         </div>
+      </div>
 
-        <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="-5" data-slice2-rotation="25"
-          data-slice1-scale="2" data-slice2-scale="1">
-          <div class="sl-slide-inner">
-            <div class="bg-img bg-img-4"></div>
-            <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
-            <blockquote>
-              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
-              <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
-              </p>
-              <cite>Rs. 20,000,000</cite>
-            </blockquote>
-          </div>
+      <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15"
+        data-slice1-scale="1.5" data-slice2-scale="1.5">
+        <div class="sl-slide-inner">
+          <div class="bg-img bg-img-2"></div>
+          <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+          <blockquote>
+            <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
+            <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
+            </p>
+            <cite>Rs. 20,000,000</cite>
+          </blockquote>
         </div>
+      </div>
 
-        <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-5" data-slice2-rotation="10"
-          data-slice1-scale="2" data-slice2-scale="1">
-          <div class="sl-slide-inner">
-            <div class="bg-img bg-img-5"></div>
-            <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
-            <blockquote>
-              <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
-              <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
-              </p>
-              <cite>Rs. 20,000,000</cite>
-            </blockquote>
-          </div>
+      <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3"
+        data-slice1-scale="2" data-slice2-scale="1">
+        <div class="sl-slide-inner">
+          <div class="bg-img bg-img-3"></div>
+          <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+          <blockquote>
+            <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
+            <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
+            </p>
+            <cite>Rs. 20,000,000</cite>
+          </blockquote>
         </div>
-      </div><!-- /sl-slider -->
+      </div>
+
+      <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="-5" data-slice2-rotation="25"
+        data-slice1-scale="2" data-slice2-scale="1">
+        <div class="sl-slide-inner">
+          <div class="bg-img bg-img-4"></div>
+          <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+          <blockquote>
+            <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
+            <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
+            </p>
+            <cite>Rs. 20,000,000</cite>
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-5" data-slice2-rotation="10"
+        data-slice1-scale="2" data-slice2-scale="1">
+        <div class="sl-slide-inner">
+          <div class="bg-img bg-img-5"></div>
+          <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
+          <blockquote>
+            <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 1890 Syndey, Australia</p>
+            <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
+            </p>
+            <cite>Rs. 20,000,000</cite>
+          </blockquote>
+        </div>
+      </div>
+    </div><!-- /sl-slider -->
 
 
 
-      <nav id="nav-dots" class="nav-dots">
-        <span class="nav-dot-current"></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </nav>
+    <nav id="nav-dots" class="nav-dots">
+      <span class="nav-dot-current"></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </nav>
 
-    </div><!-- /slider-wrapper -->
+  </div><!-- /slider-wrapper -->
   </div>
 
 
@@ -127,7 +203,7 @@
                 </select>
               </div>
               <div class="col-lg-3 col-sm-4">
-                <button class="btn btn-success" onclick="window.location.href='buysalerent.php'">Find Now</button>
+                <button class="btn btn-success" onclick="window.location.href='buysalerent.html'">Find Now</button>
               </div>
             </div>
 
@@ -143,139 +219,151 @@
   </div>
   <!-- banner -->
   <div class="container">
-    <div class="properties-listing spacer"> <a href="buysalerent.php" class="pull-right viewall">View All Listing</a>
+    <div class="properties-listing spacer"> <a href="{% url 'buysalerent' %}" class="pull-right viewall">View All
+        Listing</a>
       <h2>Featured Properties</h2>
       <div id="owl-example" class="owl-carousel">
         <div class="properties">
-          <div class="image-holder"><img src="images/properties/1.jpg" class="img-responsive" alt="properties" />
+          <div class="image-holder"><img src="{% static 'images/properties/1.jpg' %}" class="img-responsive"
+              alt="properties" />
             <div class="status sold">Sold</div>
           </div>
-          <h4><a href="property-detail.php">Royal Inn</a></h4>
+          <h4><a href="property-detail.html">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="property-detail.php">View Details</a>
+          <a class="btn btn-primary" href="property-detail.html">View Details</a>
         </div>
         <div class="properties">
-          <div class="image-holder"><img src="images/properties/2.jpg" class="img-responsive" alt="properties" />
+          <div class="image-holder"><img src="{% static 'images/properties/2.jpg' %}" class=" img-responsive"
+              alt="properties" />
             <div class="status new">New</div>
           </div>
-          <h4><a href="property-detail.php">Royal Inn</a></h4>
+          <h4><a href="property-detail.html">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="property-detail.php">View Details</a>
+          <a class="btn btn-primary" href="property-detail.html">View Details</a>
         </div>
         <div class="properties">
-          <div class="image-holder"><img src="images/properties/3.jpg" class="img-responsive" alt="properties" /></div>
-          <h4><a href="property-detail.php">Royal Inn</a></h4>
+          <div class="image-holder"><img src="{% static 'images/properties/3.jpg' %}" class=" img-responsive"
+              alt="properties" /></div>
+          <h4><a href="property-detail.html">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="property-detail.php">View Details</a>
+          <a class="btn btn-primary" href="property-detail.html">View Details</a>
         </div>
         <div class="properties">
-          <div class="image-holder"><img src="images/properties/4.jpg" class="img-responsive" alt="properties" /></div>
-          <h4><a href="property-detail.php">Royal Inn</a></h4>
+          <div class="image-holder"><img src="{% static 'images/properties/4.jpg' %}" class=" img-responsive"
+              alt="properties" /></div>
+          <h4><a href="property-detail.html">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="property-detail.php">View Details</a>
+          <a class="btn btn-primary" href="property-detail.html">View Details</a>
         </div>
         <div class="properties">
-          <div class="image-holder"><img src="images/properties/1.jpg" class="img-responsive" alt="properties" />
+          <div class="image-holder"><img src="{% static 'images/properties/1.jpg' %}" class=" img-responsive"
+              alt="properties" />
             <div class="status sold">Sold</div>
           </div>
-          <h4><a href="property-detail.php">Royal Inn</a></h4>
+          <h4><a href="property-detail.html">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="property-detail.php">View Details</a>
+          <a class="btn btn-primary" href="property-detail.html">View Details</a>
         </div>
         <div class="properties">
-          <div class="image-holder"><img src="images/properties/2.jpg" class="img-responsive" alt="properties" />
+          <div class="image-holder"><img src="{% static 'images/properties/2.jpg' %}" class=" img-responsive"
+              alt="properties" />
             <div class="status sold">Sold</div>
           </div>
-          <h4><a href="property-detail.php">Royal Inn</a></h4>
+          <h4><a href="property-detail.html">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="property-detail.php">View Details</a>
+          <a class="btn btn-primary" href="property-detail.html">View Details</a>
         </div>
         <div class="properties">
-          <div class="image-holder"><img src="images/properties/3.jpg" class="img-responsive" alt="properties" />
+          <div class="image-holder"><img src="{% static 'images/properties/3.jpg' %}" class=" img-responsive"
+              alt="properties" />
             <div class="status new">New</div>
           </div>
-          <h4><a href="property-detail.php">Royal Inn</a></h4>
+          <h4><a href="property-detail.html">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="property-detail.php">View Details</a>
+          <a class="btn btn-primary" href="property-detail.html">View Details</a>
         </div>
         <div class="properties">
-          <div class="image-holder"><img src="images/properties/4.jpg" class="img-responsive" alt="properties" /></div>
-          <h4><a href="property-detail.php">Royal Inn</a></h4>
+          <div class="image-holder"><img src="{% static 'images/properties/4.jpg' %}" class=" img-responsive"
+              alt="properties" /></div>
+          <h4><a href="property-detail.html">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="property-detail.php">View Details</a>
+          <a class="btn btn-primary" href="property-detail.html">View Details</a>
         </div>
         <div class="properties">
-          <div class="image-holder"><img src="images/properties/1.jpg" class="img-responsive" alt="properties" /></div>
-          <h4><a href="property-detail.php">Royal Inn</a></h4>
+          <div class="image-holder"><img src="{% static 'images/properties/1.jpg' %}" class=" img-responsive"
+              alt="properties" /></div>
+          <h4><a href="property-detail.html">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="property-detail.php">View Details</a>
+          <a class="btn btn-primary" href="property-detail.html">View Details</a>
         </div>
         <div class="properties">
-          <div class="image-holder"><img src="images/properties/2.jpg" class="img-responsive" alt="properties" /></div>
-          <h4><a href="property-detail.php">Royal Inn</a></h4>
+          <div class="image-holder"><img src="{% static 'images/properties/2.jpg' %}" class=" img-responsive"
+              alt="properties" /></div>
+          <h4><a href="property-detail.html">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="property-detail.php">View Details</a>
+          <a class="btn btn-primary" href="property-detail.html">View Details</a>
         </div>
         <div class="properties">
-          <div class="image-holder"><img src="images/properties/3.jpg" class="img-responsive" alt="properties" /></div>
-          <h4><a href="property-detail.php">Royal Inn</a></h4>
+          <div class="image-holder"><img src="{% static 'images/properties/3.jpg' %}" class=" img-responsive"
+              alt="properties" /></div>
+          <h4><a href="property-detail.html">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="property-detail.php">View Details</a>
+          <a class="btn btn-primary" href="property-detail.html">View Details</a>
         </div>
 
       </div>
@@ -287,7 +375,7 @@
           <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections
             1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact
             original form, accompanied by English versions from the 1914 translation by H. Rackham.<br><a
-              href="about.php">Learn More</a></p>
+              href="{% url 'about' %}">Learn More</a></p>
 
         </div>
         <div class="col-lg-5 col-lg-offset-1 col-sm-3 recommended">
@@ -303,45 +391,49 @@
             <div class="carousel-inner">
               <div class="item active">
                 <div class="row">
-                  <div class="col-lg-4"><img src="images/properties/1.jpg" class="img-responsive" alt="properties" />
+                  <div class="col-lg-4"><img src="{% static 'images/properties/1.jpg' %}" class="img-responsive"
+                      alt="properties" />
                   </div>
                   <div class="col-lg-8">
-                    <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                    <h5><a href="property-detail.html">Integer sed porta quam</a></h5>
                     <p class="price">Rs. 300,000</p>
-                    <a href="property-detail.php" class="more">More Detail</a>
+                    <a href="property-detail.html" class="more">More Detail</a>
                   </div>
                 </div>
               </div>
               <div class="item">
                 <div class="row">
-                  <div class="col-lg-4"><img src="images/properties/2.jpg" class="img-responsive" alt="properties" />
+                  <div class="col-lg-4"><img src="{% static 'images/properties/2.jpg' %}" class="img-responsive"
+                      alt="properties" />
                   </div>
                   <div class="col-lg-8">
-                    <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                    <h5><a href="property-detail.html">Integer sed porta quam</a></h5>
                     <p class="price">Rs. 300,000</p>
-                    <a href="property-detail.php" class="more">More Detail</a>
+                    <a href="property-detail.html" class="more">More Detail</a>
                   </div>
                 </div>
               </div>
               <div class="item">
                 <div class="row">
-                  <div class="col-lg-4"><img src="images/properties/3.jpg" class="img-responsive" alt="properties" />
+                  <div class="col-lg-4"><img src="{% static 'images/properties/3.jpg' %}" class="img-responsive"
+                      alt="properties" />
                   </div>
                   <div class="col-lg-8">
-                    <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                    <h5><a href="property-detail.html">Integer sed porta quam</a></h5>
                     <p class="price">Rs. 300,000</p>
-                    <a href="property-detail.php" class="more">More Detail</a>
+                    <a href="property-detail.html" class="more">More Detail</a>
                   </div>
                 </div>
               </div>
               <div class="item">
                 <div class="row">
-                  <div class="col-lg-4"><img src="images/properties/4.jpg" class="img-responsive" alt="properties" />
+                  <div class="col-lg-4"><img src="{% static 'images/properties/4.jpg' %}" class="img-responsive"
+                      alt="properties" />
                   </div>
                   <div class="col-lg-8">
-                    <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
+                    <h5><a href="property-detail.html">Integer sed porta quam</a></h5>
                     <p class="price">Rs. 300,000</p>
-                    <a href="property-detail.php" class="more">More Detail</a>
+                    <a href="property-detail.html" class="more">More Detail</a>
                   </div>
                 </div>
               </div>
@@ -351,6 +443,92 @@
       </div>
     </div>
   </div>
+  {% endblock %}
+
+  {% block footer %}
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-sm-3">
+          <h4>Information</h4>
+          <ul class="row">
+            <li class="col-lg-12 col-sm-12 col-xs-3"><a href="{% url 'about' %}">About</a></li>
+            <li class="col-lg-12 col-sm-12 col-xs-3"><a href="{% url 'agents' %}">Agents</a></li>
+            <li class="col-lg-12 col-sm-12 col-xs-3"><a href="{% url 'blog' %}">Blog</a></li>
+            <li class="col-lg-12 col-sm-12 col-xs-3"><a href="{% url 'contact' %}">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-sm-3">
+          <h4>Newsletter</h4>
+          <p>Get notified about the latest properties in our marketplace.</p>
+          <form class="form-inline" role="form">
+            <input type="text" placeholder="Enter Your email address" class="form-control">
+            <button class="btn btn-success" type="button">Notify Me!</button>
+          </form>
+        </div>
+
+        <div class="col-lg-3 col-sm-3">
+          <h4>Follow us</h4>
+          <a href="#"><img src="{% static 'images/facebook.png' %}" alt="facebook"></a>
+          <a href="#"><img src="{% static 'images/twitter.png' %}" alt="twitter"></a>
+          <a href="#"><img src="{% static 'images/linkedin.png' %}" alt="linkedin"></a>
+          <a href="#"><img src="{% static 'images/instagram.png' %}" alt="instagram"></a>
+        </div>
+
+        <div class="col-lg-3 col-sm-3">
+          <h4>Contact us</h4>
+          <p><b>Realestate Ltd.</b><br>
+            <span class="glyphicon glyphicon-map-marker"></span> Gaindakot, Nepal <br>
+            <span class="glyphicon glyphicon-envelope"></span> hello@example.com<br>
+            <span class="glyphicon glyphicon-earphone"></span> +977 9876543210
+          </p>
+        </div>
+      </div>
+      <p class="copyright">Copyright 2023. All rights reserved. </p>
+
+    </div>
+  </div>
+
+
+
+
+  <!-- Modal -->
+  <div id="loginpop" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="row">
+          <div class="col-sm-6 login">
+            <h4>Login</h4>
+            <form class="" role="form">
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputPassword2">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Remember me
+                </label>
+              </div>
+              <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+          </div>
+          <div class="col-sm-6">
+            <h4>New User Sign Up</h4>
+            <p>Join today and get updated with all the properties deal happening around.</p>
+            <button type="submit" class="btn btn-info" onclick="window.location.href='register.html'">Join Now</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.modal -->
+  {% endblock %}
 </body>
 
 </html>
