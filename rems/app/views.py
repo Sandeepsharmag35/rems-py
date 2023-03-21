@@ -35,10 +35,6 @@ def buypage(request):
     return render(request, 'buy.html')
 
 
-def sellpage(request):
-    return render(request, 'sell.html')
-
-
 def rentpage(request):
     return render(request, 'rent.html')
 
@@ -52,21 +48,17 @@ def propertyDetailsPage(request):
 
 
 def registerpage(request):
-    return render(request, 'register.html')
-
-
-def signup(request):
     if request.method == 'POST':
-        uname = request.POST['username']
-        email = request.POST['email']
-        pass1 = request.POST['password1']
-        pass2 = request.POST['password2']
+        fullname = request.POST['form_name']
+        email = request.POST['form_email']
+        pass1 = request.POST['form_password']
+        pass2 = request.POST['form_cpassword']
 
         if pass1 != pass2:
             return HttpResponse("Password did not match")
 
         else:
-            myuser = User.objects.create_user(uname, email, pass1)
+            myuser = User.objects.create_user(fullname, email, pass1)
             myuser.save()
             return redirect('loginform')
 
@@ -75,9 +67,9 @@ def signup(request):
 
 def loginpage(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        pass1 = request.POST['password']
-        user = authenticate(request, username=username, password=pass1)
+        email_id = request.POST['form_email']
+        pass1 = request.POST['form_password']
+        user = authenticate(request, email_id=email_id, password=pass1)
 
         if user is not None:
             login(request, user)
@@ -94,5 +86,7 @@ def LogoutPage(request):
 
 
 @login_required(login_url='login')
-def home(request):
+def sellpage(request):
+    user = request.user
+    context = {'user' = user}
     return render(request, 'sell.html')
