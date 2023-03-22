@@ -65,19 +65,19 @@ def registerpage(request):
     return render(request, 'register.html')
 
 
-def loginpage(request):
-    if request.method == 'POST':
-        email_id = request.POST['form_email']
-        pass1 = request.POST['form_password']
-        user = authenticate(request, email_id=email_id, password=pass1)
+# def loginpage(request):
+#     if request.method == 'POST':
+#         email_id = request.POST['form_email']
+#         pass1 = request.POST['form_password']
+#         user = authenticate(request, email_id=email_id, password=pass1)
 
-        if user is not None:
-            login(request, user)
-            return redirect('homepage')
-        else:
-            return HttpResponse("Username or Password is invalid !")
+#         if user is not None:
+#             login(request, user)
+#             return redirect('homepage')
+#         else:
+#             return HttpResponse("Username or Password is invalid !")
 
-    return render(request, 'login.html')
+#     return render(request, 'login.html')
 
 
 def LogoutPage(request):
@@ -88,5 +88,5 @@ def LogoutPage(request):
 @login_required(login_url='login')
 def sellpage(request):
     user = request.user
-    context = {'user' = user}
+   # context = {'user' = user}
     return render(request, 'sell.html')
