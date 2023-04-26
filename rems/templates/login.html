@@ -11,7 +11,11 @@
   </div>
 </div>
 <!-- banner -->
-
+{% if error_message %}
+<div class="alert alert-danger" role="alert">
+  {{ error_message }}
+</div>
+{% endif %}
 <div class="container">
   <div class="spacer">
     <div class="row">

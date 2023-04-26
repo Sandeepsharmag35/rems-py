@@ -12,11 +12,17 @@
 </div>
 <!-- banner -->
 
+{% if error_message %}
+<div class="alert alert-danger" role="alert">
+  {{ error_message }}
+</div>
+{% endif %}
+
 <div class="container">
   <div class="spacer">
     <div class="row register">
       <div class="col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 ">
-        <form action="{% url 'register' %}" method="post">
+        <form action="" method="post">
           {% csrf_token %}
           <input type="text" class="form-control" placeholder="Enter Email" name="form_email">
           <input type="text" class="form-control" placeholder="Username" name="form_name">
@@ -25,9 +31,12 @@
           <button type="submit" class="btn btn-success" name="Submit">Register</button>
         </form>
       </div>
-
+    </div>
+    <div class="col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 ">
+      <h4>Already a User?</h4>
+      <button type="submit" class="btn btn-info" onclick="window.location.href='{% url 'login' %}'">Login Now</button>
     </div>
   </div>
 </div>
-
+<br>
 {% endblock %}

@@ -17,12 +17,14 @@ def RegisterPage(request):
         pass2 = request.POST["form_cpassword"]
 
         if pass1 != pass2:
-            return HttpResponse("Your password and confirm password didn't match!")
+ #           return HttpResponse("Your password and confirm password didn't match!")
+            error_message = "Your password and confirm password didn't match!"
+            return render(request, 'register.html', {'error_message': error_message})
 
         else:
             myuser = User.objects.create_user(uname, email, pass1)
             myuser.save()
-            return redirect("home")
+            return redirect("login")
     return render(request, "register.html")
 
 
@@ -36,9 +38,9 @@ def Loginpage(request):
             login(request, user)
             return redirect("home")
         else:
-            return HttpResponse("Your password and confirm password are not same!")
-
-    return render(request, "login.html")
+            error_message = "Your username or password is incorrect."
+            return render(request, 'login.html', {'error_message': error_message})
+    return render(request, 'login.html')
 
 
 def LogoutPage(request):

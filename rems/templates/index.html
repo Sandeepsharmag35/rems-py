@@ -213,13 +213,14 @@
                   Now</button>
               </div>
             </div>
-
-
           </div>
+          {% block Before-Login %}
           <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
             <p>Join now and get updated with all the properties deals.</p>
-            <button class="btn btn-info" data-toggle="modal" data-target="#loginpop">Login</button>
+            <button type="submit" class="btn btn-info" onclick="window.location.href='{% url 'register' %}'">Join
+              Now</button>
           </div>
+          {% endblock %}
         </div>
       </div>
     </div>
