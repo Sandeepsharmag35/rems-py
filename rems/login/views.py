@@ -5,36 +5,22 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-
-# def signup(request):
-#     if request.method == "POST":
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data.get("username")
-#             raw_password = form.cleaned_data.get("password1")
-#             user = authenticate(username=username, password=raw_password)
-#             login(request, user)
-#             return redirect("home")
-#     else:
-#         form = UserCreationForm()
-#     return render(request, "signup.html", {"form": form})
+def Indexpage(request):
+    return render(request, "index.html")
 
 
 def RegisterPage(request):
     if request.method == "POST":
-        fullname = request.POST["form_name"]
-        phonenum = request.POST["form_phone"]
         email = request.POST["form_email"]
+        uname = request.POST["form_name"]
         pass1 = request.POST["form_password"]
-        pass2 = request.POST["form_password"]
-        address = request.POST["form_address"]
+        pass2 = request.POST["form_cpassword"]
 
         if pass1 != pass2:
             return HttpResponse("Your password and confirm password didn't match!")
 
         else:
-            myuser = User.objects.create_user(fullname, phonenum, email, pass1, address)
+            myuser = User.objects.create_user(uname, email, pass1)
             myuser.save()
             return redirect("home")
     return render(request, "register.html")
@@ -42,9 +28,9 @@ def RegisterPage(request):
 
 def Loginpage(request):
     if request.method == "POST":
-        email_id = request.POST["user_email"]
+        usrname = request.POST["user_name"]
         passw = request.POST["user_password"]
-        user = authenticate(request, email=email_id, password=passw)
+        user = authenticate(request, username=usrname, password=passw)
 
         if user is not None:
             login(request, user)
@@ -57,11 +43,9 @@ def Loginpage(request):
 
 def LogoutPage(request):
     logout(request)
-    return redirect("home")
+    return redirect("index")
 
 
-@login_required
+@login_required(login_url=login)
 def Homepage(request):
-    user = request.user
-    context = {"user": user}
-    return render(request, "index.html", context)
+    return render(request, "home.html", {'user': request.user}) 

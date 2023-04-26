@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Property
+# from .models import Property
 
 # Register your models here.
 
 
-admin.site.register(Property):
-    list_display=[]
+# admin.site.register(Property):
+#     list_display=[]

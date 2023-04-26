@@ -6,9 +6,6 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-def homepage(request):
-    return render(request, "index.html")
-
 
 def aboutpage(request):
     return render(request, "about.html")
@@ -47,5 +44,4 @@ def propertyDetailsPage(request):
 
 
 def sellpage(request):
-    user = request.user
     return render(request, "sell.html")

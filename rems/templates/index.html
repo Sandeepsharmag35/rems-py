@@ -3,7 +3,7 @@
 {% load static %}
 
 <head>
-  <title> {% block title %} Home {% endblock %}</title>
+  <title> {% block title %} REMS {% endblock %}</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -30,7 +30,7 @@
 </head>
 
 <body>
-  {% block subheader %}
+  {% block header %}
   <!-- Header Starts -->
   <div class="navbar-wrapper">
 
@@ -48,30 +48,14 @@
         <!-- Nav Starts -->
         <div class="navbar-collapse  collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="{% url 'home' %}">Home</a></li>
+            <li class="active"><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'agents' %}">Agents</a></li>
             <li><a href="{% url 'blog' %}">Blog</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
-
-            {% if user.is_authenticated %}
-            <li class="nav-item dropdown active">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Profile
-              </a>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'profile' %}">View Profile</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-              </div>
-            </li>
-            {% endif %}
-
-
-
-
+            {% block loginstatus %}
+            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span></a></li>
+            {% endblock %}
           </ul>
         </div>
         <!-- #Nav Ends -->
@@ -79,6 +63,9 @@
       </div>
     </div>
   </div>
+  {% endblock %}
+
+  {% block subheader %}
   <!-- #Header Starts -->
 
   <div class="container">
@@ -523,8 +510,8 @@
             <form action="" role="form" method="post">
               {% csrf_token %}
               <div class="form-group">
-                <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                <input type="email" class="form-control" name="user_email" placeholder="Enter email">
+                <label class="sr-only" for="exampleInputUsername2">Username</label>
+                <input type="text" class="form-control" name="user_name" placeholder="Enter Username">
               </div>
               <div class="form-group">
                 <label class="sr-only" for="exampleInputPassword2">Password</label>
