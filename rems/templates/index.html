@@ -53,6 +53,25 @@
             <li><a href="{% url 'agents' %}">Agents</a></li>
             <li><a href="{% url 'blog' %}">Blog</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
+
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Profile
+              </a>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'profile' %}">View Profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+              </div>
+            </li>
+            {% endif %}
+
+
+
+
           </ul>
         </div>
         <!-- #Nav Ends -->
@@ -471,10 +490,13 @@
 
         <div class="col-lg-3 col-sm-3">
           <h4>Follow us</h4>
-          <a href="#"><img src="{% static 'images/facebook.png' %}" alt="facebook"></a>
-          <a href="#"><img src="{% static 'images/twitter.png' %}" alt="twitter"></a>
-          <a href="#"><img src="{% static 'images/linkedin.png' %}" alt="linkedin"></a>
-          <a href="#"><img src="{% static 'images/instagram.png' %}" alt="instagram"></a>
+          <a href="https://www.facebook.com/sandeepsharmag35" target="_blank"><img
+              src="{% static 'images/facebook.png' %}" alt="facebook"></a>
+          <a href="https://twitter.com/slayrant/" target="_blank"><img src="{% static 'images/twitter.png' %}"
+              alt="twitter"></a>
+          <a href="#"><img src="{% static 'images/linkedin.png' %}" target="_blank" alt="linkedin"></a>
+          <a href="https://instagram.com/sandip.slayrant/" target="_blank"><img
+              src="{% static 'images/instagram.png' %}" alt="instagram"></a>
         </div>
 
         <div class="col-lg-3 col-sm-3">
@@ -498,14 +520,15 @@
         <div class="row">
           <div class="col-sm-6 login">
             <h4>Login</h4>
-            <form class="" role="form">
+            <form action="" role="form" method="post">
+              {% csrf_token %}
               <div class="form-group">
                 <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+                <input type="email" class="form-control" name="user_email" placeholder="Enter email">
               </div>
               <div class="form-group">
                 <label class="sr-only" for="exampleInputPassword2">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                <input type="password" class="form-control" name="user_password" placeholder="Password">
               </div>
               <div class="checkbox">
                 <label>
