@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
+from django.db import IntegrityError
 
 # Create your views here.
 
@@ -14,10 +17,32 @@ def RegisterPage(request):
         email = request.POST["form_email"]
         uname = request.POST["form_name"]
         pass1 = request.POST["form_password"]
+
+        # Password Validation Process
+        try:
+            validate_password(pass1)
+        except ValidationError as error:
+            error = "Password must be at least 8 characters long including any Special Characters and Numeric Value!"
+            return render(request, 'register.html', {'error': error})
+        # End Of Validation
+
+        # Username and Email Validation
+        try:
+            user = User.objects.create_user(username=uname, email=email, password=pass1)
+        except IntegrityError as e:
+            error_msg = str(e)
+            if 'UNIQUE constraint failed: auth_user.email' in error_msg:
+                error_msg = "Entered Email is already associated with other account, try another"
+                return render(request, 'register.html', {'error_message_email': error_msg})
+            elif 'UNIQUE constraint failed: auth_user.username' in error_msg:
+                error_msg = "Username already taken, try another."
+                return render(request, 'register.html', {'error_message_username': error_msg})
+            
+        # End Username and Email Validation
+
         pass2 = request.POST["form_cpassword"]
 
         if pass1 != pass2:
- #           return HttpResponse("Your password and confirm password didn't match!")
             error_message = "Your password and confirm password didn't match!"
             return render(request, 'register.html', {'error_message': error_message})
 

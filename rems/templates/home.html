@@ -1,5 +1,16 @@
 {% extends 'index.html' %}
 {% load static %}
+
+{% block BeforeLogin %}
+
+{% if user.is_authenticated %}
+<li class="active"><a href="{% url 'home' %}">Home</a></li>
+{% else %}
+<li class="active"><a href="{% url 'index' %}">Home</a></li>
+{% endif %}
+
+{% endblock %}
+
 {% block loginstatus %}
 {% if user.is_authenticated %}
 <li class="nav-item dropdown">
@@ -19,5 +30,5 @@
 
 {% endif %}
 {% endblock %}
-{% block Before-Login %}
+{% block Before-Login-message %}
 {% endblock %}

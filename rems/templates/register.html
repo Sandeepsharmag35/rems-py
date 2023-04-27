@@ -12,6 +12,28 @@
 </div>
 <!-- banner -->
 
+<!-- error alert for email -->
+{% if error_message_email %}
+<div class="alert alert-danger" role="alert">
+  {{ error_message_email }}
+</div>
+{% endif %}
+
+<!-- error alert for username -->
+{% if error_message_username %}
+<div class="alert alert-danger" role="alert">
+  {{ error_message_username }}
+</div>
+{% endif %}
+
+<!-- error alert for password -->
+{% if error %}
+<div class="alert alert-danger" role="alert">
+  {{ error }}
+</div>
+{% endif %}
+
+<!-- error alert for confirm password -->
 {% if error_message %}
 <div class="alert alert-danger" role="alert">
   {{ error_message }}
@@ -24,7 +46,7 @@
       <div class="col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 ">
         <form action="" method="post">
           {% csrf_token %}
-          <input type="text" class="form-control" placeholder="Enter Email" name="form_email">
+          <input type="email" class="form-control" placeholder="Enter Email" name="form_email">
           <input type="text" class="form-control" placeholder="Username" name="form_name">
           <input type="password" class="form-control" placeholder="Password" name="form_password">
           <input type="password" class="form-control" placeholder="Confirm Password" name="form_cpassword">

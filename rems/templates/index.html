@@ -48,7 +48,9 @@
         <!-- Nav Starts -->
         <div class="navbar-collapse  collapse">
           <ul class="nav navbar-nav navbar-right">
+            {% block BeforeLogin %}
             <li class="active"><a href="{% url 'index' %}">Home</a></li>
+            {% endblock %}
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'agents' %}">Agents</a></li>
             <li><a href="{% url 'blog' %}">Blog</a></li>
@@ -214,7 +216,7 @@
               </div>
             </div>
           </div>
-          {% block Before-Login %}
+          {% block Before-Login-message %}
           <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
             <p>Join now and get updated with all the properties deals.</p>
             <button type="submit" class="btn btn-info" onclick="window.location.href='{% url 'register' %}'">Join
