@@ -117,7 +117,7 @@
           <!-- properties -->
           <div class="col-lg-4 col-sm-6">
             <div class="properties">
-              <div class="image-holder"><img src="{{property.image}}" class="img-responsive" alt="properties">
+              <div class="image-holder"><img src="{{property.image.url}}" class="img-responsive" alt="properties">
                 <div class="status sold">{{property.status}}</div>
               </div>
               <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
@@ -132,19 +132,17 @@
           </div>
           <!-- properties -->
           {% endfor %}
-
-          <div class="center">
-            <ul class="pagination">
-              <li><a href="#">«</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#">»</a></li>
-            </ul>
-          </div>
-
+        </div>
+        <div class="center">
+          <ul class="pagination">
+            <li><a href="#">«</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">»</a></li>
+          </ul>
         </div>
       </div>
     </div>
