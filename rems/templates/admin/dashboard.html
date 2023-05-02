@@ -12,6 +12,8 @@
 </head>
 
 <body>
+
+    {% block navigation %}
     <!-- =============== Navigation ================ -->
     <div class="container">
         <div class="navigation">
@@ -89,7 +91,9 @@
                 </li>
             </ul>
         </div>
+        {% endblock %}
 
+        {% block topbar %}
         <!-- ========================= Main ==================== -->
         <div class="main">
             <div class="topbar">
@@ -105,10 +109,12 @@
                 </div>
 
                 <div class="user">
-                    <img src="{% static 'assets/admin/imgs/customer01.jpg' %}" alt="">
+                    <img src="{% static 'assets/admin/imgs/customer01.jpg' %}" alt="Admin">
                 </div>
             </div>
+            {% endblock %}
 
+            {% block content %}
             <!-- ======================= Cards ================== -->
             <div class="cardBox">
                 <div class="card">
@@ -317,6 +323,7 @@
             </div>
         </div>
     </div>
+    {% endblock %}
 
     <!-- =========== Scripts =========  -->
     <script src="{% static 'assets/admin/js/main.js' %}"></script>
