@@ -499,47 +499,8 @@
         </div>
       </div>
       <p class="copyright">Copyright 2023. All rights reserved. </p>
-
     </div>
   </div>
-
-  <!-- Modal -->
-  <div id="loginpop" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="row">
-          <div class="col-sm-6 login">
-            <h4>Login</h4>
-            <form action="" role="form" method="post">
-              {% csrf_token %}
-              <div class="form-group">
-                <label class="sr-only" for="exampleInputUsername2">Username</label>
-                <input type="text" class="form-control" name="user_name" placeholder="Enter Username">
-              </div>
-              <div class="form-group">
-                <label class="sr-only" for="exampleInputPassword2">Password</label>
-                <input type="password" class="form-control" name="user_password" placeholder="Password">
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox"> Remember me
-                </label>
-              </div>
-              <button type="submit" class="btn btn-success">Sign in</button>
-            </form>
-          </div>
-          <div class="col-sm-6">
-            <h4>New User Sign Up</h4>
-            <p>Join today and get updated with all the properties deal happening around.</p>
-            <button type="submit" class="btn btn-info" onclick="window.location.href='{% url 'register' %}'">Join
-              Now</button>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- /.modal -->
   {% endblock %}
 </body>
 

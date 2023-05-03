@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from .models import Property
+from .models import Property, RentProperty
 
 
 # Create your views here.
@@ -30,8 +30,8 @@ def buypage(request):
     return render(request, "buy.html",{'properties': properties})
 
 
-def rentpage(request):
-    return render(request, "rent.html")
+def sellpage(request):
+    return render(request, "sell.html")
 
 
 def contactpage(request):
@@ -42,5 +42,6 @@ def propertyDetailsPage(request):
     return render(request, "property-detail.html")
 
 
-def sellpage(request):
-    return render(request, "sell.html")
+def rentpage(request):
+    rentproperties = RentProperty.objects.all()
+    return render(request, "rent.html", {'for_rent': rentproperties})

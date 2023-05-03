@@ -155,51 +155,126 @@
           <label for="land-area">Land Area:</label>
           <input type="text" class="form-control" placeholder="eg. 1250 sqft" id="land-area" name="land-area">
         </div>
+        <div class="col-lg-6 col-sm-6 ">
+          <label for="kitchen-number">Type:</label>
+          <select class="form-control" id="kitchen-number" name="kitchen-number">
+            <option>Select</option>
+            <option>Residential</option>
+            <option>Commertial</option>
+            <option>Bungalow</option>
+            <option>Plotted Land</option>
+            <option>Furnished</option>
+            <option>Agriculture</option>
+          </select>
+        </div>
+        <div class="col-lg-6 col-sm-6 ">
+          <label for="facing-direction">Facing Direction:</label>
+          <select class="form-control" id="facing-direction" name="facing-direction">
+            <option>East</option>
+            <option>West</option>
+            <option>North</option>
+            <option>South</option>
+            <option>South East</option>
+            <option>North East</option>
+            <option>South West</option>
+            <option>North West</option>
+          </select>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <label for="price">Price:</label>
+          <input type="number" class="form-control" placeholder="eg. 1250 sqft" id="price" name="price">
+        </div>
+        <div class="col-lg-6 col-sm-6 ">
+          <label for="price-per-unit">Price Per Unit:</label>
+          <select class="form-control" id="price-per-unit" name="price-per-unit">
+            <option>Aana</option>
+            <option>Ropani</option>
+            <option>Dhur</option>
+            <option>Kathha</option>
+            <option>Bigha</option>
+            <option>Sqft</option>
+            <option>Month</option>
+            <option>Flat</option>
+          </select>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <label for="description">Full Description:</label>
+          <label for="description">Description:</label>
+          <textarea placeholder="Fully describe about property here" class="form-control" id="description"
+            rows="5"></textarea><br>
+        </div>
       </div>
     </div>
-    <div class="col-lg-6 col-sm-6 ">
-      <label for="kitchen-number">Kitchen:</label>
-      <select class="form-control" id="kitchen-number" name="kitchen-number">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>5+</option>
-      </select>
-    </div>
-
-
-
-
-
 
     <div id="land-form" style="display: none;">
       <!-- fields for land details go here -->
-      <label for="land-size">Size:</label>
-      <input type="text" id="land-size" name="land-size">
-      <label for="land-zoning">Zoning:</label>
-      <input type="text" id="land-zoning" name="land-zoning">
+      <div class="row">
+        <div class="col-lg-6 col-sm-6">
+          <label for="road-size">Road Size:</label>
+          <input type="text" class="form-control" placeholder="eg. 8 ft" id="road-size" name="road-size">
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <label for="land-area">Land Area:</label>
+          <input type="text" class="form-control" placeholder="eg. 1250 sqft" id="land-area" name="land-area">
+        </div>
+        <div class="col-lg-6 col-sm-6 ">
+          <label for="kitchen-number">Type:</label>
+          <select class="form-control" id="kitchen-number" name="kitchen-number">
+            <option>Select</option>
+            <option>Residential</option>
+            <option>Commertial</option>
+            <option>Bungalow</option>
+            <option>Plotted Land</option>
+            <option>Furnished</option>
+            <option>Agriculture</option>
+          </select>
+        </div>
+        <div class="col-lg-6 col-sm-6 ">
+          <label for="facing-direction">Facing Direction:</label>
+          <select class="form-control" id="facing-direction" name="facing-direction">
+            <option>East</option>
+            <option>West</option>
+            <option>North</option>
+            <option>South</option>
+            <option>South East</option>
+            <option>North East</option>
+            <option>South West</option>
+            <option>North West</option>
+          </select>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <label for="price">Price:</label>
+          <input type="number" class="form-control" placeholder="eg. 1250 sqft" id="price" name="price">
+        </div>
+        <div class="col-lg-6 col-sm-6 ">
+          <label for="price-per-unit">Price Per Unit:</label>
+          <select class="form-control" id="price-per-unit" name="price-per-unit">
+            <option>Aana</option>
+            <option>Ropani</option>
+            <option>Dhur</option>
+            <option>Kathha</option>
+            <option>Bigha</option>
+            <option>Sqft</option>
+            <option>Month</option>
+            <option>Flat</option>
+          </select>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <label for="description">Full Description:</label>
+          <label for="description">Description:</label>
+          <textarea placeholder="Fully describe about property here" class="form-control" id="description"
+            rows="5"></textarea><br>
+        </div>
+      </div>
     </div>
-
-
-
-
-
-
-
-
-
-    <div class="col-lg-3 col-sm-4">
-      <button class="btn btn-danger" onclick="window.location.href='{% url 'property-details' %}'">Upload
-        Details</button>
+    <div class="row">
+      <div class="col-lg-6 col-sm-6">
+        <button class="btn btn-success" type="submit">Upload Details</button>
+      </div>
     </div>
+  </form>
 </div>
-</div>
-</form>
-</div>
-
-
+<br>
 <script>
   // get references to the form and the two divs containing the fields
   const form = document.querySelector('form');
@@ -219,10 +294,8 @@
     }
   });
 
-  // add an event listener to the form to submit the data
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    // get the form data and do something with it, like send an email
     console.log(form.elements);
   });
 </script>

@@ -42,3 +42,33 @@ class Property(models.Model):
 
     def __str__(self):
         return f"{self.property_type} at {self.city}, {self.district}"
+
+
+class RentProperty(models.Model):
+    STATUS_CHOICES = [
+        ("available", "Available"),
+        ("rented", "Rented"),
+    ]
+    TYPE_CHOICES = [
+        ("house", "House"),
+        ("land", "Land"),
+        ("apartment", "Apartment"),
+        ("flat", "Flat"),
+        ("Office", "office"),
+    ]
+
+    property_type = models.CharField(
+        max_length=100, choices=TYPE_CHOICES, default="select"
+    )
+    image=models.ImageField(blank=True, upload_to=image_validations)
+    price = models.CharField(max_length=20, blank=True)
+    city = models.CharField(max_length=50)
+    district = models.CharField(max_length=200)
+    zip_code = models.CharField(max_length=20)
+    description = models.TextField()
+    status = models.CharField(
+        max_length=20, choices=STATUS_CHOICES, default="available"
+    )
+
+    def __str__(self):
+        return f"{self.property_type} at {self.city}, {self.district}"
