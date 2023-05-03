@@ -12,350 +12,218 @@
 </div>
 <!-- banner -->
 
-
 <div class="container">
-  <div class="properties-listing spacer">
-
+  <h3>Please fill those fields according to their respective data *</h3>
+  <form method="POST" action="">
+    {% csrf_token %}
     <div class="row">
-      <div class="col-lg-3 col-sm-4 ">
-
-        <div class="search-form">
-          <h4><span class="glyphicon glyphicon-search"></span> Search for</h4>
-          <input type="text" class="form-control" placeholder="Search of Properties">
-          <div class="row">
-            <div class="col-lg-5">
-              <select class="form-control">
-                <option>Buy</option>
-                <option>Rent</option>
-                <option>Sell</option>
-              </select>
-            </div>
-            <div class="col-lg-7">
-              <select class="form-control">
-                <option>Price</option>
-                <option>$150,000 - $200,000</option>
-                <option>$200,000 - $250,000</option>
-                <option>$250,000 - $300,000</option>
-                <option>$300,000 - above</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-12">
-              <select class="form-control">
-                <option>Property Type</option>
-                <option>House</option>
-                <option>Land</option>
-                <option>Apartment</option>
-              </select>
-            </div>
-          </div>
-          <button class="btn btn-primary">Find Now</button>
-
-        </div>
-
-
-
-        <div class="hot-properties hidden-xs">
-          <h4>Hot Properties</h4>
-          <div class="row">
-            <div class="col-lg-4 col-sm-5"><img src="{% static 'images/properties/1.jpg' %}"
-                class="img-responsive img-circle" alt="properties"></div>
-            <div class="col-lg-8 col-sm-7">
-              <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
-              <p class="price">$300,000</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-4 col-sm-5"><img src="{% static 'images/properties/1.jpg' %}"
-                class="img-responsive img-circle" alt="properties"></div>
-            <div class="col-lg-8 col-sm-7">
-              <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
-              <p class="price">$300,000</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-4 col-sm-5"><img src="{% static 'images/properties/1.jpg' %}"
-                class="img-responsive img-circle" alt="properties"></div>
-            <div class="col-lg-8 col-sm-7">
-              <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
-              <p class="price">$300,000</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-4 col-sm-5"><img src="{% static 'images/properties/1.jpg' %}"
-                class="img-responsive img-circle" alt="properties"></div>
-            <div class="col-lg-8 col-sm-7">
-              <h5><a href="property-detail.php">Integer sed porta quam</a></h5>
-              <p class="price">$300,000</p>
-            </div>
-          </div>
-
-        </div>
-
-
+      <div class="col-lg-6 col-sm-6">
+        <label for="property-title">Property Ad Title:</label>
+        <input type="text" class="form-control" placeholder="New House for sale at Gaindakot, Nawalpur"
+          id="property-title" name="property-title">
       </div>
-
-      <div class="col-lg-9 col-sm-8">
-        <div class="sortby clearfix">
-          <div class="pull-left result">Showing: 12 of 100 </div>
-          <div class="pull-right">
-            <select class="form-control">
-              <option>Sort by</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
-            </select>
-          </div>
-
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-sm-6 ">
+        <label for="property-type">Property Type:</label>
+        <select class="form-control" id="property-type" name="property-type">
+          <option value="select">Select</option>
+          <option value="house">House</option>
+          <option value="apartment">Apartment</option>
+          <option value="land">Land</option>
+          <option value="flat">Flat</option>
+          <option value="commercial">Commercial Property</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-sm-6 ">
+        <label for="property-for">Sale / Rent:</label>
+        <select class="form-control" id="property-for" name="property-for">
+          <option>Sale</option>
+          <option>Rent</option>
+        </select>
+      </div>
+    </div><br>
+    <div id="house-form" style="display: none;">
+      <div class="row">
+        <div class="col-lg-4 col-sm-4 ">
+          <label for="flat-number">No of Flat:</label>
+          <select class="form-control" id="flat-number" name="flat-number">
+            <option>1</option>
+            <option>1.5</option>
+            <option>2</option>
+            <option>2.5</option>
+            <option>3</option>
+            <option>3.5</option>
+            <option>4</option>
+            <option>4.5</option>
+            <option>5</option>
+            <option>5+</option>
+          </select>
         </div>
-        <div class="row">
-
-          <!-- properties -->
-          <div class="col-lg-4 col-sm-6">
-            <div class="properties">
-              <div class="image-holder"><img src="{% static 'images/properties/1.jpg' %}" class="img-responsive"
-                  alt="properties">
-                <div class="status sold">Sold</div>
-              </div>
-              <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
-              <p class="price">Price: $234,900</p>
-              <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
-            </div>
-          </div>
-          <!-- properties -->
-
-
-          <!-- properties -->
-          <div class="col-lg-4 col-sm-6">
-            <div class="properties">
-              <div class="image-holder"><img src="{% static 'images/properties/2.jpg' %}" class="img-responsive"
-                  alt="properties">
-                <div class="status sold">Sold</div>
-              </div>
-              <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
-              <p class="price">Price: $234,900</p>
-              <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
-            </div>
-          </div>
-          <!-- properties -->
-
-          <!-- properties -->
-          <div class="col-lg-4 col-sm-6">
-            <div class="properties">
-              <div class="image-holder"><img src="{% static 'images/properties/3.jpg' %}" class="img-responsive"
-                  alt="properties">
-                <div class="status sold">Sold</div>
-              </div>
-              <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
-              <p class="price">Price: $234,900</p>
-              <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
-            </div>
-          </div>
-          <!-- properties -->
-
-          <!-- properties -->
-          <div class="col-lg-4 col-sm-6">
-            <div class="properties">
-              <div class="image-holder"><img src="{% static 'images/properties/1.jpg' %}" class="img-responsive"
-                  alt="properties">
-                <div class="status sold">Sold</div>
-              </div>
-              <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
-              <p class="price">Price: $234,900</p>
-              <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
-            </div>
-          </div>
-          <!-- properties -->
-
-          <!-- properties -->
-          <div class="col-lg-4 col-sm-6">
-            <div class="properties">
-              <div class="image-holder"><img src="{% static 'images/properties/4.jpg' %}" class="img-responsive"
-                  alt="properties">
-                <div class="status sold">Sold</div>
-              </div>
-              <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
-              <p class="price">Price: $234,900</p>
-              <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
-            </div>
-          </div>
-          <!-- properties -->
-
-          <!-- properties -->
-          <div class="col-lg-4 col-sm-6">
-            <div class="properties">
-              <div class="image-holder"><img src="{% static 'images/properties/1.jpg' %}" class="img-responsive"
-                  alt="properties">
-                <div class="status sold">Sold</div>
-              </div>
-              <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
-              <p class="price">Price: $234,900</p>
-              <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
-            </div>
-          </div>
-          <!-- properties -->
-
-          <!-- properties -->
-          <div class="col-lg-4 col-sm-6">
-            <div class="properties">
-              <div class="image-holder"><img src="{% static 'images/properties/4.jpg' %}" class="img-responsive"
-                  alt="properties">
-                <div class="status sold">Sold</div>
-              </div>
-              <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
-              <p class="price">Price: $234,900</p>
-              <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
-            </div>
-          </div>
-          <!-- properties -->
-
-          <!-- properties -->
-          <div class="col-lg-4 col-sm-6">
-            <div class="properties">
-              <div class="image-holder"><img src="{% static 'images/properties/3.jpg' %}" class="img-responsive"
-                  alt="properties">
-                <div class="status sold">Sold</div>
-              </div>
-              <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
-              <p class="price">Price: $234,900</p>
-              <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
-            </div>
-          </div>
-          <!-- properties -->
-
-          <!-- properties -->
-          <div class="col-lg-4 col-sm-6">
-            <div class="properties">
-              <div class="image-holder"><img src="{% static 'images/properties/2.jpg' %}" class="img-responsive"
-                  alt="properties">
-                <div class="status sold">Sold</div>
-              </div>
-              <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
-              <p class="price">Price: $234,900</p>
-              <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
-            </div>
-          </div>
-          <!-- properties -->
-          <!-- properties -->
-          <div class="col-lg-4 col-sm-6">
-            <div class="properties">
-              <div class="image-holder"><img src="{% static 'images/properties/1.jpg' %}" class="img-responsive"
-                  alt="properties">
-                <div class="status sold">Sold</div>
-              </div>
-              <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
-              <p class="price">Price: $234,900</p>
-              <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
-            </div>
-          </div>
-          <!-- properties -->
-
-          <!-- properties -->
-          <div class="col-lg-4 col-sm-6">
-            <div class="properties">
-              <div class="image-holder"><img src="{% static 'images/properties/4.jpg' %}" class="img-responsive"
-                  alt="properties">
-                <div class="status sold">Sold</div>
-              </div>
-              <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
-              <p class="price">Price: $234,900</p>
-              <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
-            </div>
-          </div>
-          <!-- properties -->
-
-          <!-- properties -->
-          <div class="col-lg-4 col-sm-6">
-            <div class="properties">
-              <div class="image-holder"><img src="{% static 'images/properties/3.jpg' %}" class="img-responsive"
-                  alt="properties">
-                <div class="status sold">Sold</div>
-              </div>
-              <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
-              <p class="price">Price: $234,900</p>
-              <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
-            </div>
-          </div>
-          <!-- properties -->
-          <div class="center">
-            <ul class="pagination">
-              <li><a href="#">«</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#">»</a></li>
-            </ul>
-          </div>
-
+        <div class="col-lg-4 col-sm-4 ">
+          <label for="bed-number">Bedroom:</label>
+          <select class="form-control" id="bed-number" name="bed-number">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>7+</option>
+          </select>
+        </div>
+        <div class="col-lg-4 col-sm-4 ">
+          <label for="bath-number">Bathroom:</label>
+          <select class="form-control" id="bath-number" name="bath-number">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>5+</option>
+          </select>
+        </div>
+        <div class="col-lg-4 col-sm-4 ">
+          <label for="living-number">Living Room:</label>
+          <select class="form-control" id="living-number" name="living-number">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>5+</option>
+          </select>
+        </div>
+        <div class="col-lg-4 col-sm-4 ">
+          <label for="kitchen-number">Kitchen:</label>
+          <select class="form-control" id="kitchen-number" name="kitchen-number">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>5+</option>
+          </select>
+        </div>
+        <div class="col-lg-4 col-sm-4 ">
+          <label for="total-number">Total Rooms:</label>
+          <select class="form-control" id="total-number" name="total-number">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+            <option>13</option>
+            <option>14</option>
+            <option>15</option>
+            <option>15+</option>
+          </select>
+        </div>
+        <div class="col-lg-4 col-sm-4 ">
+          <label for="parking">Parking</label>
+          <select class="form-control" id="parking" name="parking">
+            <option>Motorbike</option>
+            <option>Car-1</option>
+            <option>Car-2</option>
+            <option>Car-3</option>
+            <option>Car-3+</option>
+          </select>
+        </div>
+        <div class="col-lg-4 col-sm-4">
+          <label for="built-year">Built Year:</label>
+          <input type="text" class="form-control" placeholder="eg. 2078" id="built-year" name="built-year">
+        </div>
+        <div class="col-lg-4 col-sm-4">
+          <label for="built-area">Built Area:</label>
+          <input type="text" class="form-control" placeholder="eg. 1000 sqft" id="built-area" name="built-area">
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <label for="road-size">Road Size:</label>
+          <input type="text" class="form-control" placeholder="eg. 8 ft" id="road-size" name="road-size">
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <label for="land-area">Land Area:</label>
+          <input type="text" class="form-control" placeholder="eg. 1250 sqft" id="land-area" name="land-area">
         </div>
       </div>
     </div>
-  </div>
+    <div class="col-lg-6 col-sm-6 ">
+      <label for="kitchen-number">Kitchen:</label>
+      <select class="form-control" id="kitchen-number" name="kitchen-number">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>5+</option>
+      </select>
+    </div>
+
+
+
+
+
+
+    <div id="land-form" style="display: none;">
+      <!-- fields for land details go here -->
+      <label for="land-size">Size:</label>
+      <input type="text" id="land-size" name="land-size">
+      <label for="land-zoning">Zoning:</label>
+      <input type="text" id="land-zoning" name="land-zoning">
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="col-lg-3 col-sm-4">
+      <button class="btn btn-danger" onclick="window.location.href='{% url 'property-details' %}'">Upload
+        Details</button>
+    </div>
+</div>
+</div>
+</form>
 </div>
 
+
+<script>
+  // get references to the form and the two divs containing the fields
+  const form = document.querySelector('form');
+  const houseForm = document.getElementById('house-form');
+  const landForm = document.getElementById('land-form');
+
+  // add an event listener to the select element to show/hide the appropriate form fields
+  const select = document.getElementById('property-type');
+  select.addEventListener('change', (event) => {
+    if (event.target.value === 'land') {
+      houseForm.style.display = 'none';
+      landForm.style.display = 'block';
+    }
+    else if (event.target.value === 'house' || 'flat' || 'apartment' || 'commercial') {
+      houseForm.style.display = 'block';
+      landForm.style.display = 'none';
+    }
+  });
+
+  // add an event listener to the form to submit the data
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    // get the form data and do something with it, like send an email
+    console.log(form.elements);
+  });
+</script>
 {% endblock %}
