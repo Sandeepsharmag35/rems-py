@@ -14,6 +14,7 @@ urlpatterns = [
     path("rent/", views.rentpage, name="rent"),
     path("sell/", views.sellpage, name="sell"),
     path("properties/", views.buySaleRentPage, name="buysalerent"),
+
 ]
 
 # Serving static files during development

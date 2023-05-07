@@ -13,7 +13,7 @@
 <!-- banner -->
 
 <div class="container">
-  <h3>Please fill those fields according to their respective data *</h3>
+  <h3 style="margin-top: 10px;">Please fill those fields according to their respective data *</h3>
   <form method="POST" action="">
     {% csrf_token %}
     <div class="row">
@@ -44,7 +44,8 @@
           <option>Rent</option>
         </select>
       </div>
-    </div><br>
+    </div>
+    <hr>
     <div id="house-form" style="display: none;">
       <div class="row">
         <div class="col-lg-4 col-sm-4 ">
@@ -182,7 +183,7 @@
         </div>
         <div class="col-lg-6 col-sm-6">
           <label for="price">Price:</label>
-          <input type="number" class="form-control" placeholder="eg. 1250 sqft" id="price" name="price">
+          <input type="number" class="form-control" placeholder="eg. Rs. 5000000" id="price" name="price">
         </div>
         <div class="col-lg-6 col-sm-6 ">
           <label for="price-per-unit">Price Per Unit:</label>
@@ -206,7 +207,7 @@
       </div>
     </div>
 
-    <div id="land-form" style="display: none;">
+    <div id="land-form">
       <!-- fields for land details go here -->
       <div class="row">
         <div class="col-lg-6 col-sm-6">
@@ -267,6 +268,39 @@
         </div>
       </div>
     </div>
+    <hr>
+
+    <h3><b>Location Details</b></h3>
+    <div class="col-lg-4 col-sm-4 ">
+      <label for="province">Province:</label>
+      <select class="form-control" id="province" name="province">
+        <option>select</option>
+        <option>Province 1</option>
+        <option>Province 2</option>
+        <option>Bagmati</option>
+        <option>Gandaki</option>
+        <option>Province 5</option>
+        <option>Province 6</option>
+        <option>Province 7</option>
+      </select>
+    </div>
+    <div class="col-lg-4 col-sm-4">
+      <label for="district">District:</label>
+      <input type="text" class="form-control" placeholder="eg. Chitwan" id="district" name="district">
+    </div>
+    <div class="col-lg-4 col-sm-4">
+      <label for="municipality">Municipality:</label>
+      <input type="text" class="form-control" placeholder="eg. Bharatpur" id="municipality" name="municipality">
+    </div>
+    <div class="col-lg-4 col-sm-4">
+      <label for="ward-no">Ward No:</label>
+      <input type="number" class="form-control" placeholder="Ward Number" id="ward-no" name="ward-no">
+    </div>
+    <div class="col-lg-4 col-sm-4">
+      <label for="tole">Tole:</label>
+      <input type="number" class="form-control" placeholder="Tole Name" id="tole" name="tole">
+    </div>
+
     <div class="row">
       <div class="col-lg-6 col-sm-6">
         <button class="btn btn-success" type="submit">Upload Details</button>

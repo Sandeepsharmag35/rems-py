@@ -19,5 +19,5 @@ urlpatterns = [
     path('py-admin/', admin.site.urls),
     path('', include('admin_panel.urls')),
     path('', include('app.urls')),
-    path('', include('login.urls')),
+    path('', include('accounts.urls')),
 ]
