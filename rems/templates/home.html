@@ -4,11 +4,18 @@
 {% block BeforeLogin %}
 
 {% if user.is_authenticated %}
+
 <li class="active"><a href="{% url 'home' %}">Home</a></li>
 {% else %}
 <li class="active"><a href="{% url 'index' %}">Home</a></li>
 {% endif %}
 
+{% endblock %}
+
+{% block sellpage %}
+{% if user.is_authenticated %}
+<li><a href="{% url 'sell' %}">Sell</a></li>
+{% endif %}
 {% endblock %}
 
 {% block loginstatus %}

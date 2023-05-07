@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from .models import Property, RentProperty
-from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -29,10 +29,6 @@ def buypage(request):
     properties = Property.objects.all()
     return render(request, "buy.html",{'properties': properties})
 
-@login_required(login_url='login/')
-def sellpage(request):
-    return render(request, "sell.html")
-
 
 def contactpage(request):
     return render(request, "contact.html")
@@ -45,3 +41,7 @@ def propertyDetailsPage(request):
 def rentpage(request):
     rentproperties = RentProperty.objects.all()
     return render(request, "rent.html", {'for_rent': rentproperties})
+
+
+def sellpage(request):
+    return render(request, "sell.html")
