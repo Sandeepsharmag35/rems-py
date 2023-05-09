@@ -120,14 +120,14 @@
               <div class="image-holder"><img src="{{property.image.url}}" class="img-responsive" alt="properties">
                 <div class="status sold">{{property.status}}</div>
               </div>
-              <h4><a href="{% url 'property-details' %}">{{property}}</a></h4>
+              <h4><a href="{% url 'property-details' 'buy' property.pk %}">{{property}}</a></h4>
               <p class="price">Price: {{property.price}}</p>
               <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
                   data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
                   data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
                   data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
                   data-original-title="Kitchen">1</span> </div>
-              <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
+              <a class="btn btn-primary" href="{% url 'property-details' 'buy' property.pk %}">View Details</a>
             </div>
           </div>
           <!-- properties -->

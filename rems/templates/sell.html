@@ -14,7 +14,7 @@
 
 <div class="container">
   <h3 style="margin-top: 10px;">Please fill those fields according to their respective data *</h3>
-  <form method="POST" action="">
+  <form method="POST" action="" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row">
       <div class="col-lg-6 col-sm-6">
@@ -308,11 +308,16 @@
     <div class="row">
       <div class="col-lg-6 col-sm-6">
         <label for="name">Name:</label>
-        <input type="text" class="form-control" placeholder="Your Name" id="name" name="name">
+        {% if user.is_authenticated %}
+        <input type="text" class="form-control" placeholder="Your Name" id="name" name="name"
+          value="{{ user.username }}">
+
       </div>
       <div class="col-lg-6 col-sm-6">
         <label for="email">Email:</label>
-        <input type="email" class="form-control" placeholder="Your Name" id="email" name="email">
+        <input type="email" class="form-control" placeholder="Your Name" id="email" name="email"
+          value="{{ user.email }}">
+        {% endif %}
       </div>
       <div class="col-lg-6 col-sm-6">
         <label for="address">Address:</label>
@@ -325,6 +330,18 @@
     </div>
     <hr>
 
+    <h3><b>Upload Images</b></h3>
+    <div class="row">
+      <div class="col-lg-6 col-sm-6">
+        <div id="my-dropzone" class="dropzone">
+          <div class="dz-default dz-message">
+            <span>Drag and drop your images here or click to select files</span><br>
+            <span class="glyphicon glyphicon-plus"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
     <div class="row">
       <div class="col-lg-6 col-sm-6">
         <button class="btn btn-success" type="submit">Upload Details</button>
@@ -334,7 +351,7 @@
 </div>
 <br>
 <script>
-  // get references to the form and the two divs containing the fields
+  // getting references to the form and the two divs containing the fields
   const form = document.querySelector('form');
   const houseForm = document.getElementById('house-form');
   const landForm = document.getElementById('land-form');
@@ -355,6 +372,25 @@
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     console.log(form.elements);
+  });
+
+  Dropzone.autoDiscover = false;
+
+  var myDropzone = new Dropzone("#my-dropzone", {
+    url: "/upload/",
+    maxFiles: 10,
+    maxFilesize: 2,
+    acceptedFiles: "image/*",
+    dictDefaultMessage: "Drag and drop your images here or click to select files",
+    dictFileTooBig: "File is too big ({{filesize}} MB). Max filesize: {{maxFilesize}} MB.",
+    dictInvalidFileType: "You can't upload files of this type.",
+    dictResponseError: "Server responded with {{statusCode}} code.",
+    success: function (file, response) {
+      // Handle successful file upload
+    },
+    error: function (file, errorMessage) {
+      // Handle file upload error
+    }
   });
 </script>
 {% endblock %}

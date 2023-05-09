@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from .models import Property, RentProperty
+from django.views.generic import DetailView
 
 
 # Create your views here.
@@ -35,14 +36,27 @@ def contactpage(request):
     return render(request, "contact.html")
 
 
-def propertyDetailsPage(request):
-    return render(request, "property-detail.html")
-
-
 def rentpage(request):
     rentproperties = RentProperty.objects.all()
     return render(request, "rent.html", {"for_rent": rentproperties})
 
 
 def sellpage(request):
-    return render(request, "sell.html")
+    return render(request, "sell.html", {"user": request.user})
+
+
+# def propertyDetailsPage(request, property_id):
+#     property = get_object_or_404(Property, id=property_id)
+#     return render(request, "property-details.html", {"property": property})
+
+
+class propertyDetailsPage(DetailView):
+    template_name = "property-details.html"
+
+    def get(self, request, model, pk):
+        if model == "buy":
+            property = get_object_or_404(Property, pk=pk)
+        elif model == "rent":
+            property = get_object_or_404(RentProperty, pk=pk)
+
+        return render(request, self.template_name, {"property": property})

@@ -9,6 +9,10 @@
 
   <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.css' %}" />
   <link rel="stylesheet" href="{% static 'assets/style.css' %}" />
+  <!-- for image upload field -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+  <!--end of for image upload field -->
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="{% static 'assets/bootstrap/js/bootstrap.js' %}"></script>
   <script src="{% static 'assets/script.js' %}"></script>
@@ -213,7 +217,7 @@
                 </select>
               </div>
               <div class="col-lg-3 col-sm-4">
-                <button class="btn btn-success" onclick="window.location.href='{% url 'property-details' %}'">Find
+                <button class="btn btn-success" onclick="window.location.href='#'">Find
                   Now</button>
               </div>
             </div>
@@ -240,142 +244,142 @@
               alt="properties" />
             <div class="status sold">Sold</div>
           </div>
-          <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
+          <h4><a href="#">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
+          <a class="btn btn-primary" href="#">View Details</a>
         </div>
         <div class="properties">
           <div class="image-holder"><img src="{% static 'images/properties/2.jpg' %}" class=" img-responsive"
               alt="properties" />
             <div class="status new">New</div>
           </div>
-          <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
+          <h4><a href="#">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
+          <a class="btn btn-primary" href="#">View Details</a>
         </div>
         <div class="properties">
           <div class="image-holder"><img src="{% static 'images/properties/3.jpg' %}" class=" img-responsive"
               alt="properties" /></div>
-          <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
+          <h4><a href="#">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
+          <a class="btn btn-primary" href="#">View Details</a>
         </div>
         <div class="properties">
           <div class="image-holder"><img src="{% static 'images/properties/4.jpg' %}" class=" img-responsive"
               alt="properties" /></div>
-          <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
+          <h4><a href="#">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
+          <a class="btn btn-primary" href="#">View Details</a>
         </div>
         <div class="properties">
           <div class="image-holder"><img src="{% static 'images/properties/1.jpg' %}" class=" img-responsive"
               alt="properties" />
             <div class="status sold">Sold</div>
           </div>
-          <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
+          <h4><a href="#">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
+          <a class="btn btn-primary" href="#">View Details</a>
         </div>
         <div class="properties">
           <div class="image-holder"><img src="{% static 'images/properties/2.jpg' %}" class=" img-responsive"
               alt="properties" />
             <div class="status sold">Sold</div>
           </div>
-          <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
+          <h4><a href="#">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
+          <a class="btn btn-primary" href="#">View Details</a>
         </div>
         <div class="properties">
           <div class="image-holder"><img src="{% static 'images/properties/3.jpg' %}" class=" img-responsive"
               alt="properties" />
             <div class="status new">New</div>
           </div>
-          <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
+          <h4><a href="#">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
+          <a class="btn btn-primary" href="#">View Details</a>
         </div>
         <div class="properties">
           <div class="image-holder"><img src="{% static 'images/properties/4.jpg' %}" class=" img-responsive"
               alt="properties" /></div>
-          <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
+          <h4><a href="#">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
+          <a class="btn btn-primary" href="#">View Details</a>
         </div>
         <div class="properties">
           <div class="image-holder"><img src="{% static 'images/properties/1.jpg' %}" class=" img-responsive"
               alt="properties" /></div>
-          <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
+          <h4><a href="#">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
+          <a class="btn btn-primary" href="#">View Details</a>
         </div>
         <div class="properties">
           <div class="image-holder"><img src="{% static 'images/properties/2.jpg' %}" class=" img-responsive"
               alt="properties" /></div>
-          <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
+          <h4><a href="#">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
+          <a class="btn btn-primary" href="#">View Details</a>
         </div>
         <div class="properties">
           <div class="image-holder"><img src="{% static 'images/properties/3.jpg' %}" class=" img-responsive"
               alt="properties" /></div>
-          <h4><a href="{% url 'property-details' %}">Royal Inn</a></h4>
+          <h4><a href="#">Royal Inn</a></h4>
           <p class="price">Price: Rs. 234,900</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="{% url 'property-details' %}">View Details</a>
+          <a class="btn btn-primary" href="#">View Details</a>
         </div>
 
       </div>
@@ -407,9 +411,9 @@
                       alt="properties" />
                   </div>
                   <div class="col-lg-8">
-                    <h5><a href="{% url 'property-details' %}">Integer sed porta quam</a></h5>
+                    <h5><a href="#">Integer sed porta quam</a></h5>
                     <p class="price">Rs. 300,000</p>
-                    <a href="{% url 'property-details' %}" class="more">More Detail</a>
+                    <a href="#" class="more">More Detail</a>
                   </div>
                 </div>
               </div>
@@ -419,9 +423,9 @@
                       alt="properties" />
                   </div>
                   <div class="col-lg-8">
-                    <h5><a href="{% url 'property-details' %}">Integer sed porta quam</a></h5>
+                    <h5><a href="#">Integer sed porta quam</a></h5>
                     <p class="price">Rs. 300,000</p>
-                    <a href="{% url 'property-details' %}" class="more">More Detail</a>
+                    <a href="#" class="more">More Detail</a>
                   </div>
                 </div>
               </div>
@@ -431,9 +435,9 @@
                       alt="properties" />
                   </div>
                   <div class="col-lg-8">
-                    <h5><a href="{% url 'property-details' %}">Integer sed porta quam</a></h5>
+                    <h5><a href="#">Integer sed porta quam</a></h5>
                     <p class="price">Rs. 300,000</p>
-                    <a href="{% url 'property-details' %}" class="more">More Detail</a>
+                    <a href="#" class="more">More Detail</a>
                   </div>
                 </div>
               </div>
@@ -443,9 +447,9 @@
                       alt="properties" />
                   </div>
                   <div class="col-lg-8">
-                    <h5><a href="{% url 'property-details' %}">Integer sed porta quam</a></h5>
+                    <h5><a href="#">Integer sed porta quam</a></h5>
                     <p class="price">Rs. 300,000</p>
-                    <a href="{% url 'property-details' %}" class="more">More Detail</a>
+                    <a href="#" class="more">More Detail</a>
                   </div>
                 </div>
               </div>
