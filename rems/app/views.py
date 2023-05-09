@@ -5,6 +5,7 @@ from .models import Property, RentProperty
 
 # Create your views here.
 
+
 def aboutpage(request):
     return render(request, "about.html")
 
@@ -27,7 +28,7 @@ def buySaleRentPage(request):
 
 def buypage(request):
     properties = Property.objects.all()
-    return render(request, "buy.html",{'properties': properties})
+    return render(request, "buy.html", {"properties": properties})
 
 
 def contactpage(request):
@@ -40,7 +41,7 @@ def propertyDetailsPage(request):
 
 def rentpage(request):
     rentproperties = RentProperty.objects.all()
-    return render(request, "rent.html", {'for_rent': rentproperties})
+    return render(request, "rent.html", {"for_rent": rentproperties})
 
 
 def sellpage(request):
