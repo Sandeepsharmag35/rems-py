@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
-from .models import Property, RentProperty, CustomerMessage
+from .models import Property, CustomerMessage
 from django.views.generic import DetailView
 
 
@@ -28,7 +28,7 @@ def buySaleRentPage(request):
 
 
 def buypage(request):
-    properties = Property.objects.all()
+    properties = Property.objects.filter(property_for="buyer")
     return render(request, "buy.html", {"properties": properties})
 
 
@@ -37,8 +37,8 @@ def contactpage(request):
 
 
 def rentpage(request):
-    rentproperties = RentProperty.objects.all()
-    return render(request, "rent.html", {"for_rent": rentproperties})
+    properties = Property.objects.filter(property_for="renter")
+    return render(request, "rent.html", {"for_rent": properties})
 
 
 def sellpage(request):
@@ -52,7 +52,7 @@ class propertyDetailsPage(DetailView):
         if model == "buy":
             property = get_object_or_404(Property, pk=pk)
         elif model == "rent":
-            property = get_object_or_404(RentProperty, pk=pk)
+            property = get_object_or_404(Property, pk=pk)
 
         return render(request, self.template_name, {"property": property})
 
@@ -60,7 +60,7 @@ class propertyDetailsPage(DetailView):
         if model == "buy":
             property = get_object_or_404(Property, pk=pk)
         elif model == "rent":
-            property = get_object_or_404(RentProperty, pk=pk)
+            property = get_object_or_404(Property, pk=pk)
 
         # Process the form data
         full_name = request.POST.get("full_name")
