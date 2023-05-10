@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
-from .models import Property, RentProperty
+from .models import Property, RentProperty, CustomerMessage
 from django.views.generic import DetailView
 
 
@@ -45,11 +45,6 @@ def sellpage(request):
     return render(request, "sell.html", {"user": request.user})
 
 
-# def propertyDetailsPage(request, property_id):
-#     property = get_object_or_404(Property, id=property_id)
-#     return render(request, "property-details.html", {"property": property})
-
-
 class propertyDetailsPage(DetailView):
     template_name = "property-details.html"
 
@@ -60,3 +55,30 @@ class propertyDetailsPage(DetailView):
             property = get_object_or_404(RentProperty, pk=pk)
 
         return render(request, self.template_name, {"property": property})
+
+    def post(self, request, model, pk):
+        if model == "buy":
+            property = get_object_or_404(Property, pk=pk)
+        elif model == "rent":
+            property = get_object_or_404(RentProperty, pk=pk)
+
+        # Process the form data
+        full_name = request.POST.get("full_name")
+        email = request.POST.get("email_address")
+        phone = request.POST.get("phone_number")
+        message = request.POST.get("message")
+
+        inquiry = CustomerMessage(
+            #  property=property,
+            fullname=full_name,
+            email=email,
+            phone_number=phone,
+            message=message,
+        )
+        # saving the instance to the database
+        inquiry.save()
+        sucess = "Message sent Sucessfully."
+
+        return render(
+            request, self.template_name, {"property": property, "sucess": sucess}
+        )
