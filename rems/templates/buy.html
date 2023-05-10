@@ -117,10 +117,11 @@
           <!-- properties -->
           <div class="col-lg-4 col-sm-6">
             <div class="properties">
-              <div class="image-holder"><img src="{{property.image.url}}" class="img-responsive" alt="properties">
-                <div class="status sold">{{property.status}}</div>
+              <div class="image-holder"><img src="{{property.image.url}}" class="img-responsive" alt="properties"
+                  style="width: 250px; height:200px;">
+                <div class=" status sold">{{property.status}}</div>
               </div>
-              <h4><a href="{% url 'property-details' 'buy' property.pk %}">{{property}}</a></h4>
+              <h5><a href="{% url 'property-details' 'buy' property.pk %}">{{property}}</a></h5>
               <p class="price">Price: {{property.price}}</p>
               <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
                   data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
