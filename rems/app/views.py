@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from .models import Property, CustomerMessage
 from django.views.generic import DetailView
-
+from django.db.models import Q
 
 # Create your views here.
 
@@ -82,3 +82,36 @@ class propertyDetailsPage(DetailView):
         return render(
             request, self.template_name, {"property": property, "sucess": sucess}
         )
+
+
+def SearchResultPage(request):
+    location = request.GET.get("location", "")
+    property_for = request.GET.get("property_for", "")
+    property_type = request.GET.get("property_type", "")
+    #   price_range = request.GET.get("price_range", "")
+
+    properties = Property.objects.all()
+
+    if location:
+        properties = properties.filter(
+            Q(city__icontains=location) | Q(district__icontains=location)
+        )
+
+    if property_for:
+        properties = properties.filter(property_for__icontains=property_for)
+
+    if property_type:
+        properties = properties.filter(property_type__icontains=property_type)
+
+    # if price_range:
+    #     price_ranges = price_range.split("-")
+    #     min_price = price_ranges[0].strip()
+    #     max_price = price_ranges[1].strip() if len(price_ranges) > 1 else None
+
+    #     if max_price:
+    #         properties = properties.filter(price__gte=min_price, price__lte=max_price)
+    #     else:
+    #         properties = properties.filter(price__gte=min_price)
+
+    context = {"properties": properties}
+    return render(request, "search/search-result.html", context)

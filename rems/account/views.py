@@ -22,7 +22,7 @@ def RegisterPage(request):
         try:
             validate_password(pass1)
         except ValidationError as error:
-            error = "Password must be at least 8 characters long including any Special Characters and Numeric Value!"
+            error = "Your password must contain at least one special character (~!@#$%^&*()_+}{\":?><,./;') and one number."
             return render(request, "register.html", {"error": error})
         # End Of Validation
 
@@ -33,7 +33,7 @@ def RegisterPage(request):
                 request, "register.html", {"error_message_username": error_message}
             )
 
-        # Check if email already exists
+        # Checking if email already exists
         if User.objects.filter(email=email).exists():
             error_message = (
                 "Entered Email is already associated with other account, try another"
@@ -41,8 +41,7 @@ def RegisterPage(request):
             return render(
                 request, "register.html", {"error_message_email": error_message}
             )
-
-        # End Username and Email Validation
+        # End of Username and Email Validation
 
         pass2 = request.POST["form_cpassword"]
 

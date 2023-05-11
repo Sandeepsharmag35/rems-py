@@ -190,46 +190,48 @@
       <div class="searchbar">
         <div class="row">
           <div class="col-lg-6 col-sm-6">
-            <input type="text" class="form-control" placeholder="Search of Properties">
-            <div class="row">
-              <div class="col-lg-3 col-sm-3 ">
-                <select class="form-control">
-                  <option>Buy</option>
-                  <option>Rent</option>
-                  <option>Sell</option>
-                </select>
+            <form action="{% url 'search-result' %}" method="get">
+              <input type="text" name="location" class="form-control" placeholder="Location of Property">
+              <div class="row">
+                <div class="col-lg-3 col-sm-3 ">
+                  <select class="form-control" name="property_for">
+                    <option>Buy</option>
+                    <option>Rent</option>
+                    <option>Sell</option>
+                  </select>
+                </div>
+                <div class="col-lg-3 col-sm-4">
+                  <select class="form-control" name="price_range">
+                    <option>Price</option>
+                    <option>Rs. 150,000 - Rs. 200,000</option>
+                    <option>Rs. 200,000 - Rs. 250,000</option>
+                    <option>Rs. 250,000 - Rs. 300,000</option>
+                    <option>Rs. 300,000 - above</option>
+                  </select>
+                </div>
+                <div class="col-lg-3 col-sm-4">
+                  <select class="form-control" name="property_type">
+                    <option>House</option>
+                    <option>Apartment</option>
+                    <option>Land</option>
+                    <option>Commercial</option>
+                  </select>
+                </div>
+                <div class="col-lg-3 col-sm-4">
+                  <button type="submit" class="btn btn-success">Find
+                    Now</button>
+                </div>
               </div>
-              <div class="col-lg-3 col-sm-4">
-                <select class="form-control">
-                  <option>Price</option>
-                  <option>Rs. 150,000 - Rs. 200,000</option>
-                  <option>Rs. 200,000 - Rs. 250,000</option>
-                  <option>Rs. 250,000 - Rs. 300,000</option>
-                  <option>Rs. 300,000 - above</option>
-                </select>
-              </div>
-              <div class="col-lg-3 col-sm-4">
-                <select class="form-control">
-                  <option>Property</option>
-                  <option>Apartment</option>
-                  <option>Building</option>
-                  <option>Office Space</option>
-                </select>
-              </div>
-              <div class="col-lg-3 col-sm-4">
-                <button class="btn btn-success" onclick="window.location.href='#'">Find
-                  Now</button>
-              </div>
-            </div>
+            </form>
           </div>
-          {% block Before-Login-message %}
-          <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
-            <p>Join now and get updated with all the properties deals.</p>
-            <button type="submit" class="btn btn-info" onclick="window.location.href='{% url 'register' %}'">Join
-              Now</button>
-          </div>
-          {% endblock %}
         </div>
+        {% block Before-Login-message %}
+        <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
+          <p>Join now and get updated with all the properties deals.</p>
+          <button type="submit" class="btn btn-info" onclick="window.location.href='{% url 'register' %}'">Join
+            Now</button>
+        </div>
+        {% endblock %}
       </div>
     </div>
   </div>

@@ -1,61 +1,55 @@
 {% extends 'home.html' %}
 {% load static %}
+{% block title %} Rent Property {% endblock %}
 {% block content %}
-
 
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
     <span class="pull-right"><a href="{% url 'home' %}">Home</a> / Rent</span>
-    <h2>For Rent</h2>
+    <h2>Rent Properties</h2>
   </div>
 </div>
 <!-- banner -->
-
-
 <div class="container">
   <div class="properties-listing spacer">
-
     <div class="row">
       <div class="col-lg-3 col-sm-4 ">
-
         <div class="search-form">
           <h4><span class="glyphicon glyphicon-search"></span> Search for</h4>
-          <input type="text" class="form-control" placeholder="Search of Properties">
-          <div class="row">
-            <div class="col-lg-5">
-              <select class="form-control">
-                <option>Buy</option>
-                <option>Rent</option>
-                <option>Sell</option>
-              </select>
+          <form action="{% url 'search-result' %}" method="get">
+            <input type="text" name="location" class="form-control" placeholder="Location of Property">
+            <div class="row">
+              <div class="col-lg-5">
+                <select class="form-control" name="property_for">
+                  <option>Buy</option>
+                  <option>Rent</option>
+                  <option>Sell</option>
+                </select>
+              </div>
+              <div class="col-lg-7">
+                <select class="form-control" name="property_type">
+                  <option>House</option>
+                  <option>Apartment</option>
+                  <option>Land</option>
+                  <option>Commercial</option>
+                </select>
+              </div>
             </div>
-            <div class="col-lg-7">
-              <select class="form-control">
-                <option>Price</option>
-                <option>$150,000 - $200,000</option>
-                <option>$200,000 - $250,000</option>
-                <option>$250,000 - $300,000</option>
-                <option>$300,000 - above</option>
-              </select>
+            <div class="row">
+              <div class="col-lg-12">
+                <select class="form-control" name="price_range">
+                  <option>Price</option>
+                  <option>Rs. 150,000 - Rs. 200,000</option>
+                  <option>Rs. 200,000 - Rs. 250,000</option>
+                  <option>Rs. 250,000 - Rs. 300,000</option>
+                  <option>Rs. 300,000 - above</option>
+                </select>
+              </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-12">
-              <select class="form-control">
-                <option>Property Type</option>
-                <option>House</option>
-                <option>Land</option>
-                <option>Apartment</option>
-              </select>
-            </div>
-          </div>
-          <button class="btn btn-primary">Find Now</button>
-
+            <button class="btn btn-primary">Find Now</button>
+          </form>
         </div>
-
-
 
         <div class="hot-properties hidden-xs">
           <h4>Hot Properties</h4>
