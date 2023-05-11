@@ -38,7 +38,7 @@ def contactpage(request):
 
 def rentpage(request):
     properties = Property.objects.filter(property_for="renter")
-    return render(request, "rent.html", {"for_rent": properties})
+    return render(request, "rent.html", {"properties": properties})
 
 
 def sellpage(request):
