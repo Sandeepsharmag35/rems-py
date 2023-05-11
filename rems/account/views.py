@@ -4,7 +4,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
-from django.db import IntegrityError
 
 # Create your views here.
 
@@ -28,20 +27,20 @@ def RegisterPage(request):
         # End Of Validation
 
         # Username and Email Validation
-        try:
-            user = User.objects.create_user(username=uname, email=email, password=pass1)
-        except IntegrityError as e:
-            error_msg = str(e)
-            if "UNIQUE constraint failed: auth_user.username" in error_msg:
-                error_msg = "Username already taken, try another."
-                return render(
-                    request, "register.html", {"error_message_username": error_msg}
-                )
-            elif "UNIQUE constraint failed: auth_user.email" in error_msg:
-                error_msg = "Entered Email is already associated with other account, try another"
-                return render(
-                    request, "register.html", {"error_message_email": error_msg}
-                )
+        if User.objects.filter(username=uname).exists():
+            error_message = "Username already taken, try another."
+            return render(
+                request, "register.html", {"error_message_username": error_message}
+            )
+
+        # Check if email already exists
+        if User.objects.filter(email=email).exists():
+            error_message = (
+                "Entered Email is already associated with other account, try another"
+            )
+            return render(
+                request, "register.html", {"error_message_email": error_message}
+            )
 
         # End Username and Email Validation
 
