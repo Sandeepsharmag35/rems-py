@@ -69,7 +69,7 @@ class propertyDetailsPage(DetailView):
         message = request.POST.get("message")
 
         inquiry = CustomerMessage(
-            #  property=property,
+            property=property,
             fullname=full_name,
             email=email,
             phone_number=phone,
