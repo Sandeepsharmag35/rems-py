@@ -275,6 +275,13 @@ body {
   /* margin-top: 10px; */
 }
 
+.inside-blocks {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  margin-left: 10px;
+}
+
 .details .recentOrders {
   position: relative;
   display: grid;

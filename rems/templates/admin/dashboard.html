@@ -9,13 +9,17 @@
     <title>Dashboard</title>
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="{% static 'assets/admin/css/dashboard_style.css' %}">
+    <link rel="stylesheet" href="{% static 'datatable/datatables.css' %}">
+    <script src="{% static 'datatable/jquery-3.6.0.js' %}"></script>
+    <script src="{% static 'datatable/datatables.js' %}"></script>
+
 </head>
 
 <body>
 
     {% block navigation %}
     <!-- =============== Navigation ================ -->
-    <div class="container">
+    <div class="main-container">
         <div class="navigation">
             <ul>
                 <li>
@@ -112,9 +116,11 @@
                     <img src="{% static 'assets/admin/imgs/customer01.jpg' %}" alt="Admin">
                 </div>
             </div>
-            {% endblock %}
+            <div class="inside-blocks">
+                {% endblock %}
 
-            {% block content %}
+                {% block content %}
+            </div>
             <!-- ======================= Cards ================== -->
             <div class="cardBox">
                 <div class="card">

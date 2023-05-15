@@ -1,15 +1,38 @@
 {% extends 'admin/dashboard.html' %}
 {% load static %}
-<style>
-    /* Basic CSS styles for the message list */
-</style>
 {% block content %}
-<div class="container">
-    <div class="cardHeader">
-        <h2>Recent Orders</h2>
-        <a href="#" class="btn">View All</a>
-    </div>
+<div class="cardHeader">
+    <h2>Customer Messages</h2>
+    <table id="example" class="display">
+        <thead>
+            <th>SN</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Message</th>
+            <th>Property</th>
+            <th>Received At</th>
+        </thead>
+        {% if message %}
+        <tbody>
+            {% for msg in message %}
+            <tr>
+                <td>{{msg.id}}</td>
+                <td>{{msg.fullname}}</td>
+                <td>{{msg.email}}</td>
+                <td>{{msg.phone_number}}</td>
+                <td>{{msg.message}}</td>
+                <td>{{msg.property}}</td>
+                <td>{{msg.received_at}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% endif %}
+    </table>
 </div>
-
-
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
 {% endblock %}
