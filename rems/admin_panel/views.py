@@ -36,3 +36,7 @@ def AdminDashboard(request):
 def customerMessage(request):
     message = CustomerMessage.objects.all()
     return render(request, "admin/message.html", {"message": message})
+
+
+def Customers(request):
+    return render(request, "adimin/customer.html", {"user": user})

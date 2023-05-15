@@ -228,8 +228,8 @@
           {% block Before-Login-message %}
           <div class="col-lg-5 col-lg-offset-1 col-sm-6 ">
             <p>Join now and get updated with all the properties deals.</p>
-            <button type="submit" class="btn btn-info" onclick="window.location.href='{% url 'register' %}'">Join
-              Now</button>
+            <a type="submit" class="btn btn-info" href="{% url 'register' %}">Join
+              Now</a>
           </div>
           {% endblock %}
         </div>
@@ -238,7 +238,7 @@
   </div>
   <!-- banner -->
   <div class="container">
-    <div class="properties-listing spacer"> <a href="{% url 'buysalerent' %}" class="pull-right viewall">View All
+    <div class="properties-listing spacer"> <a href="{% url 'buy' %}" class="pull-right viewall">View All
         Listing</a>
       <h2>Featured Properties</h2>
       <div id="owl-example" class="owl-carousel">

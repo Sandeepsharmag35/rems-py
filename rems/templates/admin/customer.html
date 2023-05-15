@@ -1,17 +1,14 @@
 {% extends 'admin/dashboard.html' %}
-{% load static %}
+{% block title %}Customers{% endblock %}
 {% block content %}
 <div class="cardHeader">
-    <h2>Customer Messages</h2>
+    <h2>Customers</h2>
     <table id="example" class="display">
         <thead>
-            <th>SN</th>
+            <th>ID</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Phone</th>
-            <th>Message</th>
-            <th>Property</th>
-            <th>Received At</th>
+            <th>@Username</th>
         </thead>
         {% if message %}
         <tbody>
@@ -20,10 +17,9 @@
                 <td>{{msg.id}}</td>
                 <td>{{msg.fullname}}</td>
                 <td>{{msg.email}}</td>
-                <td>{{msg.phone_number}}</td>
-                <td>{{msg.message}}</td>
-                <td>{{msg.property}}</td>
-                <td>{{msg.received_at}}</td>
+                <td>{{msg.username}}</td>
+                <td><a href="#" class="btn">Update</a></td>
+                <td><a href="#" class="btn">Delete</a></td>
             </tr>
             {% endfor %}
         </tbody>

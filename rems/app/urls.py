@@ -12,7 +12,6 @@ urlpatterns = [
     path("contact/", views.contactpage, name="contact"),
     path("rent/", views.rentpage, name="rent"),
     path("sell/", views.sellpage, name="sell"),
-    path("properties/", views.buySaleRentPage, name="buysalerent"),
     path(
         "property-details/<str:model>/<int:pk>/",
         views.propertyDetailsPage.as_view(),

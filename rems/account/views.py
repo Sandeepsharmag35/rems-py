@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from .models import Profile
 
 # Create your views here.
 
@@ -79,3 +80,27 @@ def LogoutPage(request):
 @login_required(login_url=login)
 def Homepage(request):
     return render(request, "home.html", {"user": request.user})
+
+
+@login_required(login_url=login)
+def ProfilePage(request):
+    if request.method == "POST":
+        email = request.POST["email"]
+        fullname = request.POST["full-name"]
+        phone_number = request.POST["phone-number"]
+        address = request.POST["address"]
+
+        user = request.user
+
+        # Create or update the profile data
+        profile = Profile.objects.get_or_create(user=user)
+        profile.email = email
+        profile.fullname = fullname
+        profile.phone_number = phone_number
+        profile.address = address
+        profile.save()
+
+        return redirect("home")
+
+    context = {"user": request.user}
+    return render(request, "profile.html", context)

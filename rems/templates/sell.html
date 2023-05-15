@@ -13,39 +13,41 @@
 <!-- banner -->
 
 <div class="container">
-  <h3 style="margin-top: 10px;">Please fill those fields according to their respective data *</h3>
-  <form method="POST" action="" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="row">
-      <div class="col-lg-6 col-sm-6">
-        <label for="property-title">Property Ad Title:</label>
-        <input type="text" class="form-control" placeholder="New House for sale at Gaindakot, Nawalpur"
-          id="property-title" name="property-title">
+  <div class="spacer">
+    <h3>Please fill those fields according to their respective data *</h3>
+    <form method="POST" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-lg-6 col-sm-6">
+          <label for="property-title">Property Ad Title:</label>
+          <input type="text" class="form-control" placeholder="New House for sale at Gaindakot, Nawalpur"
+            id="property-title" name="property-title">
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6 col-sm-6 ">
-        <label for="property-type">Property Type:</label>
-        <select class="form-control" id="property-type" name="property-type">
-          <option value="select">Select</option>
-          <option value="house">House</option>
-          <option value="apartment">Apartment</option>
-          <option value="land">Land</option>
-          <option value="flat">Flat</option>
-          <option value="commercial">Commercial Property</option>
-        </select>
+      <div class="row">
+        <div class="col-lg-6 col-sm-6 ">
+          <label for="property-type">Property Type:</label>
+          <select class="form-control" id="property-type" name="property-type">
+            <option value="select">Select</option>
+            <option value="house">House</option>
+            <option value="apartment">Apartment</option>
+            <option value="land">Land</option>
+            <option value="flat">Flat</option>
+            <option value="commercial">Commercial Property</option>
+          </select>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6 col-sm-6 ">
-        <label for="property-for">Sale / Rent:</label>
-        <select class="form-control" id="property-for" name="property-for">
-          <option>Sale</option>
-          <option>Rent</option>
-        </select>
+      <div class="row">
+        <div class="col-lg-6 col-sm-6 ">
+          <label for="property-for">Sale / Rent:</label>
+          <select class="form-control" id="property-for" name="property-for">
+            <option>Sale</option>
+            <option>Rent</option>
+          </select>
+        </div>
       </div>
-    </div>
-    <hr>
+  </div>
+  <div class="spacer">
     <div id="house-form" style="display: none;">
       <div class="row">
         <div class="col-lg-4 col-sm-4 ">
@@ -268,9 +270,9 @@
         </div>
       </div>
     </div>
-    <hr>
-
-    <h3><b>Location Details</b></h3>
+  </div>
+  <div class="spacer">
+    <h3><strong>Location Details</strong></h3>
     <div class="row">
       <div class="col-lg-4 col-sm-4 ">
         <label for="province">Province:</label>
@@ -302,9 +304,9 @@
         <input type="number" class="form-control" placeholder="Tole Name" id="tole" name="tole">
       </div>
     </div>
-    <hr>
-
-    <h3><b>Contact Details</b></h3>
+  </div>
+  <div class="spacer">
+    <h3><strong>Contact Details</strong></h3>
     <div class="row">
       <div class="col-lg-6 col-sm-6">
         <label for="name">Name:</label>
@@ -328,28 +330,29 @@
         <input type="number" class="form-control" placeholder="Your phone number" id="phone" name="phone">
       </div>
     </div>
-    <hr>
-
-    <h3><b>Upload Images</b></h3>
+  </div>
+  <div class="spacer">
+    <h3><strong>Upload Images</strong></h3>
     <div class="row">
       <div class="col-lg-6 col-sm-6">
         <div id="my-dropzone" class="dropzone">
           <div class="dz-default dz-message">
             <span>Drag and drop your images here or click to select files</span><br>
-            <span class="glyphicon glyphicon-plus"></span>
+            <span class="glyphicon glyphicon-picture">&nbsp;</span><span class="glyphicon glyphicon-plus"></span>
           </div>
         </div>
       </div>
     </div>
-    <hr>
+  </div>
+  <div class="spacer">
     <div class="row">
       <div class="col-lg-6 col-sm-6">
         <button class="btn btn-success" type="submit">Upload Details</button>
       </div>
     </div>
-  </form>
+    </form>
+  </div>
 </div>
-<br>
 <script>
   // getting references to the form and the two divs containing the fields
   const form = document.querySelector('form');
