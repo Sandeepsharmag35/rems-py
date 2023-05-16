@@ -312,6 +312,24 @@ body {
   border-radius: 6px;
 }
 
+.cardHeader .btn-update {
+  position: relative;
+  padding: 5px 10px;
+  background: #0a83fc;
+  text-decoration: none;
+  color: var(--white);
+  border-radius: 6px;
+}
+
+.cardHeader .btn-delete {
+  position: relative;
+  padding: 5px 10px;
+  background: red;
+  text-decoration: none;
+  color: var(--white);
+  border-radius: 6px;
+}
+
 .details table {
   width: 100%;
   border-collapse: collapse;

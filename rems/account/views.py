@@ -84,23 +84,66 @@ def Homepage(request):
 
 @login_required(login_url=login)
 def ProfilePage(request):
+    user = request.user
+    try:
+        profile = Profile.objects.get(user=user)
+        is_new_profile = False
+    except Profile.DoesNotExist:
+        profile = None
+        is_new_profile = True
+
     if request.method == "POST":
+        user = request.user
         email = request.POST["email"]
         fullname = request.POST["full-name"]
         phone_number = request.POST["phone-number"]
         address = request.POST["address"]
 
-        user = request.user
+        if is_new_profile:
+            profile_data = Profile.objects.create(
+                user=user,
+                email=email,
+                fullname=fullname,
+                phone_number=phone_number,
+                address=address,
+            )
+            save_sucess = "Profile saved sucessfully."
+        else:
+            profile.fullname = fullname
+            profile.phone_number = phone_number
+            profile.address = address
+            profile.save()
+            update_sucess = "Profile updated sucessfully."
+        return redirect("profile")
 
-        # Create or update the profile data
-        profile = Profile.objects.get_or_create(user=user)
-        profile.email = email
-        profile.fullname = fullname
-        profile.phone_number = phone_number
-        profile.address = address
-        profile.save()
-
-        return redirect("home")
-
-    context = {"user": request.user}
+    context = {
+        "user": request.user,
+        "profile": profile,
+        "is_new_profile": is_new_profile,
+        "saved_msg": save_sucess,
+        "updated_msg": update_sucess,
+    }
     return render(request, "profile.html", context)
+
+
+# @login_required(login_url="login")
+# def Update_Profile(request):
+#     user = request.user
+#     profile = Profile.objects.get(user=user)
+
+#     if request.method == "POST":
+#         email = request.POST.get("email")
+#         fullname = request.POST.get("full-name")
+#         phone_number = request.POST.get("phone-number")
+#         address = request.POST.get("address")
+
+#         profile.email = email
+#         profile.fullname = fullname
+#         profile.phone_number = phone_number
+#         profile.address = address
+#         profile.save()
+
+#         return redirect("profile")
+
+#     context = {"profile": profile}
+#     return render(request, "update_profile.html", context)

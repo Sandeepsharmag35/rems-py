@@ -8,18 +8,20 @@
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
-            <th>@Username</th>
+            <th>Username</th>
+            <th>Action</th>
         </thead>
-        {% if message %}
+        {% if profile %}
         <tbody>
-            {% for msg in message %}
+            {% for profile in profile %}
             <tr>
-                <td>{{msg.id}}</td>
-                <td>{{msg.fullname}}</td>
-                <td>{{msg.email}}</td>
-                <td>{{msg.username}}</td>
-                <td><a href="#" class="btn">Update</a></td>
-                <td><a href="#" class="btn">Delete</a></td>
+                <td>{{profile.id}}</td>
+                <td>{{profile.fullname}}</td>
+                <td>{{profile.email}}</td>
+                <td>@{{profile.user}}</td>
+                <td><a href="#" class="btn-update">Update</a>
+                    <a href="#" class="btn-delete">Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from app.models import CustomerMessage
+from account.models import Profile
 
 # Create your views here.
 
@@ -39,4 +40,5 @@ def customerMessage(request):
 
 
 def Customers(request):
-    return render(request, "adimin/customer.html", {"user": user})
+    profile = Profile.objects.all()
+    return render(request, "admin/customer.html", {"profile": profile})
