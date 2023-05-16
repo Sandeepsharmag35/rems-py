@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from app.models import CustomerMessage
 from account.models import Profile
+from django.contrib import messages
 
 # Create your views here.
 
@@ -40,5 +41,48 @@ def customerMessage(request):
 
 
 def Customers(request):
-    profile = Profile.objects.all()
-    return render(request, "admin/customer.html", {"profile": profile})
+    profile = Profile.objects.filter(user__is_superuser=False)
+    return render(request, "admin/customers.html", {"profile": profile})
+
+
+def Update_Customer(request, profile_id):
+    profile = get_object_or_404(Profile, id=profile_id)
+    user = profile.user
+    username = user.username
+
+    if request.method == "POST":
+        full_name = request.POST.get("full_name")
+        email = request.POST.get("email")
+        phone_number = request.POST.get("phone")
+
+        # Update the user's profile
+        profile.fullname = full_name
+        profile.email = email
+        profile.phone_number = phone_number
+        profile.save()
+        messages.success(
+            request, f"The user @'{username}''s profile has been updated successfully."
+        )
+
+        return redirect("customers")
+
+    return render(request, "admin/customers.html", {"profile": profile})
+
+
+def Delete_Customer(request, profile_id):
+    try:
+        profile = Profile.objects.get(id=profile_id)
+        user = profile.user
+        username = user.username
+        user.delete()
+        messages.success(
+            request, f"The user @'{username}' has been deleted successfully."
+        )
+    except Profile.DoesNotExist:
+        messages.error(request, "The user profile does not exist.")
+    return redirect("customers")
+
+
+def Admins(request):
+    profile = Profile.objects.filter(user__is_superuser=True)
+    return render(request, "admin/admins.html", {"profile": profile})

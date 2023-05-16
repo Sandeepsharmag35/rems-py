@@ -42,15 +42,11 @@
       <div class="col-sm-6">
         <h4>New User Sign Up</h4>
         <p>Join today and get updated with all the properties deal happening around.</p>
-        <button type="submit" class="btn btn-info" onclick="window.location.href='{% url 'register' %}'">Join
-          Now</button>
+        <a type="submit" class="btn btn-info" href="{% url 'register' %}">Join
+          Now</a>
       </div>
-
     </div>
   </div>
 </div>
 
-{% endblock %}
-
-{% block footer %}
 {% endblock %}

@@ -13,7 +13,7 @@
 
 <div class="container">
   {% if success_message %}
-  <div class="alert alert-danger" role="alert">
+  <div class="alert alert-success" role="alert">
     {{ success_message }}
   </div>
   {% endif %}
@@ -52,11 +52,9 @@
           <input type="text" class="form-control" placeholder="Address" id="address" name="address">
         </div>
       </div>
-      <div class="spacer">
-        <div class="row">
-          <div class="col-lg-6 col-sm-6">
-            <button type="submit" class="btn btn-primary">Save Details</button>
-          </div>
+      <div class="row">
+        <div class="col-lg-6 col-sm-6">
+          <button type="submit" class="btn btn-success">Save Details</button>
         </div>
       </div>
       {% else %}
@@ -93,16 +91,13 @@
             value="{{profile.address}}">
         </div>
       </div>
-      <div class="spacer">
-        <div class="row">
-          <div class="col-lg-6 col-sm-6">
-            <button type="submit" class="btn btn-sucess">Update Details</button>
-          </div>
+      <div class="row">
+        <div class="col-lg-6 col-sm-6">
+          <button type="submit" class="btn btn-success">Update Details</button>
         </div>
       </div>
       {% endif %}
     </form>
   </div>
 </div>
-
 {% endblock %}

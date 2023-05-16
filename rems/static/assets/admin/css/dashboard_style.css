@@ -321,6 +321,11 @@ body {
   border-radius: 6px;
 }
 
+.btn-update,
+.btn-delete :hover {
+  cursor: pointer;
+}
+
 .cardHeader .btn-delete {
   position: relative;
   padding: 5px 10px;
@@ -328,6 +333,13 @@ body {
   text-decoration: none;
   color: var(--white);
   border-radius: 6px;
+}
+
+.cardHeader table input {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background: none;
 }
 
 .details table {

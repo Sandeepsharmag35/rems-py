@@ -17,4 +17,4 @@ class Profile(models.Model):
     address = models.TextField(max_length=100, blank=True)
 
     def __str__(self):
-        return self.user
+        return self.fullname

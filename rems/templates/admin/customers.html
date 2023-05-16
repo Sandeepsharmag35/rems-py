@@ -1,0 +1,43 @@
+{% extends 'admin/dashboard.html' %}
+{% block title %}Customers{% endblock %}
+{% block content %}
+<div class="cardHeader">
+    <h2>Customers</h2>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <table id="example" class="display">
+        <thead>
+            <th>S.N.</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Username</th>
+            <th>Action</th>
+        </thead>
+        {% if profile %}
+        <tbody>
+            {% for profile in profile %}
+            <tr>
+                <form method="POST" action="{% url 'update_customer' profile.id %}">
+                    {% csrf_token %}
+                    <td>{{forloop.counter}}</td>
+                    <td><input type="text" name="full_name" value="{{profile.fullname}}"></td>
+                    <td><input type="text" name="email" value="{{profile.email}}"></td>
+                    <td><input type="number" name="phone" value="{{profile.phone_number}}"></td>
+                    <td><input type="text" name="username" value="@{{profile.user}}"></td>
+                    <td><input type="submit" class="btn-update" value="Update">
+                        <a href="{% url 'delete_customer' profile.id %}" class="btn-delete">Delete</a>
+                    </td>
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% endif %}
+    </table>
+</div>
+{% endblock %}
