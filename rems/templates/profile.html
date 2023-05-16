@@ -12,14 +12,9 @@
 <!-- banner -->
 
 <div class="container">
-  {% if saved_msg %}
+  {% if success_message %}
   <div class="alert alert-danger" role="alert">
-    {{ saved_msg }}
-  </div>
-  {% endif %}
-  {% if updated_msg %}
-  <div class="alert alert-danger" role="alert">
-    {{ updated_msg }}
+    {{ success_message }}
   </div>
   {% endif %}
   <div class="spacer">

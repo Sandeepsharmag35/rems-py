@@ -92,6 +92,8 @@ def ProfilePage(request):
         profile = None
         is_new_profile = True
 
+    success_message = None
+
     if request.method == "POST":
         user = request.user
         email = request.POST["email"]
@@ -107,43 +109,19 @@ def ProfilePage(request):
                 phone_number=phone_number,
                 address=address,
             )
-            save_sucess = "Profile saved sucessfully."
+            success_message = "Profile saved sucessfully."
         else:
             profile.fullname = fullname
             profile.phone_number = phone_number
             profile.address = address
             profile.save()
-            update_sucess = "Profile updated sucessfully."
+            success_message = "Profile updated sucessfully."
         return redirect("profile")
 
     context = {
         "user": request.user,
         "profile": profile,
         "is_new_profile": is_new_profile,
-        "saved_msg": save_sucess,
-        "updated_msg": update_sucess,
+        "success_message": success_message,
     }
     return render(request, "profile.html", context)
-
-
-# @login_required(login_url="login")
-# def Update_Profile(request):
-#     user = request.user
-#     profile = Profile.objects.get(user=user)
-
-#     if request.method == "POST":
-#         email = request.POST.get("email")
-#         fullname = request.POST.get("full-name")
-#         phone_number = request.POST.get("phone-number")
-#         address = request.POST.get("address")
-
-#         profile.email = email
-#         profile.fullname = fullname
-#         profile.phone_number = phone_number
-#         profile.address = address
-#         profile.save()
-
-#         return redirect("profile")
-
-#     context = {"profile": profile}
-#     return render(request, "update_profile.html", context)
