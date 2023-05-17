@@ -18,4 +18,5 @@ urlpatterns = [
         name="delete_customer",
     ),
     path("admins/", views.Admins, name="admins"),
+    path("properties/", views.PropertyList, name="properties"),
 ]

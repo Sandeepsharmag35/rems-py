@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from app.models import CustomerMessage
 from account.models import Profile
+from app.models import Property
 from django.contrib import messages
 
 # Create your views here.
@@ -86,3 +87,9 @@ def Delete_Customer(request, profile_id):
 def Admins(request):
     profile = Profile.objects.filter(user__is_superuser=True)
     return render(request, "admin/admins.html", {"profile": profile})
+
+
+def PropertyList(request):
+    properties = Property.objects.all()
+    context = {"properties": properties}
+    return render(request, "admin/properties.html", context)

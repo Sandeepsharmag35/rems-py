@@ -312,6 +312,25 @@ body {
   border-radius: 6px;
 }
 
+.cardHeader .btn-add {
+  position: relative;
+  float: right;
+  margin-right: 20px;
+  padding: 5px 10px;
+  background: var(--blue);
+  text-decoration: none;
+  color: var(--white);
+  border-radius: 5px;
+
+}
+
+.cardHeader .btn-add .icon {
+  font-size: 20px;
+  display: inline;
+  margin-right: 5px;
+
+}
+
 .cardHeader .btn-update {
   position: relative;
   padding: 5px 10px;
@@ -319,6 +338,8 @@ body {
   text-decoration: none;
   color: var(--white);
   border-radius: 6px;
+  margin: 10px;
+
 }
 
 .btn-update,
@@ -341,6 +362,7 @@ body {
   outline: none;
   background: none;
 }
+
 
 .details table {
   width: 100%;

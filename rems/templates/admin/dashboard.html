@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>{% block title %}Dashboard{% endblock %}</title>
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="{% static 'assets/admin/css/dashboard_style.css' %}">
     <link rel="stylesheet" href="{% static 'datatable/datatables.css' %}">
@@ -55,6 +55,15 @@
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
                         <span class="title">Messages</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'properties' %}">
+                        <span class="icon">
+                            <ion-icon name="list-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Properties</span>
                     </a>
                 </li>
 

@@ -1,0 +1,63 @@
+{% extends 'admin/dashboard.html' %}
+{% load static %}
+{% block title %}Properties{% endblock %}
+{% block content %}
+<div class="cardHeader">
+    <h2>Properties</h2>
+    <a href="#" class="btn-add">
+        <span class="icon">
+            <ion-icon name="add-circle"></ion-icon>
+        </span>
+        <span class="btn-add-text">Add Property</span>
+    </a>
+    <table id="example" class="display">
+        <thead>
+            <th>SN</th>
+            <th>Image</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>District</th>
+            <th>City</th>
+            <th>Status</th>
+            <th>Property For</th>
+            <th>Action</th>
+
+        </thead>
+        {% if properties %}
+        <tbody>
+            {% for property in properties %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><img src="{{property.image.url}}" height="50px"></td>
+                <td>{{property.property_type}}</td>
+                <td>{{property.price}}</td>
+                <td>{{property.district}}</td>
+                <td>{{property.city}}</td>
+                <td>{{property.status}}</td>
+                <td>{{property.property_for}}</td>
+                <td><input type="submit" class="btn-update" value="Update"><a href="#" class="btn-delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% endif %}
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            columnDefs: [
+                { width: 90, targets: 1 },
+                { width: 80, targets: 2 },
+                { width: 110, targets: 3 },
+                { width: 100, targets: 4 },
+                { width: 100, targets: 5 },
+                { width: 100, targets: 6 },
+                { width: 50, targets: 7 },
+
+            ]
+        });
+    });
+</script>
+{% endblock %}
