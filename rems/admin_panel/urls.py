@@ -19,4 +19,5 @@ urlpatterns = [
     ),
     path("admins/", views.Admins, name="admins"),
     path("properties/", views.PropertyList, name="properties"),
+    path("add-property/", views.AddProperty, name="add-property"),
 ]

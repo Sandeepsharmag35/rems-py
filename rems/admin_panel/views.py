@@ -93,3 +93,7 @@ def PropertyList(request):
     properties = Property.objects.all()
     context = {"properties": properties}
     return render(request, "admin/properties.html", context)
+
+
+def AddProperty(request):
+    return render(request, "admin/add_property.html")

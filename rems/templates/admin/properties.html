@@ -4,7 +4,7 @@
 {% block content %}
 <div class="cardHeader">
     <h2>Properties</h2>
-    <a href="#" class="btn-add">
+    <a href="{% url 'add-property' %}" class="btn-add">
         <span class="icon">
             <ion-icon name="add-circle"></ion-icon>
         </span>
@@ -43,21 +43,4 @@
         {% endif %}
     </table>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('#example').DataTable({
-            columnDefs: [
-                { width: 90, targets: 1 },
-                { width: 80, targets: 2 },
-                { width: 110, targets: 3 },
-                { width: 100, targets: 4 },
-                { width: 100, targets: 5 },
-                { width: 100, targets: 6 },
-                { width: 50, targets: 7 },
-
-            ]
-        });
-    });
-</script>
 {% endblock %}
