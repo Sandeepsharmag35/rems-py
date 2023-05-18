@@ -96,4 +96,30 @@ def PropertyList(request):
 
 
 def AddProperty(request):
+    if request.method == "POST":
+        property_type = request.POST.get("property-type")
+        property_for = request.POST.get("property-for")
+        image = request.POST.get("property-image")
+        price = request.POST.get("property-price")
+        city = request.POST.get("city")
+        district = request.POST.get("district")
+        zip_code = request.POST.get("zip-code")
+        description = request.POST.get("description")
+        status = request.POST.get("status")
+
+        property = Property(
+            property_type=property_type,
+            property_for=property_for,
+            image=image,
+            price=price,
+            city=city,
+            district=district,
+            zip_code=zip_code,
+            description=description,
+            status=status,
+        )
+        property.save()
+        messages.success(request, f"Property has been added successfully.")
+        return redirect("add-property")
+
     return render(request, "admin/add_property.html")

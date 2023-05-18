@@ -27,6 +27,19 @@ body {
   width: 100%;
 }
 
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-top: 15px;
+}
+
+.col-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
 /* =============== Navigation ================ */
 .navigation {
   position: fixed;
@@ -491,7 +504,114 @@ body {
   color: var(--white);
 }
 
+/* ---------------add property css--------------------- */
+.insider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.animated-form {
+  width: 600px;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.animated-form h2 {
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.animated-form>label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+textarea,
+select,
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.animated-form>button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.animated-form>button:hover {
+  background-color: #45a049;
+}
+
+
 /* ====================== Responsive Design ========================== */
+[class^="col-"] {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+/* Column breakpoints for different screen sizes */
+@media (min-width: 576px) {
+
+  /* Extra small devices (576px and up) */
+  .col-sm {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+
+  /* Small devices (768px and up) */
+  .col-md {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+
+  /* Medium devices (992px and up) */
+  .col-lg {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  /* Large devices (1200px and up) */
+  .col-xl {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+
 @media (max-width: 991px) {
   .navigation {
     left: -300px;

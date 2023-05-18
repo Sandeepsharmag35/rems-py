@@ -1,55 +1,70 @@
 {% extends 'admin/dashboard.html' %}
 {% block title %}Add Property{% endblock %}
 {% block content %}
-<div class="container">
-    <div class="cardHeader">
-        <h2>Add Property</h2>
-        <div class="">
-            <form action="" method="post" role="form">
+<div class="insider">
+    <div class="row">
+        <div class="cardHeader">
+            <form action="{% url 'add-property' %}" method="post" class="animated-form">
                 {% csrf_token %}
-                <label for="property-type">Property Type:</label>
-                <select id="property-type" name="property-type">
-                    <option>House</option>
-                    <option>Land</option>
-                    <option>Apartment</option>
-                    <option>Commercial</option>
-                </select>
-
-                <label for="property-for">Property For:</label>
-                <select id="property-for" name="property-for">
-                    <option>Buyer</option>
-                    <option>Renter</option>
-                </select>
-
-                <label for="property-image">Image:</label>
-                <input type="image" id="property-image" name="property-image" width="250px" height="200px">
-
-                <label for="property-price">Price:</label>
-                <input type="number" id="property-price" name="property-price">
-
-                <label for="city">City:</label>
-                <input type="text" id="city" name="city">
-
-                <label for="district">District:</label>
-                <input type="text" id="district" name="district">
-
-                <label for="zip-code">Zip Code:</label>
-                <input type="number" id="zip-code" name="zip-code">
-
-                <label for="description">Description:</label>
-                <input type="textarea" id="description" name="description">
-
-                <label for="status">Status:</label>
-                <select id="status" name="status">
-                    <option>Available</option>
-                    <option>Sold</option>
-                    <option>Rented</option>
-                </select>
-
+                <h2>Add Property</h2>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="form-group">
+                    <label for="property-type">Property Type:</label>
+                    <select id="property-type" name="property-type">
+                        <option>House</option>
+                        <option>Land</option>
+                        <option>Apartment</option>
+                        <option>Commercial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="property-for">Property For:</label>
+                    <select id="property-for" name="property-for">
+                        <option>Buyer</option>
+                        <option>Renter</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="property-image">Image:</label>
+                    <input type="file" id="property-image" name="property-image">
+                </div>
+                <div class="form-group">
+                    <label for="property-price">Price:</label>
+                    <input type="number" id="property-price" name="property-price">
+                </div>
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city">
+                </div>
+                <div class="form-group">
+                    <label for="district">District:</label>
+                    <input type="text" id="district" name="district">
+                </div>
+                <div class="form-group">
+                    <label for="zip-code">Zip Code:</label>
+                    <input type="number" id="zip-code" name="zip-code">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select id="status" name="status">
+                        <option>Available</option>
+                        <option>Sold</option>
+                        <option>Rented</option>
+                    </select>
+                </div>
                 <button type="submit">Save</button>
-
             </form>
-
         </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
