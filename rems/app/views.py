@@ -24,7 +24,7 @@ def blogdetailspage(request):
 
 
 def buypage(request):
-    properties = Property.objects.filter(property_for="buyer")
+    properties = Property.objects.filter(property_for="Buyer")
     return render(request, "buy.html", {"properties": properties})
 
 
@@ -33,7 +33,7 @@ def contactpage(request):
 
 
 def rentpage(request):
-    properties = Property.objects.filter(property_for="renter")
+    properties = Property.objects.filter(property_for="Renter")
     return render(request, "rent.html", {"properties": properties})
 
 

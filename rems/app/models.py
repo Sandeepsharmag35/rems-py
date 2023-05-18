@@ -18,9 +18,10 @@ def image_validations(instance, filename):
 
 class Property(models.Model):
     STATUS_CHOICES = [
-        ("available", "Available"),
-        ("rented", "Rented"),
-        ("sold", "Sold"),
+        ("Select", "Select"),
+        ("Available", "Available"),
+        ("Rented", "Rented"),
+        ("Sold", "Sold"),
     ]
     TYPE_CHOICES = [
         ("House", "House"),
@@ -29,8 +30,8 @@ class Property(models.Model):
         ("Commercial", "Commercial"),
     ]
     FOR_CHOICES = [
-        ("buyer", "Buyer"),
-        ("renter", "Renter"),
+        ("Buyer", "Buyer"),
+        ("Renter", "Renter"),
     ]
 
     property_type = models.CharField(
@@ -45,9 +46,7 @@ class Property(models.Model):
     district = models.CharField(max_length=200)
     zip_code = models.CharField(max_length=20)
     description = models.TextField()
-    status = models.CharField(
-        max_length=20, choices=STATUS_CHOICES, default="available"
-    )
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Select")
 
     def __str__(self):
         return f"{self.property_type} at {self.city}, {self.district}"

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'datatable/datatables.css' %}">
     <script src="{% static 'datatable/jquery-3.6.0.js' %}"></script>
     <script src="{% static 'datatable/datatables.js' %}"></script>
-
+    {% block extrajs %} {% endblock %}
 </head>
 
 <body>
@@ -23,7 +23,7 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="{% url 'admin_dashboard' %}">
                         <span class="icon">
                             <ion-icon name="planet"></ion-icon>
                         </span>
@@ -361,6 +361,17 @@
         $('#example').DataTable({
             responsive: true
         });
+    });
+
+    $("#property-image").bind("change", function () {
+        var filename = $("#property-image").val();
+        if (/^\s*$/.test(filename)) {
+            $(".file-upload").removeClass("active");
+            $("#noFile").text("No file chosen...");
+        } else {
+            $(".file-upload").addClass("active");
+            $("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+        }
     });
 </script>
 

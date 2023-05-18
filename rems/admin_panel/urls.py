@@ -8,6 +8,11 @@ urlpatterns = [
     path("messages/", views.customerMessage, name="messages"),
     path("customers/", views.Customers, name="customers"),
     path(
+        "delete_message/<int:msg_id>/",
+        views.Delete_CustomerMessage,
+        name="delete_message",
+    ),
+    path(
         "update_customer/<int:profile_id>/",
         views.Update_Customer,
         name="update_customer",
@@ -18,6 +23,11 @@ urlpatterns = [
         name="delete_customer",
     ),
     path("admins/", views.Admins, name="admins"),
+    path(
+        "remove_admin/<int:user_id>/",
+        views.Remove_Admin,
+        name="remove_admin",
+    ),
     path("properties/", views.PropertyList, name="properties"),
     path("add-property/", views.AddProperty, name="add-property"),
 ]

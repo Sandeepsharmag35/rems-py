@@ -4,6 +4,13 @@
 {% block content %}
 <div class="cardHeader">
     <h2>Customer Messages</h2>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
     <table id="example" class="display">
         <thead>
             <th>SN</th>
@@ -13,6 +20,7 @@
             <th>Message</th>
             <th>Property</th>
             <th>Received At</th>
+            <th>Action</th>
         </thead>
         {% if message %}
         <tbody>
@@ -22,9 +30,12 @@
                 <td>{{msg.fullname}}</td>
                 <td>{{msg.email}}</td>
                 <td>{{msg.phone_number}}</td>
-                <td>{{msg.message}}</td>
+                <td><textarea>{{msg.message}}</textarea></td>
                 <td>{{msg.property}}</td>
                 <td>{{msg.received_at}}</td>
+                <td>
+                    <a href="{% url 'delete_message' msg.id %}" class="btn-delete">Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

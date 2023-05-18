@@ -33,19 +33,36 @@ def adminLogout(request):
 
 @login_required(login_url=login)
 def AdminDashboard(request):
-    return render(request, "admin/dashboard.html", {"user": request.user})
+    context = {"user": request.user}
+    return render(request, "admin/dashboard.html", context)
 
 
+@login_required(login_url=login)
 def customerMessage(request):
     message = CustomerMessage.objects.all()
-    return render(request, "admin/message.html", {"message": message})
+    context = {"message": message}
+    return render(request, "admin/message.html", context)
 
 
+@login_required(login_url=login)
+def Delete_CustomerMessage(request, msg_id):
+    try:
+        msg = CustomerMessage.objects.get(id=msg_id)
+        msg.delete()
+        messages.success(request, f"The message has been deleted successfully.")
+    except CustomerMessage.DoesNotExist:
+        messages.error(request, "The message does not exist.")
+    return redirect("messages")
+
+
+@login_required(login_url=login)
 def Customers(request):
     profile = Profile.objects.filter(user__is_superuser=False)
-    return render(request, "admin/customers.html", {"profile": profile})
+    context = {"profile": profile}
+    return render(request, "admin/customers.html", context)
 
 
+@login_required(login_url=login)
 def Update_Customer(request, profile_id):
     profile = get_object_or_404(Profile, id=profile_id)
     user = profile.user
@@ -66,10 +83,11 @@ def Update_Customer(request, profile_id):
         )
 
         return redirect("customers")
+    context = {"profile": profile}
+    return render(request, "admin/customers.html", context)
 
-    return render(request, "admin/customers.html", {"profile": profile})
 
-
+@login_required(login_url=login)
 def Delete_Customer(request, profile_id):
     try:
         profile = Profile.objects.get(id=profile_id)
@@ -84,17 +102,32 @@ def Delete_Customer(request, profile_id):
     return redirect("customers")
 
 
+@login_required(login_url=login)
 def Admins(request):
     profile = Profile.objects.filter(user__is_superuser=True)
-    return render(request, "admin/admins.html", {"profile": profile})
+    context = {"profile": profile}
+    return render(request, "admin/admins.html", context)
 
 
+@login_required(login_url=login)
+def Remove_Admin(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    username = user.username
+    user.is_staff = False
+    user.is_superuser = False
+    user.save()
+    messages.success(request, f"'{username}' has been removed as 'admin' successfully.")
+    return redirect("admins")
+
+
+@login_required(login_url=login)
 def PropertyList(request):
     properties = Property.objects.all()
     context = {"properties": properties}
     return render(request, "admin/properties.html", context)
 
 
+@login_required(login_url=login)
 def AddProperty(request):
     if request.method == "POST":
         property_type = request.POST.get("property-type")
