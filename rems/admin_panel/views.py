@@ -109,14 +109,24 @@ def Admins(request):
     return render(request, "admin/admins.html", context)
 
 
-@login_required(login_url=login)
-def Remove_Admin(request, user_id):
-    user = get_object_or_404(User, id=user_id)
-    username = user.username
-    user.is_staff = False
-    user.is_superuser = False
-    user.save()
-    messages.success(request, f"'{username}' has been removed as 'admin' successfully.")
+def Remove_Admin(request, profile_id):
+    try:
+        profile = Profile.objects.get(id=profile_id)
+        user = profile.user
+        username = user.username
+    except Profile.DoesNotExist:
+        messages.error(request, "The user profile does not exist.")
+
+    if user.is_superuser or user.is_staff:
+        user.is_superuser = False
+        user.is_staff = False
+        user.save()
+        messages.success(
+            request, f"'{username}' has been removed as 'admin' successfully."
+        )
+    else:
+        messages.error(request, f"'{username}' is not an admin.")
+
     return redirect("admins")
 
 

@@ -24,7 +24,7 @@ urlpatterns = [
     ),
     path("admins/", views.Admins, name="admins"),
     path(
-        "remove_admin/<int:user_id>/",
+        "remove_admin/<int:profile_id>/",
         views.Remove_Admin,
         name="remove_admin",
     ),

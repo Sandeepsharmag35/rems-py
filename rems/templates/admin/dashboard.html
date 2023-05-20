@@ -362,7 +362,7 @@
             responsive: true
         });
     });
-
+    // for choose file
     $("#property-image").bind("change", function () {
         var filename = $("#property-image").val();
         if (/^\s*$/.test(filename)) {
@@ -374,5 +374,31 @@
         }
     });
 </script>
+{% block on_page_scripts %}
+<script>
+    function formatNumber(input) {
+        // Remove any non-digit characters
+        const value = input.value.replace(/\D/g, '');
+
+        // Format the value with Nepali commas
+        let formattedValue = '';
+        let count = 0;
+
+        for (let i = value.length - 1; i >= 0; i--) {
+            formattedValue = value[i] + formattedValue;
+            count++;
+
+            if (count === 3 && i !== 0) {
+                formattedValue = ',' + formattedValue;
+                count = 0;
+            }
+        }
+
+        // Update the input value
+        input.value = formattedValue;
+    }
+</script>
+{% endblock %}
+
 
 </html>
