@@ -30,8 +30,8 @@
                     <td><input type="text" name="email" value="{{profile.email}}"></td>
                     <td><input type="tel" name="phone" value="{{profile.phone_number}}"></td>
                     <td><input type="text" name="username" value="@{{profile.user}}"></td>
-                    <td><input type="submit" class="btn-update" value="Update"><a
-                            href="{% url 'delete_customer' profile.id %}" class="btn-delete">Delete</a>
+                    <td><input type="submit" class="btn-update" value="Update">
+                        <a href="{% url 'delete_customer' profile.id %}" class="btn-delete">Delete</a>
                     </td>
                 </form>
             </tr>

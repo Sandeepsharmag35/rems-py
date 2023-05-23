@@ -19,6 +19,7 @@
             <th>Phone</th>
             <th>Message</th>
             <th>Property</th>
+            <th>Image</th>
             <th>Received At</th>
             <th>Action</th>
         </thead>
@@ -32,6 +33,7 @@
                 <td>{{msg.phone_number}}</td>
                 <td><textarea>{{msg.message}}</textarea></td>
                 <td>{{msg.property}}</td>
+                <td><img src="{{msg.property.image.url}}" width="80px" height="50px"></td>
                 <td>{{msg.received_at}}</td>
                 <td>
                     <a href="{% url 'delete_message' msg.id %}" class="btn-delete">Delete</a>

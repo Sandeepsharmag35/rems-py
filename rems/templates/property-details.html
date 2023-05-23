@@ -6,8 +6,13 @@
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
+    {% if property.property_for == 'Buyer' %}
     <span class="pull-right"><a href="{% url 'home' %}">Home</a> / Buy</span>
     <h2>Buy</h2>
+    {% else %}
+    <span class="pull-right"><a href="{% url 'home' %}">Home</a> / Rent</span>
+    <h2>Rent</h2>
+    {% endif %}
   </div>
 </div>
 <!-- banner -->

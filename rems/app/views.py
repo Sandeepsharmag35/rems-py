@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from .models import Property, CustomerMessage
 from django.views.generic import DetailView
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -25,16 +26,24 @@ def blogdetailspage(request):
 
 def buypage(request):
     properties = Property.objects.filter(property_for="Buyer")
-    return render(request, "buy.html", {"properties": properties})
-
-
-def contactpage(request):
-    return render(request, "contact.html")
+    paginator = Paginator(properties, 9)  # Show 9 properties per page
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj": page_obj}
+    return render(request, "buy.html", context)
 
 
 def rentpage(request):
     properties = Property.objects.filter(property_for="Renter")
-    return render(request, "rent.html", {"properties": properties})
+    paginator = Paginator(properties, 9)  # Show 9 properties per page
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj": page_obj}
+    return render(request, "rent.html", context)
+
+
+def contactpage(request):
+    return render(request, "contact.html")
 
 
 def sellpage(request):

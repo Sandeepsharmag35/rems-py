@@ -39,8 +39,8 @@ def AdminDashboard(request):
 
 @login_required(login_url=login)
 def customerMessage(request):
-    message = CustomerMessage.objects.all()
-    context = {"message": message}
+    messages = CustomerMessage.objects.select_related("property")
+    context = {"message": messages}
     return render(request, "admin/message.html", context)
 
 
