@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from .models import Profile
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -53,7 +55,16 @@ def RegisterPage(request):
         else:
             myuser = User.objects.create_user(uname, email, pass1)
             myuser.save()
-            return redirect("login")
+
+            user = authenticate(request, username=uname, password=pass1)
+            if user is not None:
+                login(request, user)
+                return redirect("home")
+            else:
+                # Handle the case when authentication fails
+                error_message = "Registration successful, but failed to log in. Please try logging in manually."
+                return render(request, "login.html", {"error_message": error_message})
+
     return render(request, "register.html")
 
 
@@ -91,7 +102,6 @@ def ProfilePage(request):
     except Profile.DoesNotExist:
         profile = None
         is_new_profile = True
-
     success_message = None
 
     if request.method == "POST":
@@ -116,12 +126,12 @@ def ProfilePage(request):
             profile.address = address
             profile.save()
             success_message = "Profile updated sucessfully."
+        messages.success(request, success_message)
         return redirect("profile")
 
     context = {
         "user": request.user,
         "profile": profile,
         "is_new_profile": is_new_profile,
-        "success_message": success_message,
     }
     return render(request, "profile.html", context)

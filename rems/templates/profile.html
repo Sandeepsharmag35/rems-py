@@ -13,11 +13,15 @@
 <!-- banner -->
 
 <div class="container">
-  {% if success_message %}
-  <div class="alert alert-success" role="alert">
-    {{ success_message }}
+  <div class="row">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
   </div>
-  {% endif %}
   <div class="spacer">
     <form method="post" role="form">
       {% csrf_token %}
