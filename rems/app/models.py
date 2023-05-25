@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
+from .validators import phone_regex
 
 # Create your models here.
 
@@ -7,13 +9,15 @@ from django.core.validators import RegexValidator
 def image_validations(instance, filename):
     img = instance.image  # getting the image name
     print(img)
-    ext = img.name.split(".")[-1]
-    print(ext)
+    ext = img.name.split(".")[-1].lower()
+    allowed_extensions = ["jpg", "jpeg", "png"]
 
-    if ext.lower() == "jpg" or ext.lower() == "png" or ext.lower() == "jpeg":
-        return filename
+    if ext in allowed_extensions:
+        return f"property_images/{filename}"
     else:
-        return "error"
+        raise ValidationError(
+            "Invalid file format. Only JPG, JPEG, and PNG files are allowed."
+        )
 
 
 class Property(models.Model):
@@ -53,16 +57,49 @@ class Property(models.Model):
 
 
 class CustomerMessage(models.Model):
-    fullname = models.TextField(max_length=50, blank=True)
+    fullname = models.CharField(max_length=50, blank=True)
     email = models.EmailField(max_length=100, unique=True)
-    phone_regex = RegexValidator(
-        regex=r"^\+?1?\d{9,15}$",
-        message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.",
-    )
-    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
+    phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=True)
     message = models.TextField(max_length=200, blank=True)
     property = models.ForeignKey(Property, on_delete=models.CASCADE, blank=True)
     received_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Message from {self.fullname}."
+
+
+class SellRequests(models.Model):
+    property_title = models.CharField(max_length=100, blank=False)
+    property_type = models.CharField(max_length=15, blank=False)
+    property_for = models.CharField(max_length=10, blank=False)
+    flat_number = models.IntegerField(blank=True)
+    bedrooms = models.IntegerField(blank=True)
+    bathrooms = models.IntegerField(blank=True)
+    living_rooms = models.IntegerField(blank=True)
+    kitchens = models.IntegerField(blank=True)
+    total_rooms = models.IntegerField(blank=True)
+    parking = models.CharField(max_length=15, blank=True)
+    built_year = models.IntegerField(blank=True)
+    built_area = models.CharField(max_length=20, blank=True)
+    road_size = models.CharField(max_length=20, blank=True)
+    land_area = models.CharField(max_length=20, blank=True)
+    type = models.CharField(max_length=20, blank=True)
+    facing_direction = models.CharField(max_length=20, blank=True)
+    price = models.CharField(max_length=20, blank=True)
+    price_per_unit = models.CharField(max_length=15, blank=True)
+    full_description = models.TextField(max_length=300, blank=True)
+
+    # location
+    province = models.CharField(max_length=15, blank=True)
+    district = models.CharField(max_length=20, blank=True)
+    municipality = models.CharField(max_length=20, blank=True)
+    ward_no = models.CharField(max_length=5, blank=True)
+    tole = models.CharField(max_length=30, blank=True)
+
+    # contact
+    name = models.CharField(max_length=50, blank=False)
+    email = models.EmailField(max_length=50, blank=False)
+    address = models.CharField(max_length=50, blank=False)
+    phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=True)
+
+    # images
