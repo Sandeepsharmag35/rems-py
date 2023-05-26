@@ -212,6 +212,8 @@ body {
 
 .user {
   position: relative;
+  float: left;
+  margin-right: 10%;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -329,7 +331,7 @@ body {
   position: relative;
   float: right;
   margin-right: 20px;
-  padding: 5px 10px;
+  padding: 10px 10px;
   background: var(--blue);
   text-decoration: none;
   color: var(--white);
@@ -337,11 +339,8 @@ body {
 
 }
 
-.cardHeader .btn-add .icon {
-  font-size: 20px;
-  display: inline;
-  margin-right: 5px;
-
+.cardHeader .btn-add i {
+  margin-right: 10px;
 }
 
 .cardHeader .btn-update {
@@ -505,6 +504,12 @@ body {
 }
 
 /* ---------------add property css--------------------- */
+.go-back ion-icon {
+  font-size: 1.75rem;
+
+}
+
+
 .insider {
   display: flex;
   justify-content: center;

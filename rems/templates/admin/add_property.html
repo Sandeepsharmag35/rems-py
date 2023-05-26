@@ -1,9 +1,16 @@
 {% extends 'admin/dashboard.html' %}
 {% block title %}Add Property{% endblock %}
-{% block extrajs %}
+{% block extracssjs %}
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 {% endblock %}
 {% block content %}
+<div class="go-back">
+    <a href="javascript:void(0);" onclick="window.history.back();">
+        <span class="icon">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+        </span>
+    </a>
+</div>
 <div class="insider">
     <div class="row">
         <div class="cardHeader">
