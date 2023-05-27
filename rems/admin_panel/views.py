@@ -2,9 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from app.models import CustomerMessage
+from app.models import CustomerMessage, Property, SellRequest
 from account.models import Profile
-from app.models import Property
 from django.contrib import messages
 
 # Create your views here.
@@ -166,3 +165,62 @@ def AddProperty(request):
         return redirect("add-property")
 
     return render(request, "admin/add_property.html")
+
+
+def SellRequest(request):
+    if request.method == "POST":
+        property_title = request.POST.get("property-title")
+        property_type = request.POST.get("property-title")
+        property_for = request.POST.get("property-title")
+        flat_number = request.POST.get("property-title")
+        bedrooms = request.POST.get("property-title")
+        bathrooms = request.POST.get("property-title")
+        living_rooms = request.POST.get("property-title")
+        kitchens = request.POST.get("property-title")
+        total_rooms = request.POST.get("property-title")
+        parking = request.POST.get("property-title")
+        built_year = request.POST.get("property-title")
+        built_area = request.POST.get("property-title")
+        road_size = request.POST.get("property-title")
+        land_area = request.POST.get("property-title")
+        type = request.POST.get("property-title")
+        facing_direction = request.POST.get("property-title")
+        price = request.POST.get("property-title")
+        price_per_unit = request.POST.get("property-title")
+        full_description = request.POST.get("property-title")
+        province = request.POST.get("property-title")
+        district = request.POST.get("property-title")
+        municipality = request.POST.get("property-title")
+        ward_no = request.POST.get("property-title")
+        tole = request.POST.get("property-title")
+        name = request.POST.get("property-title")
+        email = request.POST.get("property-title")
+        address = request.POST.get("property-title")
+        phone_number = request.POST.get("property-title")
+        image = request.FILES.getlist("property-title")
+
+        if property_type == "Land":
+            sell_request = SellRequest(
+                property_title=property_title,
+                property_type=property_type,
+                property_for=property_for,
+                road_size=road_size,
+                land_area=land_area,
+                type=type,
+                facing_direction=facing_direction,
+                price=price,
+                price_per_unit=price_per_unit,
+                full_description=full_description,
+                province=province,
+                district=district,
+                municipality=municipality,
+                ward_no=ward_no,
+                tole=tole,
+                name=name,
+                email=email,
+                address=address,
+                phone_number=phone_number,
+                image=image,
+            )
+
+    return render(request, "admin/sellrequest.html")

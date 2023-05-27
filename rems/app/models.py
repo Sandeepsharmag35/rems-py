@@ -28,7 +28,9 @@ class Property(models.Model):
     property_for = models.CharField(
         max_length=20, choices=FOR_CHOICES, default="select"
     )
-    image = models.ImageField(blank=True, upload_to=image_validations)
+    image = models.ImageField(
+        blank=True, validators=[image_validations], upload_to="property_images"
+    )
     price = models.CharField(max_length=20, blank=True)
     city = models.CharField(max_length=50)
     district = models.CharField(max_length=200)
@@ -52,7 +54,7 @@ class CustomerMessage(models.Model):
         return f"Message from {self.fullname}."
 
 
-class SellRequests(models.Model):
+class SellRequest(models.Model):
     property_title = models.CharField(max_length=100, blank=False)
     property_type = models.CharField(max_length=15, blank=False)
     property_for = models.CharField(max_length=10, blank=False)
@@ -87,6 +89,7 @@ class SellRequests(models.Model):
     phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=True)
 
     # images
+    image = models.ImageField(blank=True, upload_to="Sell_Requests/")
 
     def __str__(self):
         return self.property_title

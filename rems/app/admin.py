@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Property, CustomerMessage, SellRequests
+from .models import Property, CustomerMessage, SellRequest
 
 # Register your models here.
 
@@ -37,11 +37,11 @@ class CustomerMessageAdmin(admin.ModelAdmin):
 admin.site.register(CustomerMessage, CustomerMessageAdmin)
 
 
-class SellRequestsAdmin(admin.ModelAdmin):
+class SellRequestAdmin(admin.ModelAdmin):
     list_display = [
         "property_title",
         "property_for",
     ]
 
 
-admin.site.register(SellRequests, SellRequestsAdmin)
+admin.site.register(SellRequest, SellRequestAdmin)
