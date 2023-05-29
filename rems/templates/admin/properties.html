@@ -16,7 +16,8 @@
             <th>City</th>
             <th>Status</th>
             <th>Property For</th>
-            <th>Action</th>
+            <th>Edit</th>
+            <th>Remove</th>
 
         </thead>
         {% if properties %}
@@ -31,8 +32,9 @@
                 <td>{{property.city}}</td>
                 <td>{{property.status}}</td>
                 <td>{{property.property_for}}</td>
-                <td><input type="submit" class="btn-update" value="Update"><a href="#" class="btn-delete">Delete</a>
-                </td>
+                <th><span class="btn-update"><i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></span>
+                </th>
+                <th><span class="btn-delete"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></span></th>
             </tr>
             {% endfor %}
         </tbody>

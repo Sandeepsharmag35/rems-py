@@ -4,3 +4,34 @@
 {% block content %}
 <div class="cardHeader">
     <h2>Sell Requests</h2>
+    <table id="example" class="display">
+        <thead>
+            <th>SN</th>
+            <th>Title</th>
+            <th>Property For</th>
+            <th>From</th>
+            <th>Phone</th>
+            <th>View</th>
+            <th>Approve</th>
+            <th>Remove</th>
+        </thead>
+        {% if sell_req %}
+        <tbody>
+            {% for req in sell_req %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <!-- <td><img src="{{property.image.url}}" width="80px" height="50px"></td> -->
+                <td>{{req.property_title}}</td>
+                <td>{{req.property_for}}</td>
+                <td>{{req.name}}</td>
+                <td>{{req.phone_number}}</td>
+                <td><a href="" class="btn-update"><i class="fa fa-eye" style="color: #ffffff;"></i></a></td>
+                <td><a href="" class="btn-update"><i class="fa-solid fa-check" style="color: #ffffff;"></i></a></td>
+                <td><a href="#" class="btn-delete"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% endif %}
+    </table>
+</div>
+{% endblock %}

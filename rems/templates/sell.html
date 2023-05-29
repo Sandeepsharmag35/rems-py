@@ -13,15 +13,24 @@
 <!-- banner -->
 
 <div class="container">
+  <div class="row">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
   <div class="spacer">
     <h3>Please fill those fields according to their respective data *</h3>
-    <form method="POST" action="" enctype="multipart/form-data">
+    <form method="POST" action="{% url 'sell' %}" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="row">
         <div class="col-lg-6 col-sm-6">
-          <label for="property-title">Property Ad Title:</label>
+          <label for="property-title">Property Ad Title:*</label>
           <input type="text" class="form-control" placeholder="New House for sale at Gaindakot, Nawalpur"
-            id="property-title" name="property-title">
+            id="property-title" name="property-title" required>
         </div>
       </div>
       <div class="row">
@@ -29,11 +38,11 @@
           <label for="property-type">Property Type:</label>
           <select class="form-control" id="property-type" name="property-type">
             <option value="select">Select</option>
-            <option value="house">House</option>
-            <option value="apartment">Apartment</option>
-            <option value="land">Land</option>
-            <option value="flat">Flat</option>
-            <option value="commercial">Commercial Property</option>
+            <option value="House">House</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Land">Land</option>
+            <option value="Flat">Flat</option>
+            <option value="Commercial Property">Commercial Property</option>
           </select>
         </div>
       </div>
@@ -46,310 +55,310 @@
           </select>
         </div>
       </div>
-  </div>
-  <div class="spacer">
-    <div id="house-form" style="display: none;">
-      <div class="row">
-        <div class="col-lg-4 col-sm-4 ">
-          <label for="flat-number">No of Flat:</label>
-          <select class="form-control" id="flat-number" name="flat-number">
-            <option>1</option>
-            <option>1.5</option>
-            <option>2</option>
-            <option>2.5</option>
-            <option>3</option>
-            <option>3.5</option>
-            <option>4</option>
-            <option>4.5</option>
-            <option>5</option>
-            <option>5+</option>
-          </select>
+      <div class="spacer">
+        <div id="house-form" style="display: none;">
+          <div class="row">
+            <div class="col-lg-4 col-sm-4 ">
+              <label for="flat-number">No of Flat:</label>
+              <select class="form-control" id="flat-number" name="flat-number">
+                <option>1</option>
+                <option>1.5</option>
+                <option>2</option>
+                <option>2.5</option>
+                <option>3</option>
+                <option>3.5</option>
+                <option>4</option>
+                <option>4.5</option>
+                <option>5</option>
+                <option>5+</option>
+              </select>
+            </div>
+            <div class="col-lg-4 col-sm-4 ">
+              <label for="bed-number">Bedroom:</label>
+              <select class="form-control" id="bed-number" name="bed-number">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>7+</option>
+              </select>
+            </div>
+            <div class="col-lg-4 col-sm-4 ">
+              <label for="bath-number">Bathroom:</label>
+              <select class="form-control" id="bath-number" name="bath-number">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>5+</option>
+              </select>
+            </div>
+            <div class="col-lg-4 col-sm-4 ">
+              <label for="living-number">Living Room:</label>
+              <select class="form-control" id="living-number" name="living-number">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>5+</option>
+              </select>
+            </div>
+            <div class="col-lg-4 col-sm-4 ">
+              <label for="kitchen-number">Kitchen:</label>
+              <select class="form-control" id="kitchen-number" name="kitchen-number">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>5+</option>
+              </select>
+            </div>
+            <div class="col-lg-4 col-sm-4 ">
+              <label for="total-number">Total Rooms:</label>
+              <select class="form-control" id="total-number" name="total-number">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>15+</option>
+              </select>
+            </div>
+            <div class="col-lg-4 col-sm-4 ">
+              <label for="parking">Parking</label>
+              <select class="form-control" id="parking" name="parking">
+                <option>Motorbike</option>
+                <option>Car-1</option>
+                <option>Car-2</option>
+                <option>Car-3</option>
+                <option>Car-3+</option>
+              </select>
+            </div>
+            <div class="col-lg-4 col-sm-4">
+              <label for="built-year">Built Year:</label>
+              <input type="number" class="form-control" placeholder="eg. 2078" id="built-year" name="built-year">
+            </div>
+            <div class="col-lg-4 col-sm-4">
+              <label for="built-area">Built Area:</label>
+              <input type="text" class="form-control" placeholder="eg. 1000 sqft" id="built-area" name="built-area">
+            </div>
+            <div class="col-lg-6 col-sm-6">
+              <label for="road-size">Road Size:</label>
+              <input type="text" class="form-control" placeholder="eg. 8 ft" id="road-size" name="road-size">
+            </div>
+            <div class="col-lg-6 col-sm-6">
+              <label for="land-area">Land Area:</label>
+              <input type="text" class="form-control" placeholder="eg. 1250 sqft" id="land-area" name="land-area">
+            </div>
+            <div class="col-lg-6 col-sm-6 ">
+              <label for="type">Type:</label>
+              <select class="form-control" id="type" name="type">
+                <option>Select</option>
+                <option>Residential</option>
+                <option>Commertial</option>
+                <option>Bungalow</option>
+                <option>Plotted Land</option>
+                <option>Furnished</option>
+                <option>Agriculture</option>
+              </select>
+            </div>
+            <div class="col-lg-6 col-sm-6 ">
+              <label for="facing-direction">Facing Direction:</label>
+              <select class="form-control" id="facing-direction" name="facing-direction">
+                <option>East</option>
+                <option>West</option>
+                <option>North</option>
+                <option>South</option>
+                <option>South East</option>
+                <option>North East</option>
+                <option>South West</option>
+                <option>North West</option>
+              </select>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+              <label for="price">Price:</label>
+              <input type="number" class="form-control" placeholder="eg. 5000000" id="price" name="price">
+            </div>
+            <div class="col-lg-6 col-sm-6 ">
+              <label for="price-per-unit">Price Per Unit:</label>
+              <select class="form-control" id="price-per-unit" name="price-per-unit">
+                <option>Aana</option>
+                <option>Ropani</option>
+                <option>Dhur</option>
+                <option>Kathha</option>
+                <option>Bigha</option>
+                <option>Sqft</option>
+                <option>Month</option>
+                <option>Flat</option>
+              </select>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+              <label for="description">Full Description:</label>
+              <textarea placeholder="Fully describe about property here" class="form-control" id="description"
+                name="description" rows="5"></textarea><br>
+            </div>
+          </div>
         </div>
-        <div class="col-lg-4 col-sm-4 ">
-          <label for="bed-number">Bedroom:</label>
-          <select class="form-control" id="bed-number" name="bed-number">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>7+</option>
-          </select>
-        </div>
-        <div class="col-lg-4 col-sm-4 ">
-          <label for="bath-number">Bathroom:</label>
-          <select class="form-control" id="bath-number" name="bath-number">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>5+</option>
-          </select>
-        </div>
-        <div class="col-lg-4 col-sm-4 ">
-          <label for="living-number">Living Room:</label>
-          <select class="form-control" id="living-number" name="living-number">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>5+</option>
-          </select>
-        </div>
-        <div class="col-lg-4 col-sm-4 ">
-          <label for="kitchen-number">Kitchen:</label>
-          <select class="form-control" id="kitchen-number" name="kitchen-number">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>5+</option>
-          </select>
-        </div>
-        <div class="col-lg-4 col-sm-4 ">
-          <label for="total-number">Total Rooms:</label>
-          <select class="form-control" id="total-number" name="total-number">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-            <option>13</option>
-            <option>14</option>
-            <option>15</option>
-            <option>15+</option>
-          </select>
-        </div>
-        <div class="col-lg-4 col-sm-4 ">
-          <label for="parking">Parking</label>
-          <select class="form-control" id="parking" name="parking">
-            <option>Motorbike</option>
-            <option>Car-1</option>
-            <option>Car-2</option>
-            <option>Car-3</option>
-            <option>Car-3+</option>
-          </select>
-        </div>
-        <div class="col-lg-4 col-sm-4">
-          <label for="built-year">Built Year:</label>
-          <input type="text" class="form-control" placeholder="eg. 2078" id="built-year" name="built-year">
-        </div>
-        <div class="col-lg-4 col-sm-4">
-          <label for="built-area">Built Area:</label>
-          <input type="text" class="form-control" placeholder="eg. 1000 sqft" id="built-area" name="built-area">
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <label for="road-size">Road Size:</label>
-          <input type="text" class="form-control" placeholder="eg. 8 ft" id="road-size" name="road-size">
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <label for="land-area">Land Area:</label>
-          <input type="text" class="form-control" placeholder="eg. 1250 sqft" id="land-area" name="land-area">
-        </div>
-        <div class="col-lg-6 col-sm-6 ">
-          <label for="kitchen-number">Type:</label>
-          <select class="form-control" id="kitchen-number" name="kitchen-number">
-            <option>Select</option>
-            <option>Residential</option>
-            <option>Commertial</option>
-            <option>Bungalow</option>
-            <option>Plotted Land</option>
-            <option>Furnished</option>
-            <option>Agriculture</option>
-          </select>
-        </div>
-        <div class="col-lg-6 col-sm-6 ">
-          <label for="facing-direction">Facing Direction:</label>
-          <select class="form-control" id="facing-direction" name="facing-direction">
-            <option>East</option>
-            <option>West</option>
-            <option>North</option>
-            <option>South</option>
-            <option>South East</option>
-            <option>North East</option>
-            <option>South West</option>
-            <option>North West</option>
-          </select>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <label for="price">Price:</label>
-          <input type="number" class="form-control" placeholder="eg. Rs. 5000000" id="price" name="price">
-        </div>
-        <div class="col-lg-6 col-sm-6 ">
-          <label for="price-per-unit">Price Per Unit:</label>
-          <select class="form-control" id="price-per-unit" name="price-per-unit">
-            <option>Aana</option>
-            <option>Ropani</option>
-            <option>Dhur</option>
-            <option>Kathha</option>
-            <option>Bigha</option>
-            <option>Sqft</option>
-            <option>Month</option>
-            <option>Flat</option>
-          </select>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <label for="description">Full Description:</label>
-          <label for="description">Description:</label>
-          <textarea placeholder="Fully describe about property here" class="form-control" id="description"
-            rows="5"></textarea><br>
-        </div>
-      </div>
-    </div>
 
-    <div id="land-form">
-      <!-- fields for land details go here -->
-      <div class="row">
-        <div class="col-lg-6 col-sm-6">
-          <label for="road-size">Road Size:</label>
-          <input type="text" class="form-control" placeholder="eg. 8 ft" id="road-size" name="road-size">
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <label for="land-area">Land Area:</label>
-          <input type="text" class="form-control" placeholder="eg. 1250 sqft" id="land-area" name="land-area">
-        </div>
-        <div class="col-lg-6 col-sm-6 ">
-          <label for="kitchen-number">Type:</label>
-          <select class="form-control" id="kitchen-number" name="kitchen-number">
-            <option>Select</option>
-            <option>Residential</option>
-            <option>Commertial</option>
-            <option>Bungalow</option>
-            <option>Plotted Land</option>
-            <option>Furnished</option>
-            <option>Agriculture</option>
-          </select>
-        </div>
-        <div class="col-lg-6 col-sm-6 ">
-          <label for="facing-direction">Facing Direction:</label>
-          <select class="form-control" id="facing-direction" name="facing-direction">
-            <option>East</option>
-            <option>West</option>
-            <option>North</option>
-            <option>South</option>
-            <option>South East</option>
-            <option>North East</option>
-            <option>South West</option>
-            <option>North West</option>
-          </select>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <label for="price">Price:</label>
-          <input type="number" class="form-control" placeholder="eg. 1250 sqft" id="price" name="price">
-        </div>
-        <div class="col-lg-6 col-sm-6 ">
-          <label for="price-per-unit">Price Per Unit:</label>
-          <select class="form-control" id="price-per-unit" name="price-per-unit">
-            <option>Aana</option>
-            <option>Ropani</option>
-            <option>Dhur</option>
-            <option>Kathha</option>
-            <option>Bigha</option>
-            <option>Sqft</option>
-            <option>Month</option>
-            <option>Flat</option>
-          </select>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <label for="description">Full Description:</label>
-          <label for="description">Description:</label>
-          <textarea placeholder="Fully describe about property here" class="form-control" id="description"
-            rows="5"></textarea><br>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="spacer">
-    <h3><strong>Location Details</strong></h3>
-    <div class="row">
-      <div class="col-lg-4 col-sm-4 ">
-        <label for="province">Province:</label>
-        <select class="form-control" id="province" name="province">
-          <option>select</option>
-          <option>Province 1</option>
-          <option>Province 2</option>
-          <option>Bagmati</option>
-          <option>Gandaki</option>
-          <option>Province 5</option>
-          <option>Province 6</option>
-          <option>Province 7</option>
-        </select>
-      </div>
-      <div class="col-lg-4 col-sm-4">
-        <label for="district">District:</label>
-        <input type="text" class="form-control" placeholder="eg. Chitwan" id="district" name="district">
-      </div>
-      <div class="col-lg-4 col-sm-4">
-        <label for="municipality">Municipality:</label>
-        <input type="text" class="form-control" placeholder="eg. Bharatpur" id="municipality" name="municipality">
-      </div>
-      <div class="col-lg-4 col-sm-4">
-        <label for="ward-no">Ward No:</label>
-        <input type="number" class="form-control" placeholder="Ward Number" id="ward-no" name="ward-no">
-      </div>
-      <div class="col-lg-4 col-sm-4">
-        <label for="tole">Tole:</label>
-        <input type="number" class="form-control" placeholder="Tole Name" id="tole" name="tole">
-      </div>
-    </div>
-  </div>
-  <div class="spacer">
-    <h3><strong>Contact Details</strong></h3>
-    <div class="row">
-      <div class="col-lg-6 col-sm-6">
-        <label for="name">Name:</label>
-        {% if user.is_authenticated %}
-        <input type="text" class="form-control" placeholder="Your Name" id="name" name="name"
-          value="{{ user.username }}">
-
-      </div>
-      <div class="col-lg-6 col-sm-6">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" placeholder="Your Name" id="email" name="email"
-          value="{{ user.email }}">
-        {% endif %}
-      </div>
-      <div class="col-lg-6 col-sm-6">
-        <label for="address">Address:</label>
-        <input type="text" class="form-control" placeholder="Your address" id="address" name="address">
-      </div>
-      <div class="col-lg-6 col-sm-6">
-        <label for="phone">Phone Number:</label>
-        <input type="number" class="form-control" placeholder="Your phone number" id="phone" name="phone">
-      </div>
-    </div>
-  </div>
-  <div class="spacer">
-    <h3><strong>Upload Images</strong></h3>
-    <div class="row">
-      <div class="col-lg-6 col-sm-6">
-        <div id="my-dropzone" class="dropzone">
-          <div class="dz-default dz-message">
-            <span>Drag and drop your images here or click to select files</span><br>
-            <span class="glyphicon glyphicon-picture">&nbsp;</span><span class="glyphicon glyphicon-plus"></span>
+        <div id="land-form">
+          <!-- fields for land details go here -->
+          <div class="row">
+            <div class="col-lg-6 col-sm-6">
+              <label for="road-size">Road Size:</label>
+              <input type="text" class="form-control" placeholder="eg. 8 ft" id="road-size" name="road-size">
+            </div>
+            <div class="col-lg-6 col-sm-6">
+              <label for="land-area">Land Area:</label>
+              <input type="text" class="form-control" placeholder="eg. 1250 sqft" id="land-area" name="land-area">
+            </div>
+            <div class="col-lg-6 col-sm-6 ">
+              <label for="kitchen-number">Type:</label>
+              <select class="form-control" id="kitchen-number" name="kitchen-number">
+                <option>Select</option>
+                <option>Residential</option>
+                <option>Commertial</option>
+                <option>Bungalow</option>
+                <option>Plotted Land</option>
+                <option>Furnished</option>
+                <option>Agriculture</option>
+              </select>
+            </div>
+            <div class="col-lg-6 col-sm-6 ">
+              <label for="facing-direction">Facing Direction:</label>
+              <select class="form-control" id="facing-direction" name="facing-direction">
+                <option>East</option>
+                <option>West</option>
+                <option>North</option>
+                <option>South</option>
+                <option>South East</option>
+                <option>North East</option>
+                <option>South West</option>
+                <option>North West</option>
+              </select>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+              <label for="price">Price:</label>
+              <input type="number" class="form-control" placeholder="eg. 10000000" id="price" name="price">
+            </div>
+            <div class="col-lg-6 col-sm-6 ">
+              <label for="price-per-unit">Price Per Unit:</label>
+              <select class="form-control" id="price-per-unit" name="price-per-unit">
+                <option>Aana</option>
+                <option>Ropani</option>
+                <option>Dhur</option>
+                <option>Kathha</option>
+                <option>Bigha</option>
+                <option>Sqft</option>
+                <option>Month</option>
+                <option>Flat</option>
+              </select>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+              <label for="description">Full Description:</label>
+              <label for="description">Description:</label>
+              <textarea placeholder="Fully describe about property here" class="form-control" id="description"
+                name="description" rows="5"></textarea><br>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="spacer">
-    <div class="row">
-      <div class="col-lg-6 col-sm-6">
-        <button class="btn btn-success" type="submit">Upload Details</button>
+      <div class="spacer">
+        <h3><strong>Location Details</strong></h3>
+        <div class="row">
+          <div class="col-lg-4 col-sm-4 ">
+            <label for="province">Province:</label>
+            <select class="form-control" id="province" name="province">
+              <option>select</option>
+              <option>Province 1</option>
+              <option>Province 2</option>
+              <option>Bagmati</option>
+              <option>Gandaki</option>
+              <option>Province 5</option>
+              <option>Province 6</option>
+              <option>Province 7</option>
+            </select>
+          </div>
+          <div class="col-lg-4 col-sm-4">
+            <label for="district">District:</label>
+            <input type="text" class="form-control" placeholder="eg. Chitwan" id="district" name="district">
+          </div>
+          <div class="col-lg-4 col-sm-4">
+            <label for="municipality">Municipality:</label>
+            <input type="text" class="form-control" placeholder="eg. Bharatpur" id="municipality" name="municipality">
+          </div>
+          <div class="col-lg-4 col-sm-4">
+            <label for="ward-no">Ward No:</label>
+            <input type="number" class="form-control" placeholder="Ward Number" id="ward-no" name="ward-no">
+          </div>
+          <div class="col-lg-4 col-sm-4">
+            <label for="tole">Tole:</label>
+            <input type="text" class="form-control" placeholder="Tole Name" id="tole" name="tole">
+          </div>
+        </div>
       </div>
-    </div>
+      <div class="spacer">
+        <h3><strong>Contact Details</strong></h3>
+        <div class="row">
+          <div class="col-lg-6 col-sm-6">
+            <label for="name">Name:</label>
+            {% if user.is_authenticated %}
+            <input type="text" class="form-control" placeholder="Your Name" id="name" name="name"
+              value="{{ user.username }}">
+          </div>
+          <div class="col-lg-6 col-sm-6">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" placeholder="Your Name" id="email" name="email"
+              value="{{ user.email }}">
+            {% endif %}
+          </div>
+          <div class="col-lg-6 col-sm-6">
+            <label for="address">Address:</label>
+            <input type="text" class="form-control" placeholder="Your address" id="address" name="address">
+          </div>
+          <div class="col-lg-6 col-sm-6">
+            <label for="phone">Phone Number:</label>
+            <input type="number" class="form-control" placeholder="Your phone number" id="phone" name="phone">
+          </div>
+        </div>
+      </div>
+      <div class="spacer">
+        <h3><strong>Upload Images</strong></h3>
+        <div class="row">
+          <div class="col-lg-6 col-sm-6">
+            <div id="my-dropzone" class="dropzone">
+              <div class="dz-default dz-message">
+                <div id="success-container"></div>
+                <div id="error-container"></div>
+                <span>Drag and drop your images here or click to select files</span><br>
+                <span class="glyphicon glyphicon-picture">&nbsp;</span><span class="glyphicon glyphicon-plus"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="spacer">
+        <div class="row">
+          <div class="col-lg-6 col-sm-6">
+            <input class="btn btn-success" type="submit" value="Upload Details">
+          </div>
+        </div>
+      </div>
     </form>
   </div>
 </div>
@@ -362,25 +371,25 @@
   // add an event listener to the select element to show/hide the appropriate form fields
   const select = document.getElementById('property-type');
   select.addEventListener('change', (event) => {
-    if (event.target.value === 'land') {
+    if (event.target.value === 'Land') {
       houseForm.style.display = 'none';
       landForm.style.display = 'block';
     }
-    else if (event.target.value === 'house' || 'flat' || 'apartment' || 'commercial') {
+    else if (event.target.value === 'House' || 'Flat' || 'Apartment' || 'Commercial Property') {
       houseForm.style.display = 'block';
       landForm.style.display = 'none';
     }
   });
 
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    console.log(form.elements);
-  });
-
+</script>
+<script>
   Dropzone.autoDiscover = false;
 
   var myDropzone = new Dropzone("#my-dropzone", {
-    url: "/upload/",
+    url: "{% url 'sell' %}",
+    headers: {
+      "X-CSRFToken": "{{ csrf_token }}",
+    },
     maxFiles: 10,
     maxFilesize: 2,
     acceptedFiles: "image/*",
@@ -390,9 +399,40 @@
     dictResponseError: "Server responded with {{statusCode}} code.",
     success: function (file, response) {
       // Handle successful file upload
+      var successElement = document.createElement('div');
+      successElement.classList.add('success-message');
+      successElement.innerText = 'File uploaded: ' + file.name;
+      document.getElementById('success-container').appendChild(successElement);
+
+      console.log('File uploaded:', file.name);
+      console.log('Server response:', response);
     },
     error: function (file, errorMessage) {
       // Handle file upload error
+      console.error('Error uploading file:', file.name);
+      console.error('Error message:', errorMessage);
+
+      // Show an error message to the user
+      var errorElement = document.createElement('div');
+      errorElement.classList.add('error-message');
+      errorElement.innerText = 'File upload failed for: ' + file.name;
+      document.getElementById('error-container').appendChild(errorElement);
+    },
+    init: function () {
+      this.on("addedfile", function (file) {
+        // Image validation
+        if (!file.type.match(/image.*/)) {
+          this.removeFile(file);
+          console.error('Invalid file type:', file.name);
+          console.error('Only image files are allowed.');
+
+          // Show an error message to the user
+          var errorElement = document.createElement('div');
+          errorElement.classList.add('error-message');
+          errorElement.innerText = 'Invalid file type. Only image files are allowed.';
+          document.getElementById('error-container').appendChild(errorElement);
+        }
+      });
     }
   });
 </script>
