@@ -141,7 +141,7 @@ def AddProperty(request):
     if request.method == "POST":
         property_type = request.POST.get("property-type")
         property_for = request.POST.get("property-for")
-        image = request.POST.get("property-image")
+        image = request.FILES.get("property-image")
         price = request.POST.get("property-price")
         city = request.POST.get("city")
         district = request.POST.get("district")

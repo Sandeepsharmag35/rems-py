@@ -1,7 +1,21 @@
 from django.db import models
-from .validators import phone_regex, image_validations
+from .validators import phone_regex
+from django.core.exceptions import ValidationError
+
 
 # Create your models here.
+def image_validations(instance, filename):
+    img = instance.image  # getting the image name
+    print(img)
+    ext = img.name.split(".")[-1].lower()
+    allowed_extensions = ["jpg", "jpeg", "png"]
+
+    if ext in allowed_extensions:
+        return f"property_images/{filename}"
+    else:
+        raise ValidationError(
+            "Invalid file format. Only JPG, JPEG, and PNG files are allowed."
+        )
 
 
 class Property(models.Model):
@@ -29,7 +43,8 @@ class Property(models.Model):
         max_length=20, choices=FOR_CHOICES, default="select"
     )
     image = models.ImageField(
-        blank=True, validators=[image_validations], upload_to="property_images"
+        upload_to=image_validations,
+        blank=True,
     )
     price = models.CharField(max_length=20, blank=True)
     city = models.CharField(max_length=50)

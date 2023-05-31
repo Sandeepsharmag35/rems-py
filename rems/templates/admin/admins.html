@@ -27,7 +27,7 @@
                 <td>{{forloop.counter}}</td>
                 <td><input type="text" name="full_name" value="{{profile.fullname}}"></td>
                 <td><input type="text" name="email" value="{{profile.email}}"></td>
-                <td><input type="number" name="phone" value="{{profile.phone_number}}"></td>
+                <td><input type="tel" name="phone" value="{{profile.phone_number}}"></td>
                 <td><input type="text" name="username" value="@{{profile.user}}"></td>
                 <td>
                     <a href="{% url 'remove_admin' profile.id %}" id="delete" class="btn-delete"

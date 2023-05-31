@@ -14,7 +14,7 @@
 <div class="insider">
     <div class="row">
         <div class="cardHeader">
-            <form action="{% url 'add-property' %}" method="post" class="animated-form">
+            <form action="{% url 'add-property' %}" method="post" class="animated-form" enctype="multipart/form-data">
                 {% csrf_token %}
                 <h2>Add Property</h2>
                 {% if messages %}

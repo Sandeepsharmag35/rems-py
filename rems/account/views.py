@@ -6,7 +6,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from .models import Profile
 from django.contrib import messages
-
+from django.contrib.auth import update_session_auth_hash
 
 # Create your views here.
 
@@ -135,3 +135,35 @@ def ProfilePage(request):
         "is_new_profile": is_new_profile,
     }
     return render(request, "profile.html", context)
+
+
+@login_required(login_url=login)
+def ChangePassword(request):
+    if request.method == "POST":
+        old_password = request.POST.get("old-password")
+        new_password = request.POST.get("new-password")
+        confirm_password = request.POST.get("confirm-password")
+
+        try:
+            validate_password(new_password)
+        except ValidationError as error:
+            error = "Your password must contain at least one special character (~!@#$%^&*()_+}{\":?><,./;') and one number."
+            return render(request, "change_password.html", {"error": error})
+
+        if not request.user.check_password(old_password):
+            messages.error(request, "Your old password is incorrect.")
+        elif new_password != confirm_password:
+            messages.error(
+                request, "The new password and confirmation password do not match."
+            )
+        else:
+            user = request.user
+            user.set_password(new_password)
+            user.save()
+            update_session_auth_hash(
+                request, user
+            )  # Update the session to prevent reauthentication
+            success = "Your password has been successfully changed."
+            return render(request, "change_password.html", {"success": success})
+
+    return render(request, "change_password.html")
