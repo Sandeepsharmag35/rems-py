@@ -16,11 +16,12 @@
   <div class="spacer">
     <div class="row contact">
       <div class="col-lg-6 col-sm-6 ">
-        <form action="" method="post">
-          <input type="text" class="form-control" placeholder="Full Name">
-          <input type="text" class="form-control" placeholder="Email Address">
-          <input type="text" class="form-control" placeholder="Contact Number">
-          <textarea rows="6" class="form-control" placeholder="Message"></textarea>
+        <form action="{% url 'contact' %}" method="post">
+          {% csrf_token %}
+          <input type="text" class="form-control" placeholder="Full Name" name="full-name" required>
+          <input type="email" class="form-control" placeholder="Email Address" name="email" required>
+          <input type="tel" class="form-control" placeholder="Contact Number" name="phone" required>
+          <textarea rows="6" class="form-control" placeholder="Message" name="message" required></textarea>
           <button type="submit" class="btn btn-success" name="Submit">Send Message</button>
         </form>
       </div>

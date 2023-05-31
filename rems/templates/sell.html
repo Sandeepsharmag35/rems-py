@@ -24,7 +24,7 @@
   </div>
   <div class="spacer">
     <h3>Please fill those fields according to their respective data *</h3>
-    <form method="POST" action="{% url 'sell' %}" enctype="multipart/form-data">
+    <form method="POST" action="{% url 'sell' %}" enctype="multipart/form-data" id="sell-form">
       {% csrf_token %}
       <div class="row">
         <div class="col-lg-6 col-sm-6">
@@ -158,13 +158,18 @@
               <label for="built-area">Built Area:</label>
               <input type="text" class="form-control" placeholder="eg. 1000 sqft" id="built-area" name="built-area">
             </div>
+          </div>
+        </div>
+        <div id="land-form">
+          <div class="row">
             <div class="col-lg-6 col-sm-6">
               <label for="road-size">Road Size:</label>
-              <input type="text" class="form-control" placeholder="eg. 8 ft" id="road-size" name="road-size">
+              <input type="text" class="form-control" placeholder="eg. 8 ft" id="road-size" name="road-size" required>
             </div>
             <div class="col-lg-6 col-sm-6">
               <label for="land-area">Land Area:</label>
-              <input type="text" class="form-control" placeholder="eg. 1250 sqft" id="land-area" name="land-area">
+              <input type="text" class="form-control" placeholder="eg. 1250 sqft" id="land-area" name="land-area"
+                required>
             </div>
             <div class="col-lg-6 col-sm-6 ">
               <label for="type">Type:</label>
@@ -211,69 +216,7 @@
             <div class="col-lg-6 col-sm-6">
               <label for="description">Full Description:</label>
               <textarea placeholder="Fully describe about property here" class="form-control" id="description"
-                name="description" rows="5"></textarea><br>
-            </div>
-          </div>
-        </div>
-
-        <div id="land-form">
-          <!-- fields for land details go here -->
-          <div class="row">
-            <div class="col-lg-6 col-sm-6">
-              <label for="road-size">Road Size:</label>
-              <input type="text" class="form-control" placeholder="eg. 8 ft" id="road-size" name="road-size">
-            </div>
-            <div class="col-lg-6 col-sm-6">
-              <label for="land-area">Land Area:</label>
-              <input type="text" class="form-control" placeholder="eg. 1250 sqft" id="land-area" name="land-area">
-            </div>
-            <div class="col-lg-6 col-sm-6 ">
-              <label for="kitchen-number">Type:</label>
-              <select class="form-control" id="kitchen-number" name="kitchen-number">
-                <option>Select</option>
-                <option>Residential</option>
-                <option>Commertial</option>
-                <option>Bungalow</option>
-                <option>Plotted Land</option>
-                <option>Furnished</option>
-                <option>Agriculture</option>
-              </select>
-            </div>
-            <div class="col-lg-6 col-sm-6 ">
-              <label for="facing-direction">Facing Direction:</label>
-              <select class="form-control" id="facing-direction" name="facing-direction">
-                <option>East</option>
-                <option>West</option>
-                <option>North</option>
-                <option>South</option>
-                <option>South East</option>
-                <option>North East</option>
-                <option>South West</option>
-                <option>North West</option>
-              </select>
-            </div>
-            <div class="col-lg-6 col-sm-6">
-              <label for="price">Price:</label>
-              <input type="number" class="form-control" placeholder="eg. 10000000" id="price" name="price">
-            </div>
-            <div class="col-lg-6 col-sm-6 ">
-              <label for="price-per-unit">Price Per Unit:</label>
-              <select class="form-control" id="price-per-unit" name="price-per-unit">
-                <option>Aana</option>
-                <option>Ropani</option>
-                <option>Dhur</option>
-                <option>Kathha</option>
-                <option>Bigha</option>
-                <option>Sqft</option>
-                <option>Month</option>
-                <option>Flat</option>
-              </select>
-            </div>
-            <div class="col-lg-6 col-sm-6">
-              <label for="description">Full Description:</label>
-              <label for="description">Description:</label>
-              <textarea placeholder="Fully describe about property here" class="form-control" id="description"
-                name="description" rows="5"></textarea><br>
+                name="description" rows="5" required></textarea>
             </div>
           </div>
         </div>
@@ -341,13 +284,34 @@
         <h3><strong>Upload Images</strong></h3>
         <div class="row">
           <div class="col-lg-6 col-sm-6">
-            <div id="my-dropzone" class="dropzone">
-              <div class="dz-default dz-message">
-                <div id="success-container"></div>
-                <div id="error-container"></div>
-                <span>Drag and drop your images here or click to select files</span><br>
-                <span class="glyphicon glyphicon-picture">&nbsp;</span><span class="glyphicon glyphicon-plus"></span>
-              </div>
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Document: (Upload property document file to verify your
+                ownership.)</label>
+              <input class="form-control" type="file" id="formFile" name="document-image" required>
+            </div>
+          </div>
+        </div>
+        <div class="spacer">
+          <div class="row">
+            <div class="col-lg-6 col-sm-6">
+              <label for="front-image" class="form-label">Front Image. (Take a wide angle image from front of your
+                property.)</label>
+              <input class="form-control" type="file" id="front-image" name="front-image" required>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+              <label for="side-image" class="form-label">Side Image. (Take a wide angle image from any sides of your
+                property.)</label>
+              <input class="form-control" type="file" id="side-image" name="side-image" required>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+              <label for="extra-image" class="form-label">Extra Image. (Upload room photo if property is not
+                Land.)</label>
+              <input class="form-control" type="file" id="extra-image" name="extra-image">
+            </div>
+            <div class="col-lg-6 col-sm-6">
+              <label for="extra2-image" class="form-label">Extra Image. (Upload room photo if property is not
+                Land.)</label>
+              <input class="form-control" type="file" id="extra2-image" name="extra2-image">
             </div>
           </div>
         </div>
@@ -355,7 +319,7 @@
       <div class="spacer">
         <div class="row">
           <div class="col-lg-6 col-sm-6">
-            <input class="btn btn-success" type="submit" value="Upload Details">
+            <input class="btn btn-success" type="submit" value="Upload Details" id="upload-button">
           </div>
         </div>
       </div>
@@ -377,62 +341,54 @@
     }
     else if (event.target.value === 'House' || 'Flat' || 'Apartment' || 'Commercial Property') {
       houseForm.style.display = 'block';
-      landForm.style.display = 'none';
+      landForm.style.display = 'block';
     }
   });
 
-</script>
-<script>
-  Dropzone.autoDiscover = false;
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('sell-form');
+    form.addEventListener('submit', function (event) {
+      if (!validateImages()) {
+        event.preventDefault(); // Prevent form submission
+      }
+    });
 
-  var myDropzone = new Dropzone("#my-dropzone", {
-    url: "{% url 'sell' %}",
-    headers: {
-      "X-CSRFToken": "{{ csrf_token }}",
-    },
-    maxFiles: 10,
-    maxFilesize: 2,
-    acceptedFiles: "image/*",
-    dictDefaultMessage: "Drag and drop your images here or click to select files",
-    dictFileTooBig: "File is too big ({{filesize}} MB). Max filesize: {{maxFilesize}} MB.",
-    dictInvalidFileType: "You can't upload files of this type.",
-    dictResponseError: "Server responded with {{statusCode}} code.",
-    success: function (file, response) {
-      // Handle successful file upload
-      var successElement = document.createElement('div');
-      successElement.classList.add('success-message');
-      successElement.innerText = 'File uploaded: ' + file.name;
-      document.getElementById('success-container').appendChild(successElement);
+    function validateImages() {
+      var documentImage = document.getElementById('formFile').files[0];
+      var frontImage = document.getElementById('front-image').files[0];
+      var sideImage = document.getElementById('side-image').files[0];
+      var extraImage = document.getElementById('extra-image').files[0];
+      var extra2Image = document.getElementById('extra2-image').files[0];
 
-      console.log('File uploaded:', file.name);
-      console.log('Server response:', response);
-    },
-    error: function (file, errorMessage) {
-      // Handle file upload error
-      console.error('Error uploading file:', file.name);
-      console.error('Error message:', errorMessage);
+      // Perform image validation
+      if (!validateImageFormat(documentImage) ||
+        !validateImageFormat(frontImage) ||
+        !validateImageFormat(sideImage) ||
+        (extraImage && !validateImageFormat(extraImage)) ||
+        (extra2Image && !validateImageFormat(extra2Image))) {
+        return false;
+      }
 
-      // Show an error message to the user
-      var errorElement = document.createElement('div');
-      errorElement.classList.add('error-message');
-      errorElement.innerText = 'File upload failed for: ' + file.name;
-      document.getElementById('error-container').appendChild(errorElement);
-    },
-    init: function () {
-      this.on("addedfile", function (file) {
-        // Image validation
-        if (!file.type.match(/image.*/)) {
-          this.removeFile(file);
-          console.error('Invalid file type:', file.name);
-          console.error('Only image files are allowed.');
+      return true;
+    }
 
-          // Show an error message to the user
-          var errorElement = document.createElement('div');
-          errorElement.classList.add('error-message');
-          errorElement.innerText = 'Invalid file type. Only image files are allowed.';
-          document.getElementById('error-container').appendChild(errorElement);
+    function validateImageFormat(image) {
+      if (image) {
+        var allowedFormats = ['jpg', 'jpeg', 'png', 'gif'];
+        var extension = image.name.split('.').pop().toLowerCase();
+        if (allowedFormats.indexOf(extension) === -1) {
+          alert('Please upload a valid image file (JPEG, PNG, GIF).');
+          return false;
         }
-      });
+      } else {
+        alert('Please upload an image file.');
+        return false;
+      }
+
+      // You can add more custom validation logic here if needed
+      // ...
+
+      return true;
     }
   });
 </script>

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from app.models import CustomerMessage, Property, SellRequest, UploadedImage
+from app.models import CustomerMessage, Property, SellRequest
 from account.models import Profile
 from django.contrib import messages
 

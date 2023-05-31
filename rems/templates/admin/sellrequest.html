@@ -7,7 +7,9 @@
     <table id="example" class="display">
         <thead>
             <th>SN</th>
+            <th>Image</th>
             <th>Title</th>
+            <th>Document</th>
             <th>Property For</th>
             <th>From</th>
             <th>Phone</th>
@@ -20,8 +22,9 @@
             {% for req in sell_req %}
             <tr>
                 <td>{{forloop.counter}}</td>
-                <!-- <td><img src="{{property.image.url}}" width="80px" height="50px"></td> -->
+                <td><img src="{{req.image_front.url}}" width="75px" height="55px"></td>
                 <td>{{req.property_title}}</td>
+                <td><img src="{{req.doc_image.url}}" width="75px" height="55px"></td>
                 <td>{{req.property_for}}</td>
                 <td>{{req.name}}</td>
                 <td>{{req.phone_number}}</td>

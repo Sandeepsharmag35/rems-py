@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse
-from .models import Property, CustomerMessage, SellRequest, UploadedImage
+from .models import Property, CustomerMessage, SellRequest
+from account.models import Profile
 from django.views.generic import DetailView
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -14,7 +16,9 @@ def aboutpage(request):
 
 
 def agentspage(request):
-    return render(request, "agents.html")
+    agents = Profile.objects.filter(user__is_superuser=True)
+    context = {"agents": agents}
+    return render(request, "agents.html", context)
 
 
 def blogpage(request):
@@ -78,67 +82,48 @@ def sellpage(request):
         email = request.POST.get("email")
         address = request.POST.get("address")
         phone_number = request.POST.get("phone")
-        images = request.FILES.getlist("file")
+        doc_image = request.FILES.get("document-image")
+        image_front = request.FILES.get("front-image")
+        image_side = request.FILES.get("side-image")
+        image_extra = request.FILES.get("extra-image")
+        image_extra2 = request.FILES.get("extra2-image")
 
-        if property_type == "Land":
-            sell_request = SellRequest(
-                property_title=property_title,
-                property_type=property_type,
-                property_for=property_for,
-                flat_number=flat_number,
-                bedrooms=bedrooms,
-                bathrooms=bathrooms,
-                living_rooms=living_rooms,
-                kitchens=kitchens,
-                total_rooms=total_rooms,
-                parking=parking,
-                built_year=built_year,
-                built_area=built_area,
-                road_size=road_size,
-                land_area=land_area,
-                type=type,
-                facing_direction=facing_direction,
-                price=price,
-                price_per_unit=price_per_unit,
-                full_description=full_description,
-                province=province,
-                district=district,
-                municipality=municipality,
-                ward_no=ward_no,
-                tole=tole,
-                name=name,
-                email=email,
-                address=address,
-                phone_number=phone_number,
-            )
-            sell_request.save()
-        else:
-            sell_request = SellRequest(
-                property_title=property_title,
-                property_type=property_type,
-                property_for=property_for,
-                road_size=road_size,
-                land_area=land_area,
-                type=type,
-                facing_direction=facing_direction,
-                price=price,
-                price_per_unit=price_per_unit,
-                full_description=full_description,
-                province=province,
-                district=district,
-                municipality=municipality,
-                ward_no=ward_no,
-                tole=tole,
-                name=name,
-                email=email,
-                address=address,
-                phone_number=phone_number,
-            )
-            sell_request.save()
-
-        for image in images:
-            uploaded_image = UploadedImage(sell_request=sell_request, image=image)
-            uploaded_image.save()
+        sell_request = SellRequest(
+            property_title=property_title,
+            property_type=property_type,
+            property_for=property_for,
+            flat_number=flat_number,
+            bedrooms=bedrooms,
+            bathrooms=bathrooms,
+            living_rooms=living_rooms,
+            kitchens=kitchens,
+            total_rooms=total_rooms,
+            parking=parking,
+            built_year=built_year,
+            built_area=built_area,
+            road_size=road_size,
+            land_area=land_area,
+            type=type,
+            facing_direction=facing_direction,
+            price=price,
+            price_per_unit=price_per_unit,
+            full_description=full_description,
+            province=province,
+            district=district,
+            municipality=municipality,
+            ward_no=ward_no,
+            tole=tole,
+            name=name,
+            email=email,
+            address=address,
+            phone_number=phone_number,
+            doc_image=doc_image,
+            image_front=image_front,
+            image_side=image_side,
+            image_extra=image_extra,
+            image_extra2=image_extra2,
+        )
+        sell_request.save()
         success_message = "Details Uploaded successfully."
         messages.success(request, success_message)
         return redirect("sell")

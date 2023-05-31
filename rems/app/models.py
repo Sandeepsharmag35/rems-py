@@ -104,16 +104,16 @@ class SellRequest(models.Model):
     phone_number = models.CharField(
         validators=[phone_regex], max_length=15, blank=False
     )
+    # document image
+    doc_image = models.ImageField(
+        upload_to="Sell_Request/Uploads/documents", blank=True
+    )
+
+    # property images
+    image_front = models.ImageField(upload_to="Sell_Request/Uploads", blank=True)
+    image_side = models.ImageField(upload_to="Sell_Request/Uploads", blank=True)
+    image_extra = models.ImageField(upload_to="Sell_Request/Uploads", blank=True)
+    image_extra2 = models.ImageField(upload_to="Sell_Request/Uploads", blank=True)
 
     def __str__(self):
         return self.property_title
-
-
-class UploadedImage(models.Model):
-    sell_request = models.ForeignKey(
-        SellRequest, on_delete=models.CASCADE, related_name="images"
-    )
-    image = models.ImageField(upload_to="Sell_Request/Uploads/")
-
-    def __str__(self):
-        return self.image.name
