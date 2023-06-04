@@ -32,7 +32,15 @@ def adminLogout(request):
 
 @login_required(login_url=login)
 def AdminDashboard(request):
-    context = {"user": request.user}
+    total_properties = Property.objects.count()
+    total_sell_reqests = SellRequest.objects.count()
+    total_messages = CustomerMessage.objects.count()
+    context = {
+        "user": request.user,
+        "total_properties": total_properties,
+        "total_sell_reqests": total_sell_reqests,
+        "total_messages": total_messages,
+    }
     return render(request, "admin/dashboard.html", context)
 
 
@@ -56,9 +64,16 @@ def Delete_CustomerMessage(request, msg_id):
 
 @login_required(login_url=login)
 def Customers(request):
+    users = User.objects.all()
+    context = {"users": users}
+    return render(request, "admin/users.html", context)
+
+
+@login_required(login_url=login)
+def CustomersProfile(request):
     profile = Profile.objects.filter(user__is_superuser=False)
     context = {"profile": profile}
-    return render(request, "admin/customers.html", context)
+    return render(request, "admin/customers_profile.html", context)
 
 
 @login_required(login_url=login)
@@ -81,9 +96,9 @@ def Update_Customer(request, profile_id):
             request, f"The user @'{username}''s profile has been updated successfully."
         )
 
-        return redirect("customers")
+        return redirect("customers-profile")
     context = {"profile": profile}
-    return render(request, "admin/customers.html", context)
+    return render(request, "admin/customers_profile.html", context)
 
 
 @login_required(login_url=login)
@@ -98,7 +113,7 @@ def Delete_Customer(request, profile_id):
         )
     except Profile.DoesNotExist:
         messages.error(request, "The user profile does not exist.")
-    return redirect("customers")
+    return redirect("customers-profile")
 
 
 @login_required(login_url=login)

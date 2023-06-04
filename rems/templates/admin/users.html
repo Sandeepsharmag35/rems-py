@@ -1,10 +1,10 @@
 {% extends 'admin/dashboard.html' %}
 {% load static %}
-{% block title %}Admins{% endblock %}
+{% block title %}Users{% endblock %}
 {% block extracssjs %} {% endblock %}
 {% block content %}
 <div class="cardHeader">
-    <h2>Admins</h2>
+    <h2>Users</h2>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -15,25 +15,20 @@
     <table id="example" class="display">
         <thead>
             <th>S.N.</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
             <th>Username</th>
-            <th>Action</th>
+            <th>Email</th>
+            <th>View Profile</th>
+            <th>Delete</th>
         </thead>
-        {% if profile %}
+        {% if users %}
         <tbody>
-            {% for profile in profile %}
+            {% for user in users %}
             <tr>
                 <td>{{forloop.counter}}</td>
-                <td>{{profile.fullname}}</td>
-                <td>{{profile.email}}</td>
-                <td>{{profile.phone_number}}</td>
-                <td>@{{profile.user}}</td>
-                <td>
-                    <a href="{% url 'remove_admin' profile.id %}" id="delete" class="btn-delete"
-                        onclick="return remove_popup()">Remove</a>
-                </td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td><a href="" class="btn-update"><i class="fa fa-eye" style="color: #ffffff;"></i></a></td>
+                <td><a href="#" class="btn-delete"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a></td>
             </tr>
             {% endfor %}
         </tbody>

@@ -1,14 +1,21 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
     path("admin/", views.adminLogin, name="admin_login"),
+    path(
+        "admin/",
+        auth_views.LoginView.as_view(template_name="admin/admin-login.html"),
+        name="admin_login",
+    ),
     path("admin-logout/", views.adminLogout, name="admin_logout"),
     path("dashboard/", views.AdminDashboard, name="admin_dashboard"),
     path("messages/", views.customerMessage, name="messages"),
-    path("customers/", views.Customers, name="customers"),
+    path("users/", views.Customers, name="users"),
+    path("customers-profile/", views.CustomersProfile, name="customers-profile"),
     path(
         "delete_message/<int:msg_id>/",
         views.Delete_CustomerMessage,
