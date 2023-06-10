@@ -36,22 +36,64 @@ class Property(models.Model):
         ("Renter", "Renter"),
     ]
 
+    FEATURED_CHOICES = [
+        ("Y", "Yes"),
+        ("N", "No"),
+    ]
+
     property_type = models.CharField(
         max_length=100, choices=TYPE_CHOICES, default="select"
     )
     property_for = models.CharField(
         max_length=20, choices=FOR_CHOICES, default="select"
     )
+
+    flat_number = models.CharField(max_length=5, blank=True)
+    bedrooms = models.CharField(max_length=5, blank=True)
+    bathrooms = models.CharField(max_length=5, blank=True)
+    living_rooms = models.CharField(max_length=5, blank=True)
+    kitchens = models.CharField(max_length=5, blank=True)
+    total_rooms = models.CharField(max_length=5, blank=True)
+    parking = models.CharField(max_length=15, blank=True)
+    built_year = models.CharField(max_length=5, blank=True)
+    built_area = models.CharField(max_length=20, blank=True)
+    road_size = models.CharField(max_length=20, blank=True)
+    land_area = models.CharField(max_length=20, blank=True)
+    type = models.CharField(max_length=20, blank=True)
+    facing_direction = models.CharField(max_length=20, blank=True)
+    price = models.CharField(max_length=20, blank=True)
+    price_per_unit = models.CharField(max_length=15, blank=True)
+    description = models.TextField(blank=True)
+
+    # location
+    province = models.CharField(max_length=15, blank=True)
+    city = models.CharField(max_length=50)
+    district = models.CharField(max_length=50, blank=True)
+    zip_code = models.CharField(max_length=20)
+    municipality = models.CharField(max_length=20, blank=True)
+    ward_no = models.CharField(max_length=5, blank=True)
+    tole = models.CharField(max_length=30, blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="")
+    featured = models.CharField(
+        max_length=3, choices=FEATURED_CHOICES, default="Select"
+    )
+
     image = models.ImageField(
         upload_to=image_validations,
         blank=True,
     )
-    price = models.CharField(max_length=20, blank=True)
-    city = models.CharField(max_length=50)
-    district = models.CharField(max_length=200)
-    zip_code = models.CharField(max_length=20)
-    description = models.TextField()
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Select")
+    image_side = models.ImageField(
+        upload_to=image_validations,
+        blank=True,
+    )
+    image_extra = models.ImageField(
+        upload_to=image_validations,
+        blank=True,
+    )
+    image_extra2 = models.ImageField(
+        upload_to=image_validations,
+        blank=True,
+    )
 
     def __str__(self):
         return f"{self.property_type} at {self.city}, {self.district}"

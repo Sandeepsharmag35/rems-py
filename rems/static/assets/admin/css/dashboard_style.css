@@ -359,6 +359,7 @@ body {
   cursor: pointer;
 }
 
+
 .cardHeader .btn-delete {
   position: relative;
   padding: 5px 10px;
@@ -514,11 +515,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  margin-left: 20px;
 }
 
 .animated-form {
-  width: 600px;
+  width: 800px;
   padding: 20px;
   background-color: #f0f0f0;
   border-radius: 10px;
@@ -536,6 +537,30 @@ body {
 
 .form-group {
   margin-bottom: 20px;
+}
+
+.form-group .required {
+  color: red;
+}
+
+.form-group .left {
+  justify-content: left;
+  display: inline-block;
+  width: 49%;
+}
+
+.form-group .right {
+  justify-content: right;
+  display: inline-block;
+  width: 49%;
+  margin-left: 10px;
+}
+
+.form-group .middle {
+  justify-content: right;
+  display: inline-block;
+  width: 32%;
+  margin-left: 4px;
 }
 
 .animated-form>label {
