@@ -70,10 +70,13 @@ def Customers(request):
 
 
 @login_required(login_url=login)
-def CustomersProfile(request):
-    profile = Profile.objects.filter(user__is_superuser=False)
+def CustomersProfile(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    profile, created = Profile.objects.get_or_create(
+        user=user, defaults={"fullname": "", "phone_number": "", "email": user.email}
+    )
     context = {"profile": profile}
-    return render(request, "admin/customers_profile.html", context)
+    return render(request, "admin/user_profile.html", context)
 
 
 @login_required(login_url=login)
@@ -83,7 +86,7 @@ def Update_Customer(request, profile_id):
     username = user.username
 
     if request.method == "POST":
-        full_name = request.POST.get("full_name")
+        full_name = request.POST.get("full-name")
         email = request.POST.get("email")
         phone_number = request.POST.get("phone")
 
@@ -96,9 +99,9 @@ def Update_Customer(request, profile_id):
             request, f"The user @'{username}''s profile has been updated successfully."
         )
 
-        return redirect("customers-profile")
+        return redirect("user-profile", user_id=user.id)
     context = {"profile": profile}
-    return render(request, "admin/customers_profile.html", context)
+    return render(request, "admin/user_profile.html", context)
 
 
 @login_required(login_url=login)
@@ -113,7 +116,7 @@ def Delete_Customer(request, profile_id):
         )
     except Profile.DoesNotExist:
         messages.error(request, "The user profile does not exist.")
-    return redirect("customers-profile")
+    return redirect("user-profile")
 
 
 @login_required(login_url=login)
@@ -156,24 +159,66 @@ def AddProperty(request):
     if request.method == "POST":
         property_type = request.POST.get("property-type")
         property_for = request.POST.get("property-for")
-        image = request.FILES.get("property-image")
+        flat_number = request.POST.get("flat-number")
+        bedrooms = request.POST.get("bed-number")
+        bathrooms = request.POST.get("bath-number")
+        living_rooms = request.POST.get("living-number")
+        kitchens = request.POST.get("kitchen-number")
+        total_rooms = request.POST.get("total-number")
+        parking = request.POST.get("parking")
+        built_year = request.POST.get("built-year")
+        built_area = request.POST.get("built-area")
+        road_size = request.POST.get("road-size")
+        land_area = request.POST.get("land-area")
+        type = request.POST.get("type")
+        facing_direction = request.POST.get("facing-direction")
         price = request.POST.get("property-price")
-        city = request.POST.get("city")
+        price_per_unit = request.POST.get("price-per-unit")
+        description = request.POST.get("description")
+        province = request.POST.get("province")
         district = request.POST.get("district")
         zip_code = request.POST.get("zip-code")
-        description = request.POST.get("description")
+        city = request.POST.get("city")
+        municipality = request.POST.get("municipality")
+        ward_no = request.POST.get("ward-no")
+        tole = request.POST.get("tole")
         status = request.POST.get("status")
+        featured = request.POST.get("featured")
+        image_front = request.FILES.get("front-image")
+        image_side = request.FILES.get("side-image")
+        image_extra1 = request.FILES.get("extra1-image")
+        image_extra2 = request.FILES.get("extra2-image")
 
         property = Property(
             property_type=property_type,
             property_for=property_for,
-            image=image,
+            flat_number=flat_number,
+            bedrooms=bedrooms,
+            bathrooms=bathrooms,
+            living_rooms=living_rooms,
+            kitchens=kitchens,
+            total_rooms=total_rooms,
+            parking=parking,
+            built_year=built_year,
+            built_area=built_area,
+            road_size=road_size,
+            land_area=land_area,
+            type=type,
+            facing_direction=facing_direction,
             price=price,
-            city=city,
+            price_per_unit=price_per_unit,
+            full_description=description,
+            province=province,
             district=district,
-            zip_code=zip_code,
-            description=description,
+            municipality=municipality,
+            ward_no=ward_no,
+            tole=tole,
+            image_front=image_front,
+            image_side=image_side,
+            image_extra=image_extra1,
+            image_extra2=image_extra2,
             status=status,
+            featured=featured,
         )
         property.save()
         messages.success(request, f"Property has been added successfully.")

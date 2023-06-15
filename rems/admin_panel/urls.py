@@ -15,21 +15,25 @@ urlpatterns = [
     path("dashboard/", views.AdminDashboard, name="admin_dashboard"),
     path("messages/", views.customerMessage, name="messages"),
     path("users/", views.Customers, name="users"),
-    path("customers-profile/", views.CustomersProfile, name="customers-profile"),
+    path(
+        "user-profile/<int:user_id>/",
+        views.CustomersProfile,
+        name="user-profile",
+    ),
     path(
         "delete_message/<int:msg_id>/",
         views.Delete_CustomerMessage,
         name="delete_message",
     ),
     path(
-        "update_customer/<int:profile_id>/",
+        "update_user/<int:profile_id>/",
         views.Update_Customer,
-        name="update_customer",
+        name="update_user",
     ),
     path(
-        "delete_customer/<int:profile_id>/",
+        "delete_user/<int:profile_id>/",
         views.Delete_Customer,
-        name="delete_customer",
+        name="delete_user",
     ),
     path("admins/", views.Admins, name="admins"),
     path(

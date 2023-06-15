@@ -187,17 +187,21 @@ def SearchResultPage(request):
     if property_type:
         properties = properties.filter(property_type__icontains=property_type)
 
-    # if price_range:
-    #     price_ranges = price_range.split("-")
-    #     min_price = price_ranges[0].strip()
-    #     max_price = price_ranges[1].strip() if len(price_ranges) > 1 else None
+        # if price_range:
+        #     price_ranges = price_range.split("-")
+        #     min_price = price_ranges[0].strip()
+        #     max_price = price_ranges[1].strip() if len(price_ranges) > 1 else None
 
-    #     if max_price:
-    #         properties = properties.filter(price__gte=min_price, price__lte=max_price)
-    #     else:
-    #         properties = properties.filter(price__gte=min_price)
+        #     if max_price:
+        #         properties = properties.filter(price__gte=min_price, price__lte=max_price)
+        #     else:
+        #         properties = properties.filter(price__gte=min_price)
 
-    context = {"properties": properties}
+        paginator = Paginator(properties, 9)  # Show 9 properties per page
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+
+    context = {"page_obj": page_obj}
     return render(request, "search/search-result.html", context)
 
 
