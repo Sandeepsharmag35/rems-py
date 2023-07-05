@@ -1,6 +1,20 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
+
+
+def image_validations(instance, filename):
+    img = instance.profile_picture  # getting the image name
+    ext = img.name.split(".")[-1].lower()
+    allowed_extensions = ["jpg", "jpeg", "png"]
+
+    if ext in allowed_extensions:
+        return f"profile_pictures/{filename}"
+    else:
+        raise ValidationError(
+            "Invalid file format. Only JPG, JPEG, and PNG files are allowed."
+        )
 
 
 class Profile(models.Model):
@@ -15,6 +29,7 @@ class Profile(models.Model):
     )  # max_length should be enough to accommodate the longest possible phone number, with the country code
     email = models.EmailField(max_length=100, unique=True)
     address = models.TextField(max_length=100, blank=True)
+    profile_picture = models.ImageField(upload_to=image_validations, blank=True)
 
     def __str__(self):
         return self.fullname

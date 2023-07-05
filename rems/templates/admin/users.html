@@ -18,7 +18,6 @@
             <th>Username</th>
             <th>Email</th>
             <th>View Profile</th>
-            <th>Delete</th>
         </thead>
         {% if users %}
         <tbody>
@@ -29,7 +28,6 @@
                 <td>{{ user.email }}</td>
                 <td><a href="{% url 'user-profile' user.id %}" class="btn-update"><i class="fa fa-eye"
                             style="color: #ffffff;"></i></a></td>
-                <td><a href="#" class="btn-delete"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a></td>
             </tr>
             {% endfor %}
         </tbody>

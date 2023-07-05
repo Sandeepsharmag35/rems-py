@@ -89,11 +89,14 @@ def Update_Customer(request, profile_id):
         full_name = request.POST.get("full-name")
         email = request.POST.get("email")
         phone_number = request.POST.get("phone")
+        profile_picture = request.FILES.get("profile-picture")
 
         # Update the user's profile
         profile.fullname = full_name
         profile.email = email
         profile.phone_number = phone_number
+        profile.profile_picture = profile_picture
+
         profile.save()
         messages.success(
             request, f"The user @'{username}''s profile has been updated successfully."
@@ -116,7 +119,7 @@ def Delete_Customer(request, profile_id):
         )
     except Profile.DoesNotExist:
         messages.error(request, "The user profile does not exist.")
-    return redirect("user-profile")
+    return redirect("users")
 
 
 @login_required(login_url=login)

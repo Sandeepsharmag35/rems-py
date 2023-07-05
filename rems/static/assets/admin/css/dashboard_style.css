@@ -563,9 +563,7 @@ body {
   margin-left: 4px;
 }
 
-
 .animated-form>label {
-  display: block;
   margin-bottom: 5px;
 }
 
@@ -594,6 +592,82 @@ input[type="password"] {
 
 .animated-form>button:hover {
   background-color: #45a049;
+}
+
+/* ====================== Profile Page ========================== */
+.profile-form {
+  margin-bottom: 30px;
+}
+
+.profile-form h4 {
+  margin-bottom: 5px;
+}
+
+.profile-form label {
+  margin-bottom: 5px;
+}
+
+#profile-picture {
+  display: none;
+}
+
+.profile-form .right-col img {
+  border: 2px solid black;
+}
+
+.profile-form>.right-col>label {
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 60px;
+  padding: 9px;
+  background-color: #0a83fc;
+  color: white;
+  border-radius: 5px;
+}
+
+.profile-form .left-col {
+  width: 60%;
+  float: left;
+  margin-bottom: 15px;
+}
+
+.profile-form .right-col {
+  width: 30%;
+  float: right;
+}
+
+.right-col a {
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 60px;
+  padding: 9px;
+  background-color: #0a83fc;
+  color: white;
+  border-radius: 5px;
+}
+
+.profile-form>.form-group>.left>[type="submit"] {
+  border: none;
+  padding: 15px;
+}
+
+.profile-form>.form-group>.left>[type="submit"]:hover,
+.right-col a:hover {
+  background-color: #00376e;
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
+
+.profile-form>.form-group>.right>a {
+  padding: 10px;
+}
+
+.profile-form>.form-group>.right>.btn-delete:hover,
+.profile-form>.form-group>.right>.btn-delete:focus {
+  background-color: rgb(131, 0, 0);
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
 }
 
 

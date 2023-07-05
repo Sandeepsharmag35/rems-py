@@ -23,42 +23,61 @@
                         {% endfor %}
                 </ul>
                 {% endif %}
-                <div class="form-group">
-                    <div class="left">
+                <div class="profile-form">
+                    <div class="right-col">
+                        <h4>Profile Picture:</h4>
+                        {% if profile.profile_picture %}
+                        <img src="{{profile.profile_picture.url}}" width="200px" height="200px" id="profile-pic">
+                        {% else %}
+                        <img src="../../static/assets/admin/imgs/dummy-profile.jpg" width="200px" height="200px"
+                            id="profile-pic" />
+                        {% endif %}
+                        <input type="file" name="profile-picture" id="profile-picture"
+                            accept="image/png, image/jpg, image/jpeg">
+                        <label for="profile-picture">Change</label>
+                    </div>
+                    <div class="left-col">
                         <label for="full-name">Full Name:</label>
                         <input type="text" name="full-name" id="full-name" value="{{profile.fullname}}">
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="left">
+                    <div class="left-col">
                         <label for="email">Email:</label>
                         <input type="email" name="email" id="email" value="{{profile.email}}">
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="left">
+                    <div class="left-col">
                         <label for="phone">Phone:</label>
                         <input type="tel" name="phone" id="phone" value="{{profile.phone_number}}">
                     </div>
-                    <div class="right">
+                    <div class="left-col">
+                        <label for="username">@Username:</label>
+                        <input type="text" name="username" id="username" value="{{profile.user}}">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="left">
+                            <input type="submit" class="btn-update" value="Update">
+                        </div>
                         <div class="right">
-                            <label for="profile-pic">Profile Picture:</label>
-                            <img src="#" width="200px" height="100px" id="profile-pic" name="profile-pic">
+                            <a href="{% url 'delete_user' profile.id %}" class="btn-delete">Delete</a>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="username">@Username:</label>
-                    <input type="text" name="username" id="username" value="{{profile.user}}">
-                </div>
-                <div class="form-group">
-                    <div class="left">
-                        <input type="submit" class="btn-update" value="Update">
-                    </div>
-                    <div class="right">
-                        <a href="{% url 'delete_user' profile.id %}" class="btn-delete">Delete</a>
-                    </div>
-
             </form>
         </div>
-        {% endblock %}
+    </div>
+    <script>
+        const profilePicInput = document.getElementById('profile-picture');
+        const profilePicPreview = document.getElementById('profile-pic');
+
+        profilePicInput.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                profilePicPreview.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        });
+    </script>
+    {% endblock %}
