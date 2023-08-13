@@ -15,7 +15,6 @@
             <th>From</th>
             <th>Phone</th>
             <th>View</th>
-            <th>Approve</th>
             <th>Remove</th>
         </thead>
         {% if sell_req %}
@@ -29,9 +28,12 @@
                 <td>{{req.property_for}}</td>
                 <td>{{req.name}}</td>
                 <td>{{req.phone_number}}</td>
-                <td><a href="" class="btn-update"><i class="fa fa-eye" style="color: #ffffff;"></i></a></td>
-                <td><a href="" class="btn-update"><i class="fa-solid fa-check" style="color: #ffffff;"></i></a></td>
-                <td><a href="#" class="btn-delete"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a></td>
+                <td>
+                    <a href="{% url 'sell-details' sellrequest.id %}" class="btn-update"><i class="fa fa-eye"
+                            style="color: #ffffff;"></i></a>
+                </td>
+                <td><a href="#" class="btn-delete"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

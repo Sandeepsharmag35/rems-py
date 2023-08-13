@@ -279,7 +279,7 @@ body {
   color: var(--white);
 }
 
-/* ================== Order Details List ============== */
+/* ================== Sell Request List ============== */
 .details {
   position: relative;
   width: 100%;
@@ -287,7 +287,7 @@ body {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 30px;
-  /* margin-top: 10px; */
+  margin-top: 10px;
 }
 
 .inside-blocks {
@@ -297,9 +297,10 @@ body {
   margin-left: 10px;
 }
 
-.details .recentOrders {
+.details .recentRequests {
   position: relative;
-  display: grid;
+  display: inline;
+  margin-top: 10px;
   min-height: 500px;
   background: var(--white);
   padding: 20px;
@@ -380,42 +381,45 @@ body {
 .details table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
 }
 
 .details table thead td {
   font-weight: 600;
 }
 
-.details .recentOrders table tr {
+.details .recentRequests table tr {
   color: var(--black1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.details .recentOrders table tr:last-child {
+.details .recentRequests table tr:last-child {
   border-bottom: none;
 }
 
-.details .recentOrders table tbody tr:hover {
+.details .recentRequests table tbody tr:hover {
   background: var(--blue);
   color: var(--white);
 }
 
-.details .recentOrders table tr td {
+.details .recentRequests table tr td {
   padding: 10px;
 }
 
-.details .recentOrders table tr td:last-child {
-  text-align: end;
+.details .recentRequests table td a {
+  text-decoration: none;
 }
 
-.details .recentOrders table tr td:nth-child(2) {
-  text-align: end;
+/* .details .recentRequests table tr td:last-child {
+  text-align: start;
 }
 
-.details .recentOrders table tr td:nth-child(3) {
+.details .recentRequests table tr td:nth-child(2) {
+  text-align: start;
+}
+
+.details .recentRequests table tr td:nth-child(3) {
   text-align: center;
-}
+} */
 
 .status.delivered {
   padding: 2px 4px;
@@ -861,7 +865,7 @@ input[type="password"] {
     grid-template-columns: 1fr;
   }
 
-  .recentOrders {
+  .recentRequests {
     overflow-x: auto;
   }
 

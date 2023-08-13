@@ -33,13 +33,15 @@ def adminLogout(request):
 @login_required(login_url=login)
 def AdminDashboard(request):
     total_properties = Property.objects.count()
-    total_sell_reqests = SellRequest.objects.count()
+    total_sell_requests = SellRequest.objects.count()
     total_messages = CustomerMessage.objects.count()
+    sell_requests = SellRequest.objects.all()
     context = {
         "user": request.user,
         "total_properties": total_properties,
-        "total_sell_reqests": total_sell_reqests,
+        "total_sell_requests": total_sell_requests,
         "total_messages": total_messages,
+        "sell_requests": sell_requests,
     }
     return render(request, "admin/dashboard.html", context)
 
@@ -230,7 +232,15 @@ def AddProperty(request):
     return render(request, "admin/add_property.html")
 
 
-def SellRequestView(request):
+@login_required(login_url=login)
+def SellRequestList(request):
     sell_req = SellRequest.objects.all()
     context = {"sell_req": sell_req}
     return render(request, "admin/sellrequest.html", context)
+
+
+@login_required(login_url=login)
+def SellRequestDetails(request, sellrequest_id):
+    sell_req = get_object_or_404(SellRequest, id=sellrequest_id)
+    context = {"sell_details": sell_req}
+    return render(request, "admin/sellrequest_view.html", context)

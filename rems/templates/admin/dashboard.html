@@ -158,7 +158,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">{{ total_sell_reqests }}</div>
+                        <div class="numbers">{{ total_sell_requests }}</div>
                         <div class="cardName">Sell Requests</div>
                     </div>
 
@@ -192,79 +192,32 @@
 
             <!-- ================ Order Details List ================= -->
             <div class="details">
-                <div class="recentOrders">
+                <div class="recentRequests">
                     <div class="cardHeader">
-                        <h2>Recent Orders</h2>
-                        <a href="#" class="btn">View All</a>
+                        <h2>Recent Sell Requests</h2>
+                        <a href="{% url 'sell-requests' %}" class="btn">View All</a>
                     </div>
-
-                    <table>
+                    <table id="example" class="display">
                         <thead>
                             <tr>
-                                <td>Name</td>
-                                <td>Price</td>
-                                <td>Payment</td>
+                                <td>Property Title</td>
+                                <td>Type</td>
+                                <td>For</td>
                                 <td>Status</td>
                             </tr>
                         </thead>
-
+                        {% if sell_requests %}
                         <tbody>
+                            {% for p in sell_requests %}
                             <tr>
-                                <td>Star Refrigerator</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">Delivered</span></td>
+                                <td>{{ p.property_title }}</td>
+                                <td>{{ p.property_type }}</td>
+                                <td>{{ p.property_for }}</td>
+                                <td><a href="#" class="status pending">Pending</a></td>
                             </tr>
-
-                            <tr>
-                                <td>Dell Laptop</td>
-                                <td>$110</td>
-                                <td>Due</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Apple Watch</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status return">Return</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Addidas Shoes</td>
-                                <td>$620</td>
-                                <td>Due</td>
-                                <td><span class="status inProgress">In Progress</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Star Refrigerator</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">Delivered</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Dell Laptop</td>
-                                <td>$110</td>
-                                <td>Due</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Apple Watch</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status return">Return</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Addidas Shoes</td>
-                                <td>$620</td>
-                                <td>Due</td>
-                                <td><span class="status inProgress">In Progress</span></td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
+                        {% endif %}
                     </table>
                 </div>
 
@@ -273,35 +226,7 @@
                     <div class="cardHeader">
                         <h2>Recent Customers</h2>
                     </div>
-
                     <table>
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="{% static 'assets/imgs/customer02.jpg' %}" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="{% static 'assets/imgs/customer01.jpg' %}" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="{% static 'assets/imgs/customer02.jpg' %}" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
                         <tr>
                             <td width="60px">
                                 <div class="imgBx"><img src="{% static 'assets/imgs/customer01.jpg' %}" alt=""></div>

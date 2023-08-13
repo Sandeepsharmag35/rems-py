@@ -1,0 +1,349 @@
+{% extends 'admin/dashboard.html' %}
+{% load static %}
+{% block title %}Property Details{% endblock %}
+{% block extracssjs %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+{% endblock %}
+{% block content %}
+<div class="go-back">
+    <a href="javascript:void(0);" onclick="window.history.back();">
+        <span class="icon">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+        </span>
+    </a>
+</div>
+<div class="insider">
+    <div class="row">
+        <div class="cardHeader">
+            <form action="" method="post" class="animated-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2>Add Property</h2>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li>{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul><br>
+                {% endif %}
+
+                {% if sell_details %}
+                <div class="form-group">
+                    <div class="left">
+                        <label for="property-type">Property Type: <span class="required">*</span></label>
+                        <input type="text" value="{{ sell_details.property_type }}" id="property-type"
+                            name="property-type">
+                    </div>
+                    <div class="right">
+                        <label for="property-for">Property For: <span class="required">*</span></label>
+                        <select id="property-for" name="property-for" required>
+                            <option>Buyer</option>
+                            <option>Renter</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="house-form">
+                    <div class="form-group">
+                        <div class="middle">
+                            <label for="flat-number">No of Flat:</label>
+                            <select class="form-control" id="flat-number" name="flat-number">
+                                <option>1</option>
+                                <option>1.5</option>
+                                <option>2</option>
+                                <option>2.5</option>
+                                <option>3</option>
+                                <option>3.5</option>
+                                <option>4</option>
+                                <option>4.5</option>
+                                <option>5</option>
+                                <option>5+</option>
+                            </select>
+                        </div>
+                        <div class="middle">
+                            <label for="bed-number">Bedroom:</label>
+                            <select class="form-control" id="bed-number" name="bed-number">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>7+</option>
+                            </select>
+                        </div>
+                        <div class="middle">
+                            <label for="bath-number">Bathroom:</label>
+                            <select class="form-control" id="bath-number" name="bath-number">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>5+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="middle">
+                            <label for="living-number">Living Room:</label>
+                            <select class="form-control" id="living-number" name="living-number">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>5+</option>
+                            </select>
+                        </div>
+                        <div class="middle">
+                            <label for="kitchen-number">Kitchen:</label>
+                            <select class="form-control" id="kitchen-number" name="kitchen-number">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>5+</option>
+                            </select>
+                        </div>
+                        <div class="middle">
+                            <label for="total-number">Total Rooms:</label>
+                            <select class="form-control" id="total-number" name="total-number">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                                <option>13</option>
+                                <option>14</option>
+                                <option>15</option>
+                                <option>15+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="middle">
+                            <label for="parking">Parking</label>
+                            <select class="form-control" id="parking" name="parking">
+                                <option>Motorbike</option>
+                                <option>Car-1</option>
+                                <option>Car-2</option>
+                                <option>Car-3</option>
+                                <option>Car-3+</option>
+                            </select>
+                        </div>
+                        <div class="middle">
+                            <label for="built-year">Built Year:</label>
+                            <input type="number" class="form-control" placeholder="eg. 2078" id="built-year"
+                                name="built-year">
+                        </div>
+                        <div class="middle">
+                            <label for="built-area">Built Area:</label>
+                            <input type="text" class="form-control" placeholder="eg. 1000 sqft" id="built-area"
+                                name="built-area">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"></div>
+                <div id="land-form">
+                    <div class="form-group">
+                        <div class="middle">
+                            <label for="road-size">Road Size: <span class="required">*</span></label>
+                            <input type="text" class="form-control" placeholder="eg. 8 ft" id="road-size"
+                                name="road-size" required>
+                        </div>
+                        <div class="middle">
+                            <label for="land-area">Land Area: <span class="required">*</span></label>
+                            <input type="text" class="form-control" placeholder="eg. 1250 sqft" id="land-area"
+                                name="land-area">
+                        </div>
+                        <div class="middle">
+                            <label for="type">Type: <span class="required">*</span></label>
+                            <select class="form-control" id="type" name="type">
+                                <option>Select</option>
+                                <option>Residential</option>
+                                <option>Commertial</option>
+                                <option>Bungalow</option>
+                                <option>Plotted Land</option>
+                                <option>Furnished</option>
+                                <option>Agriculture</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="middle">
+                            <label for="facing-direction">Facing Direction: <span class="required">*</span></label>
+                            <select class="form-control" id="facing-direction" name="facing-direction">
+                                <option>East</option>
+                                <option>West</option>
+                                <option>North</option>
+                                <option>South</option>
+                                <option>South East</option>
+                                <option>North East</option>
+                                <option>South West</option>
+                                <option>North West</option>
+                            </select>
+                        </div>
+                        <div class="middle">
+                            <label for="property-price">Price: <span class="required">*</span></label>
+                            <input type="text" id="property-price" name="property-price" oninput="formatNumber(this)"
+                                required>
+                        </div>
+                        <div class="middle">
+                            <label for="price-per-unit">Price Per Unit:</label>
+                            <select class="form-control" id="price-per-unit" name="price-per-unit">
+                                <option>Aana</option>
+                                <option>Ropani</option>
+                                <option>Dhur</option>
+                                <option>Kathha</option>
+                                <option>Bigha</option>
+                                <option>Sqft</option>
+                                <option>Month</option>
+                                <option>Flat</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description: <span class="required">*</span></label>
+                        <textarea id="description" name="description" rows="4" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="middle">
+                        <label for="province">Province: <span class="required">*</span></label>
+                        <select class="form-control" id="province" name="province">
+                            <option>select</option>
+                            <option>Province 1</option>
+                            <option>Province 2</option>
+                            <option>Bagmati</option>
+                            <option>Gandaki</option>
+                            <option>Province 5</option>
+                            <option>Province 6</option>
+                            <option>Province 7</option>
+                        </select>
+                    </div>
+                    <div class="middle">
+                        <label for="district">District: <span class="required">*</span></label>
+                        <input type="text" id="district" name="district" required>
+                    </div>
+                    <div class="middle">
+                        <label for="zip-code">Zip Code: <span class="required">*</span></label>
+                        <input type="number" id="zip-code" name="zip-code" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="left">
+                        <label for="city">City: <span class="required">*</span></label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="right">
+                        <label for="municipality">Municipality: <span class="required">*</span></label>
+                        <input type="text" id="municipality" name="municipality" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="left">
+                        <label for="ward-no">Ward No: <span class="required">*</span></label>
+                        <input type="number" id="ward-no" name="ward-no" required>
+                    </div>
+                    <div class="right">
+                        <label for="tole">Tole:</label>
+                        <input type="text" id="tole" name="tole" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status: <span class="required">*</span></label>
+                    <select id="status" name="status" required>
+                        <option>Select</option>
+                        <option>Available</option>
+                        <option>Sold</option>
+                        <option>Rented</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="featured">Featured: </label>
+                    <input type="checkbox" name="featured" id="featured" style="width: 20px; height: 20px;">
+                </div>
+                <div class="form-group">
+                    <h2>Document</h2>
+                    <div class="left">
+                        <label for="doc-image">Document Preview:</label>
+                        <img src="{{ sell_details.doc_image.url }}" width="200px" height="200px">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h2>Property Images</h2>
+                    <div class="middle">
+                        {% if sell_details.image_front %}
+                        <div class="form-group">
+                            <label for="front-image">Front Image: <span class="required">*</span></label>
+                            <img src="{{ sell_details.image_front.url }}" width="200px" height="200px">
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="middle">
+                        {% if sell_details.image_side %}
+                        <div class="form-group">
+                            <label for="side-image">Side Image: <span class="required">*</span></label>
+                            <img src="{{ sell_details.image_side.url }}" width="200px" height="200px">
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="middle">
+                        {% if sell_details.image_extra %}
+                        <div class="form-group">
+                            <label for="extra1-image">LivingRoom/Bedroom Image:</label>
+                            <img src="{{ sell_details.image_extra.url }}" width="200px" height="200px">
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="middle">
+                        {% if sell_details.image_extra2 %}
+                        <div class="form-group">
+                            <label for="extra2-image">Kitchen/Other Image:</label>
+                            <img src="{{ sell_details.image_extra2.url }}" width="200px" height="200px">
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <div class="left">
+                        <button type="submit">Approve</button>
+                    </div>
+                    <div class="right">
+                        <a href="#" class="btn-delete">Decline</a>
+                    </div>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    // getting references to the form and the two divs containing the fields
+    const form = document.querySelector('form');
+    const houseForm = document.getElementById('house-form');
+    const landForm = document.getElementById('land-form');
+
+    // add an event listener to the select element to show/hide the appropriate form fields
+    const select = document.getElementById('property-type');
+    select.addEventListener('change', (event) => {
+        if (event.target.value === 'Land') {
+            houseForm.style.display = 'none';
+            landForm.style.display = 'block';
+        }
+        else if (event.target.value === 'House' || 'Flat' || 'Apartment' || 'Commercial Property') {
+            houseForm.style.display = 'block';
+            landForm.style.display = 'block';
+        }
+    });
+
+</script>
+{% endblock %}
