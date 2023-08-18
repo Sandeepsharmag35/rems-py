@@ -60,7 +60,7 @@
                 </li>
 
                 <li>
-                    <a href="{% url 'sell-requests' %}">
+                    <a href="{% url 'sell_request_list' %}">
                         <span class="icon">
                             <ion-icon name="flag-outline"></ion-icon>
                         </span>
@@ -195,7 +195,7 @@
                 <div class="recentRequests">
                     <div class="cardHeader">
                         <h2>Recent Sell Requests</h2>
-                        <a href="{% url 'sell-requests' %}" class="btn">View All</a>
+                        <a href="{% url 'sell_request_list' %}" class="btn">View All</a>
                     </div>
                     <table id="example" class="display">
                         <thead>
@@ -222,56 +222,26 @@
                 </div>
 
                 <!-- ================= New Customers ================ -->
-                <div class="recentCustomers">
+                <div class="recentMessages">
                     <div class="cardHeader">
-                        <h2>Recent Customers</h2>
+                        <h2>Recent Inquiries</h2>
                     </div>
-                    <table>
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="{% static 'assets/imgs/customer01.jpg' %}" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="{% static 'assets/imgs/customer02.jpg' %}" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="{% static 'assets/imgs/customer01.jpg' %}" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="{% static 'assets/imgs/customer01.jpg' %}" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="{% static 'assets/imgs/customer02.jpg' %}" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-                    </table>
+                    {% if msg %}
+                    <a href="{% url 'messages' %}" style="text-decoration: none; color: black;">
+                        <table>
+                            {% for m in msg %}
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{{ m.property.image.url }}" alt="img"></div>
+                                </td>
+                                <td>
+                                    <h4>{{ m.fullname }} <br> <span>{{ m.property }}</span></h4>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -22,7 +22,7 @@
   <div class="properties-listing spacer">
 
     <div class="row">
-      <div class="col-lg-3 col-sm-4 hidden-xs">
+      <!-- <div class="col-lg-3 col-sm-4 hidden-xs">
 
         <div class="hot-properties hidden-xs">
           <h4>Hot Properties</h4>
@@ -71,123 +71,258 @@
 
         </div>
 
-      </div>
+      </div> -->
 
-      <div class="col-lg-9 col-sm-8 ">
-        {% if property %}
-        <h2>{{property}}</h2>
-        <div class="row">
-          <div class="col-lg-8">
-            <div class="property-images">
-              <!-- Slider Starts -->
-              <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators hidden-xs">
-                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                  {% if property.image_side %}
-                  <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                  {% endif %}
-                  {% if property.image_extra %}
-                  <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-                  {% endif %}
-                  {% if property.image_extra2 %}
-                  <li data-target="#myCarousel" data-slide-to="3" class=""></li>
-                  {% endif %}
-                </ol>
-                <div class="carousel-inner">
-                  <!-- Item 1 -->
-                  <div class="item active">
-                    <img src="{{property.image.url}}" class=" properties" alt="properties" />
-                  </div>
-                  <!-- #Item 1 -->
-                  {% if property.image_side %}
-                  <!-- Item 2 -->
-                  <div class="item">
-                    <img src="{{property.image_side.url}}" class=" properties" alt="properties" />
-                  </div>
-                  <!-- #Item 2 -->
-                  {% endif %}
-                  {% if property.image_extra %}
-                  <!-- Item 3 -->
-                  <div class="item">
-                    <img src="{{property.image_extra.url}}" class=" properties" alt="properties" />
-                  </div>
-                  <!-- #Item 3 -->
-                  {% endif %}
-                  {% if property.image_extra2 %}
-                  <!-- Item 4 -->
-                  <div class="item ">
-                    <img src="{{property.image_extra2.url}}" class=" properties" alt="properties" />
-                  </div>
-                  <!-- # Item 4 -->
-                  {% endif %}
+      <!-- <div class="col-lg-9 col-sm-8 "> -->
+      {% if property %}
+      <h2>{{property}}</h2>
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="property-images">
+            <!-- Slider Starts -->
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators hidden-xs">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                {% if property.image_side %}
+                <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+                {% endif %}
+                {% if property.image_extra %}
+                <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+                {% endif %}
+                {% if property.image_extra2 %}
+                <li data-target="#myCarousel" data-slide-to="3" class=""></li>
+                {% endif %}
+              </ol>
+              <div class="carousel-inner">
+                <!-- Item 1 -->
+                <div class="item active">
+                  <img src="{{property.image.url}}" class=" properties" alt="properties" />
                 </div>
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span
-                    class="glyphicon glyphicon-chevron-left"></span></a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next"><span
-                    class="glyphicon glyphicon-chevron-right"></span></a>
+                <!-- #Item 1 -->
+                {% if property.image_side %}
+                <!-- Item 2 -->
+                <div class="item">
+                  <img src="{{property.image_side.url}}" class=" properties" alt="properties" />
+                </div>
+                <!-- #Item 2 -->
+                {% endif %}
+                {% if property.image_extra %}
+                <!-- Item 3 -->
+                <div class="item">
+                  <img src="{{property.image_extra.url}}" class=" properties" alt="properties" />
+                </div>
+                <!-- #Item 3 -->
+                {% endif %}
+                {% if property.image_extra2 %}
+                <!-- Item 4 -->
+                <div class="item ">
+                  <img src="{{property.image_extra2.url}}" class=" properties" alt="properties" />
+                </div>
+                <!-- # Item 4 -->
+                {% endif %}
               </div>
-              <!-- #Slider Ends -->
+              <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span
+                  class="glyphicon glyphicon-chevron-left"></span></a>
+              <a class="right carousel-control" href="#myCarousel" data-slide="next"><span
+                  class="glyphicon glyphicon-chevron-right"></span></a>
             </div>
-
-            <div class="spacer">
-              <h4><span class="glyphicon glyphicon-th-list"></span> Properties Detail</h4>
-              <p>{{property.description}}</p>
-
+            <!-- #Slider Ends -->
+          </div>
+          <div class="spacer">
+            <h4><span class="glyphicon glyphicon-th-list"></span> Property Description</h4>
+            <p>{{property.description}}</p>
+          </div>
+          <div class="spacer">
+            <div class="col-md-6">
+              <h4><span class="glyphicon glyphicon-home"></span> Property Details</h4>
+              <table class="table table-borderless" style="background: none;">
+                <tbody>
+                  <tr>
+                    <th scope="row">Price: </th>
+                    <td>Rs. {{property.price}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Land Area: </th>
+                    <td>{{property.land_area}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">No. of Flat: </th>
+                    <td colspan="2">{{property.flat_number}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Road Size: </th>
+                    <td>{{property.road_size}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Built Year: </th>
+                    <td>{{property.built_year}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">House Type: </th>
+                    <td>{{property.type}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-6">
+              <h4><span class="glyphicon glyphicon-th-list"></span> Interior Details</h4>
+              <table class="table table-borderless" style="background: none;">
+                <tbody>
+                  <tr>
+                    <th scope="row">Facing Direction: </th>
+                    <td>{{property.facing_direction}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Bedroom: </th>
+                    <td>{{property.bedrooms}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Bathroom: </th>
+                    <td colspan="2">{{property.bathrooms}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Total Rooms: </th>
+                    <td>{{property.total_rooms}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Kitchen: </th>
+                    <td>{{property.kitchens}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Parking: </th>
+                    <td>{{property.parking}}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-          <div class="col-lg-4">
-            <div class="col-lg-12  col-sm-6">
-              <div class="property-info">
-                <p class="price">Rs. {{property.price}}</p>
-                <p class="area"><span class="glyphicon glyphicon-map-marker"></span>{{property.zip_code}}
-                  {{property.city}},
-                  {{property.district}}
-                </p>
-                {% endif %}
-                <div class="profile">
-                  <span class="glyphicon glyphicon-user"></span> Agent Details
-                  <p>Sandip Sharma<br>+977 9867627595</p>
-                </div>
+          <hr>
+          <div class="spacer">
+            <h4><span class="glyphicon glyphicon-map-marker"></span> Location Details</h4>
+            <table class="table table-borderless" style="background: none;">
+              <tbody>
+                <tr>
+                  <th scope="row">Province: </th>
+                  <td>{{property.province}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">District: </th>
+                  <td>{{property.district}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">City: </th>
+                  <td colspan="2">{{property.city}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Municipality: </th>
+                  <td>{{property.municipality}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Ward No.: </th>
+                  <td>{{property.ward_no}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Tole: </th>
+                  <td>{{property.tole}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="col-lg-12  col-sm-6">
+            <div class="property-info">
+              <p class="price">Rs. {{property.price}}</p>
+              <p class="area"><span class="glyphicon glyphicon-map-marker"></span>{{property.zip_code}}
+                {{property.city}},
+                {{property.district}}
+              </p>
+              {% endif %}
+              <div class="profile">
+                <span class="glyphicon glyphicon-user"></span> Agent Details
+                <p>Sandip Sharma<br>+977 9867627595</p>
               </div>
+            </div>
 
-              {% if property.property_type == 'Land' %}
-              <p>This land is available for {{ property.property_for }}s.</p>
-              {% else %}
-              <h6><span class="glyphicon glyphicon-home"></span> Availabilty</h6>
-              <div class="listing-detail">
-                <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">
-                  {{property.bedrooms}} </span>
-                <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">
-                  {{property.living_rooms}} </span>
-                <span data-toggle="tooltip" data-placement="bottom"
-                  data-original-title="Kitchen">{{property.kitchens}}</span>
-                <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">
-                  {{property.bathrooms}}
-                </span>
+            {% if property.property_type == 'Land' %}
+            <p>This land is available for {{ property.property_for }}s.</p>
+            {% else %}
+            <h6><span class="glyphicon glyphicon-home"></span> Availabilty</h6>
+            <div class="listing-detail">
+              <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">
+                {{property.bedrooms}} </span>
+              <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">
+                {{property.living_rooms}} </span>
+              <span data-toggle="tooltip" data-placement="bottom"
+                data-original-title="Kitchen">{{property.kitchens}}</span>
+              <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">
+                {{property.bathrooms}}
+              </span>
+            </div>
+            {% endif %}
+
+          </div>
+          <div class="col-lg-12 col-sm-6 ">
+            <div class="enquiry">
+              {% if sucess %}
+              <div class="alert alert-sucess" role="alert">
+                {{ sucess }}
               </div>
               {% endif %}
-
+              <h6><span class="glyphicon glyphicon-envelope"></span> Post Enquiry</h6>
+              <form method="post" role="form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" class="form-control" placeholder="Full Name" name="full_name" required />
+                <input type="text" class="form-control" placeholder="Your email" name="email_address" required />
+                <input type="text" class="form-control" placeholder="Your phone number" name="phone_number" required />
+                <textarea rows="6" class="form-control" placeholder="Whats on your mind?" name="message"
+                  required></textarea>
+                <button type="submit" class="btn btn-primary" name="Submit">Send Message</button>
+              </form>
             </div>
-            <div class="col-lg-12 col-sm-6 ">
-              <div class="enquiry">
-                {% if sucess %}
-                <div class="alert alert-sucess" role="alert">
-                  {{ sucess }}
+          </div>
+          <div class="col-lg-10 col-sm-12 hidden-xs">
+            <div class="hot-properties hidden-xs">
+              <h4>Hot Properties</h4>
+              <div class="row">
+                <div class="col-lg-4 col-sm-5"><img src="{% static 'images/properties/1.jpg' %}"
+                    class="img-responsive img-circle" alt="properties"></div>
+                <div class="col-lg-8 col-sm-7">
+                  <h5><a href="#">Apartment For Rent</a></h5>
+                  <p class="price">Rs. 80,000</p>
                 </div>
-                {% endif %}
-                <h6><span class="glyphicon glyphicon-envelope"></span> Post Enquiry</h6>
-                <form method="post" role="form" enctype="multipart/form-data">
-                  {% csrf_token %}
-                  <input type="text" class="form-control" placeholder="Full Name" name="full_name" required />
-                  <input type="text" class="form-control" placeholder="Your email" name="email_address" required />
-                  <input type="text" class="form-control" placeholder="Your phone number" name="phone_number"
-                    required />
-                  <textarea rows="6" class="form-control" placeholder="Whats on your mind?" name="message"
-                    required></textarea>
-                  <button type="submit" class="btn btn-primary" name="Submit">Send Message</button>
-                </form>
               </div>
+              <div class="row">
+                <div class="col-lg-4 col-sm-5"><img src="{% static 'images/properties/1.jpg' %}"
+                    class="img-responsive img-circle" alt="properties"></div>
+                <div class="col-lg-8 col-sm-7">
+                  <h5><a href="#">Apartment For Sale</a></h5>
+                  <p class="price">Rs. 30,000,000</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-4 col-sm-5"><img src="{% static 'images/properties/1.jpg' %}"
+                    class="img-responsive img-circle" alt="properties"></div>
+                <div class="col-lg-8 col-sm-7">
+                  <h5><a href="#">Apartment For Rent</a></h5>
+                  <p class="price">Rs. 80,000</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-4 col-sm-5"><img src="{% static 'images/properties/1.jpg' %}"
+                    class="img-responsive img-circle" alt="properties"></div>
+                <div class="col-lg-8 col-sm-7">
+                  <h5><a href="#">Apartment For Sale</a></h5>
+                  <p class="price">Rs. 30,000,000</p>
+                </div>
+              </div>
+            </div>
+            <div class="advertisement">
+              <h4>Advertisements</h4>
+              <img src="{% static 'images/advertisements.jpg' %}" class=" img-responsive" alt="advertisement">
             </div>
           </div>
         </div>

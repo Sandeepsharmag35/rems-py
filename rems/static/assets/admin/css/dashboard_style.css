@@ -457,9 +457,9 @@ body {
   font-weight: 500;
 }
 
-.recentCustomers {
+.recentMessages {
   position: relative;
-  display: grid;
+  display: inline;
   min-height: 500px;
   padding: 20px;
   background: var(--white);
@@ -467,7 +467,7 @@ body {
   border-radius: 20px;
 }
 
-.recentCustomers .imgBx {
+.recentMessages .imgBx {
   position: relative;
   width: 40px;
   height: 40px;
@@ -475,7 +475,7 @@ body {
   overflow: hidden;
 }
 
-.recentCustomers .imgBx img {
+.recentMessages .imgBx img {
   position: absolute;
   top: 0;
   left: 0;
@@ -484,27 +484,27 @@ body {
   object-fit: cover;
 }
 
-.recentCustomers table tr td {
+.recentMessages table tr td {
   padding: 12px 10px;
 }
 
-.recentCustomers table tr td h4 {
+.recentMessages table tr td h4 {
   font-size: 16px;
   font-weight: 500;
   line-height: 1.2rem;
 }
 
-.recentCustomers table tr td h4 span {
+.recentMessages table tr td h4 span {
   font-size: 14px;
   color: var(--black2);
 }
 
-.recentCustomers table tr:hover {
+.recentMessages table tr:hover {
   background: var(--blue);
   color: var(--white);
 }
 
-.recentCustomers table tr:hover td h4 span {
+.recentMessages table tr:hover td h4 span {
   color: var(--white);
 }
 

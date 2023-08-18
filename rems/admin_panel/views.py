@@ -36,12 +36,14 @@ def AdminDashboard(request):
     total_sell_requests = SellRequest.objects.count()
     total_messages = CustomerMessage.objects.count()
     sell_requests = SellRequest.objects.all()
+    inquiries = CustomerMessage.objects.all()
     context = {
         "user": request.user,
         "total_properties": total_properties,
         "total_sell_requests": total_sell_requests,
         "total_messages": total_messages,
         "sell_requests": sell_requests,
+        "msg": inquiries,
     }
     return render(request, "admin/dashboard.html", context)
 
@@ -233,14 +235,23 @@ def AddProperty(request):
 
 
 @login_required(login_url=login)
-def SellRequestList(request):
-    sell_req = SellRequest.objects.all()
-    context = {"sell_req": sell_req}
+def Sell_Request_List(request):
+    sell_requests = SellRequest.objects.all()
+    context = {
+        "sell_requests": sell_requests,
+    }
     return render(request, "admin/sellrequest.html", context)
 
 
 @login_required(login_url=login)
-def SellRequestDetails(request, sellrequest_id):
-    sell_req = get_object_or_404(SellRequest, id=sellrequest_id)
-    context = {"sell_details": sell_req}
+def Sell_Request_Detail(request, pk):
+    sell_request = get_object_or_404(SellRequest, pk=pk)
+    context = {"sell_request": sell_request}
     return render(request, "admin/sellrequest_view.html", context)
+
+
+# @login_required(login_url=login)
+# def SellRequestDelete(request, sellrequest_id):
+#     sellrequest = get_object_or_404(SellRequest, id=sellrequest_id)
+#     sellrequest.delete()
+#     return render(request, "admin/sellrequest.html")

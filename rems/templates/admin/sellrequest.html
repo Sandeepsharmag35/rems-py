@@ -17,9 +17,9 @@
             <th>View</th>
             <th>Remove</th>
         </thead>
-        {% if sell_req %}
+        {% if sell_requests %}
         <tbody>
-            {% for req in sell_req %}
+            {% for req in sell_requests %}
             <tr>
                 <td>{{forloop.counter}}</td>
                 <td><img src="{{req.image_front.url}}" width="75px" height="55px"></td>
@@ -29,10 +29,8 @@
                 <td>{{req.name}}</td>
                 <td>{{req.phone_number}}</td>
                 <td>
-                    <a href="{% url 'sell-details' sellrequest.id %}" class="btn-update"><i class="fa fa-eye"
+                    <a href="{% url 'sell_request_detail' sell_request.pk %}" class="btn-update"><i class="fa fa-eye"
                             style="color: #ffffff;"></i></a>
-                </td>
-                <td><a href="#" class="btn-delete"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
                 </td>
             </tr>
             {% endfor %}

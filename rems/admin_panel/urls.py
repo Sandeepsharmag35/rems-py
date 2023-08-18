@@ -43,11 +43,9 @@ urlpatterns = [
     ),
     path("properties/", views.PropertyList, name="properties"),
     path("add-property/", views.AddProperty, name="add-property"),
-    path("sell-requests/", views.SellRequestList, name="sell-requests"),
+    path("sell-requests/", views.Sell_Request_List, name="sell_request_list"),
     path(
-        "sell-details/<int:sellrequest_id>/",
-        views.SellRequestDetails,
-        name="sell-details",
+        "sell-request/<int:pk>/", views.Sell_Request_Detail, name="sell_request_detail"
     ),
 ]
 
