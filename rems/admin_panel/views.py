@@ -162,6 +162,82 @@ def PropertyList(request):
 
 
 @login_required(login_url=login)
+def UpdateProperty(request, property_id):
+    property = get_object_or_404(Property, id=property_id)
+    if request.method == "POST":
+        property_type = request.POST.get("property-type")
+        property_for = request.POST.get("property-for")
+        flat_number = request.POST.get("flat-number")
+        bedrooms = request.POST.get("bed-number")
+        bathrooms = request.POST.get("bath-number")
+        living_rooms = request.POST.get("living-number")
+        kitchens = request.POST.get("kitchen-number")
+        total_rooms = request.POST.get("total-number")
+        parking = request.POST.get("parking")
+        built_year = request.POST.get("built-year")
+        built_area = request.POST.get("built-area")
+        road_size = request.POST.get("road-size")
+        land_area = request.POST.get("land-area")
+        type = request.POST.get("type")
+        facing_direction = request.POST.get("facing-direction")
+        price = request.POST.get("property-price")
+        price_per_unit = request.POST.get("price-per-unit")
+        description = request.POST.get("description")
+        province = request.POST.get("province")
+        district = request.POST.get("district")
+        zip_code = request.POST.get("zip-code")
+        city = request.POST.get("city")
+        municipality = request.POST.get("municipality")
+        ward_no = request.POST.get("ward-no")
+        tole = request.POST.get("tole")
+        status = request.POST.get("status")
+        featured = request.POST.get("featured")
+        image_front = request.FILES.get("front-image")
+        image_side = request.FILES.get("side-image")
+        image_extra1 = request.FILES.get("extra1-image")
+        image_extra2 = request.FILES.get("extra2-image")
+
+        property = Property(
+            property_type=property_type,
+            property_for=property_for,
+            flat_number=flat_number,
+            bedrooms=bedrooms,
+            bathrooms=bathrooms,
+            living_rooms=living_rooms,
+            kitchens=kitchens,
+            total_rooms=total_rooms,
+            parking=parking,
+            built_year=built_year,
+            built_area=built_area,
+            road_size=road_size,
+            land_area=land_area,
+            type=type,
+            facing_direction=facing_direction,
+            price=price,
+            price_per_unit=price_per_unit,
+            full_description=description,
+            province=province,
+            district=district,
+            zip_code=zip_code,
+            city=city,
+            municipality=municipality,
+            ward_no=ward_no,
+            tole=tole,
+            image_front=image_front,
+            image_side=image_side,
+            image_extra=image_extra1,
+            image_extra2=image_extra2,
+            status=status,
+            featured=featured,
+        )
+        property.save()
+        messages.success(request, f"Property has been updated successfully.")
+        return redirect("update-property")
+    context = {"property": property}
+    return render(request, "admin/listed_property_details.html", context)
+
+
+@login_required(login_url=login)
 def AddProperty(request):
     if request.method == "POST":
         property_type = request.POST.get("property-type")
@@ -217,6 +293,8 @@ def AddProperty(request):
             full_description=description,
             province=province,
             district=district,
+            zip_code=zip_code,
+            city=city,
             municipality=municipality,
             ward_no=ward_no,
             tole=tole,
@@ -237,16 +315,85 @@ def AddProperty(request):
 @login_required(login_url=login)
 def Sell_Request_List(request):
     sell_requests = SellRequest.objects.all()
-    context = {
-        "sell_requests": sell_requests,
-    }
+    context = {"sell_requests": sell_requests}
     return render(request, "admin/sellrequest.html", context)
 
 
 @login_required(login_url=login)
-def Sell_Request_Detail(request, pk):
-    sell_request = get_object_or_404(SellRequest, pk=pk)
-    context = {"sell_request": sell_request}
+def Sell_Request_View(request, sellrequest_id):
+    sellrequest = get_object_or_404(SellRequest, id=sellrequest_id)
+    if request.method == "POST":
+        property_type = request.POST.get("property-type")
+        property_for = request.POST.get("property-for")
+        flat_number = request.POST.get("flat-number")
+        bedrooms = request.POST.get("bed-number")
+        bathrooms = request.POST.get("bath-number")
+        living_rooms = request.POST.get("living-number")
+        kitchens = request.POST.get("kitchen-number")
+        total_rooms = request.POST.get("total-number")
+        parking = request.POST.get("parking")
+        built_year = request.POST.get("built-year")
+        built_area = request.POST.get("built-area")
+        road_size = request.POST.get("road-size")
+        land_area = request.POST.get("land-area")
+        type = request.POST.get("type")
+        facing_direction = request.POST.get("facing-direction")
+        price = request.POST.get("property-price")
+        price_per_unit = request.POST.get("price-per-unit")
+        description = request.POST.get("description")
+        province = request.POST.get("province")
+        district = request.POST.get("district")
+        zip_code = request.POST.get("zip-code")
+        city = request.POST.get("city")
+        municipality = request.POST.get("municipality")
+        ward_no = request.POST.get("ward-no")
+        tole = request.POST.get("tole")
+        status = request.POST.get("status")
+        featured = request.POST.get("featured")
+        image_front = request.FILES.get("front-image")
+        image_side = request.FILES.get("side-image")
+        image_extra1 = request.FILES.get("extra1-image")
+        image_extra2 = request.FILES.get("extra2-image")
+
+        property = Property(
+            property_type=property_type,
+            property_for=property_for,
+            flat_number=flat_number,
+            bedrooms=bedrooms,
+            bathrooms=bathrooms,
+            living_rooms=living_rooms,
+            kitchens=kitchens,
+            total_rooms=total_rooms,
+            parking=parking,
+            built_year=built_year,
+            built_area=built_area,
+            road_size=road_size,
+            land_area=land_area,
+            type=type,
+            facing_direction=facing_direction,
+            price=price,
+            price_per_unit=price_per_unit,
+            full_description=description,
+            province=province,
+            district=district,
+            zip_code=zip_code,
+            city=city,
+            municipality=municipality,
+            ward_no=ward_no,
+            tole=tole,
+            image_front=image_front,
+            image_side=image_side,
+            image_extra=image_extra1,
+            image_extra2=image_extra2,
+            status=status,
+            featured=featured,
+        )
+        property.save()
+        messages.success(
+            request, f"Request approved and Property has been listed successfully."
+        )
+        return redirect("sell_request_list")
+    context = {"sellrequest": sellrequest}
     return render(request, "admin/sellrequest_view.html", context)
 
 

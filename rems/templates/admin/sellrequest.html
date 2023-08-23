@@ -5,6 +5,13 @@
 {% block content %}
 <div class="cardHeader">
     <h2>Sell Requests</h2>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul><br>
+    {% endif %}
     <table id="example" class="display">
         <thead>
             <th>SN</th>
@@ -28,10 +35,10 @@
                 <td>{{req.property_for}}</td>
                 <td>{{req.name}}</td>
                 <td>{{req.phone_number}}</td>
-                <td>
-                    <a href="{% url 'sell_request_detail' sell_request.pk %}" class="btn-update"><i class="fa fa-eye"
+                <th>
+                    <a href="{% url 'sellrequest_view' sellrequest.id %}" class="btn-update"><i class="fa fa-eye"
                             style="color: #ffffff;"></i></a>
-                </td>
+                </th>
             </tr>
             {% endfor %}
         </tbody>

@@ -42,10 +42,17 @@ urlpatterns = [
         name="remove_admin",
     ),
     path("properties/", views.PropertyList, name="properties"),
+    path(
+        "update-property/<int:property_id>/",
+        views.UpdateProperty,
+        name="update-property",
+    ),
     path("add-property/", views.AddProperty, name="add-property"),
     path("sell-requests/", views.Sell_Request_List, name="sell_request_list"),
     path(
-        "sell-request/<int:pk>/", views.Sell_Request_Detail, name="sell_request_detail"
+        "sell-requests/<int:sellrequest_id>/",
+        views.Sell_Request_View,
+        name="sellrequest_view",
     ),
 ]
 

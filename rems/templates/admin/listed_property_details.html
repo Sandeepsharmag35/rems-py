@@ -1,6 +1,6 @@
 {% extends 'admin/dashboard.html' %}
 {% load static %}
-{% block title %}Property Details{% endblock %}
+{% block title %}Add Property{% endblock %}
 {% block extracssjs %}
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 {% endblock %}
@@ -15,7 +15,8 @@
 <div class="insider">
     <div class="row">
         <div class="cardHeader">
-            <form action="" method="post" class="animated-form" enctype="multipart/form-data">
+            <form action="{% url 'update-property' property.id %}" method="post" class="animated-form"
+                enctype="multipart/form-data">
                 {% csrf_token %}
                 <h2>Property Details</h2>
                 {% if messages %}
@@ -25,17 +26,16 @@
                     {% endfor %}
                 </ul><br>
                 {% endif %}
-
-                {% if sell %}
+                {% if property %}
                 <div class="form-group">
                     <div class="left">
                         <label for="property-type">Property Type:</label>
-                        <input type="text" value="{{ sell.property_type }}" id="property-type" name="property-type"
+                        <input type="text" value="{{ property.property_type }}" id="property-type" name="property-type"
                             readonly>
                     </div>
                     <div class="right">
                         <label for="property-for">Property For:</label>
-                        <input type="text" value="{{ sell.property_for }}" id="property-for" name="property-for"
+                        <input type="text" value="{{ property.property_for }}" id="property-for" name="property-for"
                             readonly>
                     </div>
                 </div>
@@ -43,48 +43,51 @@
                     <div class="form-group">
                         <div class="middle">
                             <label for="flat-number">No of Flat:</label>
-                            <input type="text" value="{{ sell.flat_number }}" id="flat-number" name="flat-number"
+                            <input type="text" value="{{ property.flat_number }}" id="flat-number" name="flat-number"
                                 readonly>
                         </div>
                         <div class="middle">
                             <label for="bed-number">Bedroom:</label>
-                            <input type="text" value="{{ sell.bedrooms }}" id="bed-number" name="bed-number" readonly>
+                            <input type="text" value="{{ property.bedrooms }}" id="bed-number" name="bed-number"
+                                readonly>
                         </div>
                         <div class="middle">
                             <label for="bath-number">Bathroom:</label>
-                            <input type="text" value="{{ sell.bathrooms }}" id="bath-number" name="bath-number"
+                            <input type="text" value="{{ property.bathrooms }}" id="bath-number" name="bath-number"
                                 readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="middle">
                             <label for="living-number">Living Room:</label>
-                            <input type="text" value="{{ sell.living_rooms }}" id="living-number" name="living-number"
-                                readonly>
+                            <input type="text" value="{{ property.living_rooms }}" id="living-number"
+                                name="living-number" readonly>
                         </div>
                         <div class="middle">
                             <label for="kitchen-number">Kitchen:</label>
-                            <input type="text" value="{{ sell.kitchens }}" id="kitchen-number" name="kitchen-number"
+                            <input type="text" value="{{ property.kitchens }}" id="kitchen-number" name="kitchen-number"
                                 readonly>
                         </div>
                         <div class="middle">
                             <label for="total-number">Total Rooms:</label>
-                            <input type="text" value="{{ sell.total_rooms }}" id="total-number" name="total-number"
+                            <input type="text" value="{{ property.total_rooms }}" id="total-number" name="total-number"
                                 readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="middle">
                             <label for="parking">Parking</label>
-                            <input type="text" value="{{ sell.parking }}" id="parking" name="parking" readonly>
+                            <input type="text" value="{{ property.parking }}" id="parking" name="parking" readonly>
                         </div>
                         <div class="middle">
                             <label for="built-year">Built Year:</label>
-                            <input type="text" value="{{ sell.built_year }}" id="built-year" name="built-year" readonly>
+                            <input type="text" value="{{ property.built_year }}" id="built-year" name="built-year"
+                                readonly>
                         </div>
                         <div class="middle">
                             <label for="built-area">Built Area:</label>
-                            <input type="text" value="{{ sell.built_area }}" id="built-area" name="built-area" readonly>
+                            <input type="text" value="{{ property.built_area }}" id="built-area" name="built-area"
+                                readonly>
                         </div>
                     </div>
                 </div>
@@ -93,73 +96,74 @@
                     <div class="form-group">
                         <div class="middle">
                             <label for="road-size">Road Size: <span class="required">*</span></label>
-                            <input type="text" value="{{ sell.road_size }}" id="road-size" name="road-size" readonly>
+                            <input type="text" value="{{ property.road_size }}" id="road-size" name="road-size"
+                                readonly>
                         </div>
                         <div class="middle">
                             <label for="land-area">Land Area:</label>
-                            <input type="text" value="{{ sell.land_area }}" id="land-area" name="land-area">
+                            <input type="text" value="{{ property.land_area }}" id="land-area" name="land-area">
                         </div>
                         <div class="middle">
                             <label for="type">Type: <span class="required">*</span></label>
-                            <input type="text" value="{{ sell.type }}" id="type" name="type" readonly>
+                            <input type="text" value="{{ property.type }}" id="type" name="type" readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="middle">
                             <label for="facing-direction">Facing Direction: <span class="required">*</span></label>
-                            <input type="text" value="{{ sell.facing_direction }}" id="facing-direction"
+                            <input type="text" value="{{ property.facing_direction }}" id="facing-direction"
                                 name="facing-direction" readonly>
                         </div>
                         <div class="middle">
                             <label for="property-price">Price:</label>
-                            <input type="text" value="{{ sell.price }}" id="property-price" name="property-price"
+                            <input type="text" value="{{ property.price }}" id="property-price" name="property-price"
                                 oninput="formatNumber(this)" required>
                         </div>
                         <div class="middle">
                             <label for="price-per-unit">Price Per Unit:</label>
-                            <input type="text" value="{{ sell.price_per_unit }}" id="price-per-unit"
+                            <input type="text" value="{{ property.price_per_unit }}" id="price-per-unit"
                                 name="price-per-unit" readonly>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="description">Description:</label>
                         <textarea id="description" name="description" rows="4"
-                            readonly>{{ sell.full_description }}</textarea>
+                            readonly>{{ property.full_description }}</textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="middle">
                         <label for="province">Province: </label>
-                        <input type="text" value="{{ sell.province }}" id="province" name="province" readonly>
+                        <input type="text" value="{{ property.province }}" id="province" name="province" readonly>
                     </div>
                     <div class="middle">
                         <label for="district">District: </label>
-                        <input type="text" value="{{ sell.district }}" id="district" name="district" readonly>
+                        <input type="text" value="{{ property.district }}" id="district" name="district" readonly>
                     </div>
                     <div class="middle">
                         <label for="zip-code">Zip Code: </label>
-                        <input type="text" value="{{ sell.zip_code }}" id="zip-code" name="zip-code" readonly>
+                        <input type="text" value="{{ property.zip_code }}" id="zip-code" name="zip-code" readonly>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="left">
                         <label for="city">City: </label>
-                        <input type="text" value="{{ sell.city }}" id="city" name="city" readonly>
+                        <input type="text" value="{{ property.city }}" id="city" name="city" readonly>
                     </div>
                     <div class="right">
                         <label for="municipality">Municipality: </label>
-                        <input type="text" value="{{ sell.municipality }}" id="municipality" name="municipality"
+                        <input type="text" value="{{ property.municipality }}" id="municipality" name="municipality"
                             readonly>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="left">
                         <label for="ward-no">Ward No: </label>
-                        <input type="text" value="{{ sell.ward_no }}" id="ward-no" name="ward-no" readonly>
+                        <input type="text" value="{{ property.ward_no }}" id="ward-no" name="ward-no" readonly>
                     </div>
                     <div class="right">
                         <label for="tole">Tole:</label>
-                        <input type="text" value="{{ sell.tole }}" id="tole" name="tole" readonly>
+                        <input type="text" value="{{ property.tole }}" id="tole" name="tole" readonly>
                     </div>
                 </div>
                 <div class="form-group">
@@ -167,70 +171,57 @@
                     <input type="text" value="Available" id="status" name="status" readonly>
                 </div>
                 <div class="form-group">
-                    <h2>Document</h2>
-                    <div class="middle">
-                        <label for="doc-image">Document Preview:</label>
-                        <a href="{{ sell.doc_image.url }}" target="_blank">
-                            <img src="{{ sell.doc_image.url }}" width="200px" height="200px">
-                        </a>
+                    <label for="featured">Featured: </label>
+                    <input type="checkbox" name="featured" id="featured" style="width: 20px; height: 20px;">
+                </div>
+                <div class="form-group"></div>
+                <h2>Upload Images</h2>
+                <div class="form-group">
+                    <label for="front-image">Front Image: <span class="required">*</span></label>
+                    <div class="file-upload">
+                        <div class="file-select">
+                            <div class="file-select-button" id="fileName">Choose File</div>
+                            <div class="file-select-name" id="noFile">No file chosen...</div>
+                            <input type="file" name="front-image" id="front-image" required>
+                            <div id="fileError" class="error-message"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <h2>Property Images</h2>
-                    <div class="middle">
-                        {% if sell.image_front %}
-                        <div class="form-group">
-                            <label for="front-image">Front Image: <span class="required">*</span></label>
-                            <a href="{{ sell.image_front.url }}" target="_blank">
-                                <img src="{{ sell.image_front.url }}" width="200px" height="200px">
-                            </a>
+                    <label for="side-image">Side Image: <span class="required">*</span></label>
+                    <div class="file-upload">
+                        <div class="file-select">
+                            <div class="file-select-button" id="fileName">Choose File</div>
+                            <div class="file-select-name" id="noFile">No file chosen...</div>
+                            <input type="file" name="side-image" id="side-image" required>
+                            <div id="fileError" class="error-message"></div>
                         </div>
                     </div>
-                    {% endif %}
-                    <div class="middle">
-                        {% if sell.image_side %}
-                        <div class="form-group">
-                            <label for="side-image">Side Image: <span class="required">*</span></label>
-                            <a href="{{ sell.image_side.url }}" target="_blank">
-                                <img src="{{ sell.image_side.url }}" width="200px" height="200px">
-                            </a>
+                </div>
+                <div class="form-group">
+                    <label for="extra1-image">LivingRoom/Bedroom Image:</label>
+                    <div class="file-upload">
+                        <div class="file-select">
+                            <div class="file-select-button" id="fileName">Choose File</div>
+                            <div class="file-select-name" id="noFile">No file chosen...</div>
+                            <input type="file" name="extra1-image" id="extra1-image">
+                            <div id="fileError" class="error-message"></div>
                         </div>
                     </div>
-                    {% endif %}
-                    <div class="middle">
-                        {% if sell.image_extra %}
-                        <div class="form-group">
-                            <label for="extra1-image">LivingRoom/Bedroom Image:</label>
-                            <a href="{{ sell.image_extra.url }}" target="_blank">
-                                <img src="{{ sell.image_extra.url }}" width="200px" height="200px">
-                            </a>
+                </div>
+                <div class="form-group">
+                    <label for="extra2-image">Kitchen/Other Image:</label>
+                    <div class="file-upload">
+                        <div class="file-select">
+                            <div class="file-select-button" id="fileName">Choose File</div>
+                            <div class="file-select-name" id="noFile">No file chosen...</div>
+                            <input type="file" name="extra2-image" id="extra2-image">
+                            <div id="fileError" class="error-message"></div>
                         </div>
                     </div>
-                    {% endif %}
-                    <div class="middle">
-                        {% if sell.image_extra2 %}
-                        <div class="form-group">
-                            <label for="extra2-image">Kitchen/Other Image:</label>
-                            <a href="{{ sell.image_extra2.url }}" target="_blank">
-                                <img src="{{ sell.image_extra2.url }}" width="200px" height="200px">
-                            </a>
-                        </div>
-                    </div>
-                    {% endif %}
                 </div>
                 {% endif %}
-                <div class="form-group">
-                    <label for="featured" style="display: inline-block;">Set as featured: </label>
-                    <input type="checkbox" name="featured" id="featured" style="padding: 200px;">
-                </div>
-                <div class="form-group" style="display: inline-flex;">
-                    <div class="left">
-                        <button type="submit" class="btn">Approve</button>
-                    </div>
-                    <div class="right" style="display: inline-flex;">
-                        <a href=" #" class="btn-delete">Decline</a>
-                    </div>
-                </div>
+                <button type="submit">Update</button>
             </form>
         </div>
     </div>

@@ -33,7 +33,8 @@
                 <td>{{property.city}}</td>
                 <td>{{property.status}}</td>
                 <td>{{property.property_for}}</td>
-                <th><span class="btn-update"><i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></span>
+                <th><a href="{% url 'update-property' property.id %}" class="btn-update"><i
+                            class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
                 </th>
                 <th><span class="btn-delete"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></span></th>
             </tr>
