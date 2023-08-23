@@ -5,11 +5,13 @@
 {% block content %}
 <div class="cardHeader">
     <h2>Users</h2>
+    <a href="{% url 'add_user' %}" class="btn-add">
+        <i class="fa-solid fa-plus"></i>Add User</a>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-            {% endfor %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
     </ul>
     {% endif %}
     <table id="example" class="display">

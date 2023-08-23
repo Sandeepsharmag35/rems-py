@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from app.models import CustomerMessage, Property, SellRequest
@@ -81,6 +83,51 @@ def CustomersProfile(request, user_id):
     )
     context = {"profile": profile}
     return render(request, "admin/user_profile.html", context)
+
+
+@login_required(login_url=login)
+def AddUser(request):
+    if request.method == "POST":
+        email = request.POST["user_email"]
+        uname = request.POST["username"]
+        pass1 = request.POST["user_password"]
+
+        # Password Validation Process
+        try:
+            validate_password(pass1)
+        except ValidationError as error:
+            error = "Your password must contain at least one special character (~!@#$%^&*()_+}{\":?><,./;') and one number."
+            messages.error(request, f"'{error}'")
+            return render(request, "admin/add_user.html")
+        # End Of Validation
+
+        # Username and Email Validation
+        if User.objects.filter(username=uname).exists():
+            error_message = "Username already taken, try another."
+            messages.error(request, f"'{error_message}'")
+            return render(request, "admin/add_user.html")
+
+        # Checking if email already exists
+        if User.objects.filter(email=email).exists():
+            error_message = (
+                "Entered Email is already associated with other account, try another"
+            )
+            messages.error(request, f"'{error_message}'")
+            return render(request, "admin/add_user.html")
+        # End of Username and Email Validation
+
+        pass2 = request.POST["user_cpassword"]
+
+        if pass1 != pass2:
+            error_message = "Your password and confirm password didn't match!"
+            return render(request, "admin/add_user.html")
+
+        else:
+            myuser = User.objects.create_user(uname, email, pass1)
+            myuser.save()
+            messages.success(request, f"User with @'{uname}' Created Sucessfully!")
+            return redirect("users")
+    return render(request, "admin/users.html")
 
 
 @login_required(login_url=login)

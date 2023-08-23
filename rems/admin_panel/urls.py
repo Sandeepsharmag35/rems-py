@@ -15,6 +15,7 @@ urlpatterns = [
     path("dashboard/", views.AdminDashboard, name="admin_dashboard"),
     path("messages/", views.customerMessage, name="messages"),
     path("users/", views.Customers, name="users"),
+    path("add-user/", views.AddUser, name="add_user"),
     path(
         "user-profile/<int:user_id>/",
         views.CustomersProfile,
