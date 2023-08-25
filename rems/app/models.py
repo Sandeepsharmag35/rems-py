@@ -74,9 +74,7 @@ class Property(models.Model):
     ward_no = models.CharField(max_length=5, blank=True)
     tole = models.CharField(max_length=30, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="")
-    featured = models.CharField(
-        max_length=3, choices=FEATURED_CHOICES, default="Select"
-    )
+    featured = models.BooleanField(default=False)
 
     image = models.ImageField(
         upload_to=image_validations,

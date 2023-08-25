@@ -127,7 +127,7 @@ def AddUser(request):
             myuser.save()
             messages.success(request, f"User with @'{uname}' Created Sucessfully!")
             return redirect("users")
-    return render(request, "admin/users.html")
+    return render(request, "admin/add_user.html")
 
 
 @login_required(login_url=login)
@@ -396,13 +396,16 @@ def Sell_Request_View(request, sellrequest_id):
         ward_no = request.POST.get("ward-no")
         tole = request.POST.get("tole")
         status = request.POST.get("status")
-        featured = request.POST.get("featured")
+        featured = request.POST.get("featured", False)
+
+        featured = featured == "on"
+
         image_front = request.FILES.get("front-image")
         image_side = request.FILES.get("side-image")
         image_extra1 = request.FILES.get("extra1-image")
         image_extra2 = request.FILES.get("extra2-image")
 
-        property = Property(
+        property = Property.objects.create(
             property_type=property_type,
             property_for=property_for,
             flat_number=flat_number,
@@ -420,7 +423,7 @@ def Sell_Request_View(request, sellrequest_id):
             facing_direction=facing_direction,
             price=price,
             price_per_unit=price_per_unit,
-            full_description=description,
+            description=description,
             province=province,
             district=district,
             zip_code=zip_code,
@@ -428,14 +431,13 @@ def Sell_Request_View(request, sellrequest_id):
             municipality=municipality,
             ward_no=ward_no,
             tole=tole,
-            image_front=image_front,
+            image=image_front,
             image_side=image_side,
             image_extra=image_extra1,
             image_extra2=image_extra2,
             status=status,
             featured=featured,
         )
-        property.save()
         messages.success(
             request, f"Request approved and Property has been listed successfully."
         )

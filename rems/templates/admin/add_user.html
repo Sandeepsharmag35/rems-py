@@ -1,4 +1,5 @@
 {% extends 'admin/dashboard.html' %}
+{% load static %}
 {% block title %}Add User{% endblock %}
 {% block extracssjs %} {% endblock %}
 {% block content %}
@@ -12,41 +13,38 @@
 <div class="insider">
     <div class="row">
         <div class="cardHeader">
-            <form method="POST" action="{% 'add_user' %}" class="animated-form" enctype="multipart/form-data">
+            <h2>Add User</h2>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form method="POST" action="{% url 'add_user' %}" class="animated-form" enctype="multipart/form-data">
                 {% csrf_token %}
-                <h2>Add User</h2>
-                {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
                 <div class="profile-form">
-                    <div class="left-col">
+                    <div class="form-group">
                         <label for="user_email">Email:</label>
                         <input type="email" name="user_email" id="user_email">
                     </div>
-                    <div class="left-col">
+                    <div class="form-group">
                         <label for="username">Username:</label>
                         <input type="text" name="username" id="username">
                     </div>
 
-                    <div class="left-col">
+                    <div class="form-group">
                         <label for="user_password">Password:</label>
-                        <input type="tel" name="user_password" id="user_password">
-                    </div>
-                    <div class="left-col">
-                        <label for="user_cpassword">Confirm Password:</label>
-                        <input type="text" name="user_cpassword" id="user_cpassword">
+                        <input type="password" name="user_password" id="user_password">
                     </div>
                     <div class="form-group">
-                        <div class="left">
-                            <input type="submit" class="btn-update" value="Add">
-                        </div>
+                        <label for="user_cpassword">Confirm Password:</label>
+                        <input type="password" name="user_cpassword" id="user_cpassword">
                     </div>
                 </div>
+                <button type="submit">Add</button>
             </form>
         </div>
     </div>
 </div>
+{% endblock %}

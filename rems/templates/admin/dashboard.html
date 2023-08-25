@@ -213,7 +213,7 @@
                                 <td>{{ p.property_title }}</td>
                                 <td>{{ p.property_type }}</td>
                                 <td>{{ p.property_for }}</td>
-                                <td><a href="#" class="status pending">Pending</a></td>
+                                <td><a href="{% url 'sell_request_list' %}" class="status pending">Pending</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>

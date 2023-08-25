@@ -35,10 +35,10 @@
                 <td>{{req.property_for}}</td>
                 <td>{{req.name}}</td>
                 <td>{{req.phone_number}}</td>
-                <th>
-                    <a href="{% url 'sellrequest_view' sellrequest.id %}" class="btn-update"><i class="fa fa-eye"
+                <td>
+                    <a href="{% url 'sellrequest_view' sellrequest.id %}"><i class="fa fa-eye"
                             style="color: #ffffff;"></i></a>
-                </th>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
