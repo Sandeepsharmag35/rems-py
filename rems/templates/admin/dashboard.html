@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Dashboard{% endblock %}</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="{% static 'assets/admin/css/dashboard_style.css' %}">
     <link rel="stylesheet" href="{% static 'datatable/datatables.css' %}">
@@ -87,16 +88,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">Password</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
+                    <a href="{% url 'setting' %}">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
@@ -135,7 +127,11 @@
                 </div>
 
                 <div class="user">
-                    <img src="{% static 'assets/admin/imgs/customer01.jpg' %}" alt="Admin">
+                    {% if user.profile.profile_picture %}
+                    <img src="{{user.profile.profile_picture.url}}" alt="Admin Profile Picture">
+                    {% else %}
+                    <img src="{% static 'assets/admin/imgs/dummy-profile.jpg' %}" alt="Admin Profile Picture">
+                    {% endif %}
                 </div>
             </div>
             <div class="inside-blocks">
@@ -178,16 +174,16 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <!-- <div class="card">
                     <div>
                         <div class="numbers">$7,842</div>
                         <div class="cardName">Earning</div>
-                    </div>
+                    </div> 
 
-                    <div class="iconBx">
-                        <ion-icon name="cash-outline"></ion-icon>
-                    </div>
+                <div class="iconBx">
+                    <ion-icon name="cash-outline"></ion-icon>
                 </div>
+            </div> -->
             </div>
 
             <!-- ================ Order Details List ================= -->

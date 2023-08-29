@@ -657,7 +657,7 @@ input[type="password"] {
 }
 
 .profile-form>.form-group>.left>[type="submit"]:hover,
-.right-col a:hover {
+.right-col label:hover {
   background-color: #00376e;
   box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
   transform: translateY(-0.25em);
@@ -674,6 +674,25 @@ input[type="password"] {
   transform: translateY(-0.25em);
 }
 
+/* ====================== View Images of Property  ========================== */
+
+/* #profile-picture {
+  display: none;
+}
+
+.profile-form .right-col img {
+  border: 2px solid black;
+}
+
+.profile-form>.right-col>label {
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 60px;
+  padding: 9px;
+  background-color: #0a83fc;
+  color: white;
+  border-radius: 5px;
+} */
 
 /* ====================== Choose file CSS ========================== */
 
@@ -789,6 +808,107 @@ input[type="password"] {
   display: inline-block;
   padding: 0 10px;
 }
+
+/* ====================== Popup Modal ========================== */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 200px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  min-height: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #2a2185;
+}
+
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.popup .close:hover {
+  color: #d80606;
+}
+
+.popup .content {
+  max-height: 40%;
+  overflow: auto;
+}
+
+.popup .content input[type="button"],
+.popup .content input[type="submit"] {
+  color: white;
+  background-color: #0a83fc;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0px 10px 0px;
+}
+
+.popup .content input[type="button"]:hover,
+.popup .content input[type="submit"]:hover {
+  background-color: #00376e;
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
+
+.popup .content input[type="text"] {
+  margin-top: 10px;
+}
+
+.popup .content .left {
+  float: left;
+  width: 70%
+}
+
+.popup .content .right {
+  float: right;
+  width: 25%;
+}
+
+
+@media screen and (max-width: 700px) {
+  .box {
+    width: 70%;
+  }
+
+  .popup {
+    width: 70%;
+  }
+}
+
+
+
+
+
 
 
 /* ====================== Responsive Design ========================== */

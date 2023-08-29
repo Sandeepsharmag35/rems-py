@@ -55,6 +55,14 @@ urlpatterns = [
         views.Sell_Request_View,
         name="sellrequest_view",
     ),
+    path(
+        "delete-sellrequest/<int:sellrequest_id>/",
+        views.SellRequestDelete,
+        name="delete-sellrequest",
+    ),
+    path("setting/", views.Settings, name="setting"),
+    path("update-profile/", views.Update_OwnProfile, name="update-profile"),
+    path("update-password/", views.Update_Password, name="update-password"),
 ]
 
 

@@ -12,7 +12,7 @@
         {% endfor %}
     </ul><br>
     {% endif %}
-    <table id="example" class="display">
+    <table id="example" class="display" style="overflow-x: scroll;">
         <thead>
             <th>SN</th>
             <th>Image</th>
@@ -35,10 +35,12 @@
                 <td>{{req.property_for}}</td>
                 <td>{{req.name}}</td>
                 <td>{{req.phone_number}}</td>
-                <td>
-                    <a href="{% url 'sellrequest_view' sellrequest.id %}"><i class="fa fa-eye"
-                            style="color: #ffffff;"></i></a>
+                <td><a href="#" class="btn-update"><i class="fa fa-eye" style="color: #ffffff;"></i></a>
                 </td>
+                <td>
+                    <a href="#" class="btn-delete"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
+                </td></a>
+
             </tr>
             {% endfor %}
         </tbody>

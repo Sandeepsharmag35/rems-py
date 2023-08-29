@@ -1,5 +1,5 @@
 {% extends 'admin/dashboard.html' %}
-{% block title %}{{profile.user}}'s Profile{% endblock %}
+{% block title %}Setting{% endblock %}
 {% block extracssjs %} {% endblock %}
 {% block content %}
 <div class="go-back">
@@ -12,8 +12,7 @@
 <div class="insider">
     <div class="row">
         <div class="cardHeader">
-            <form method="POST" action="{% url 'update_user' profile.id %}" class="animated-form"
-                enctype="multipart/form-data">
+            <form method="POST" action="{% url 'update-profile' %}" class="animated-form" enctype="multipart/form-data">
                 {% csrf_token %}
                 <h2>{{profile.user}}'s Profile</h2>
                 {% if messages %}
@@ -58,39 +57,11 @@
                             <input type="submit" class="btn-update" value="Update">
                         </div>
                         <div class="right">
-                            <a href="{% url 'delete_user' profile.id %}" class="btn-delete">Delete</a>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="right-col">
-                            <a href="#popup1" class="btn" style="padding: 15px;">Change Password</a>
+                            <a href="{% url 'update-password' %}" class="btn-delete">Change Password</a>
                         </div>
                     </div>
                 </div>
             </form>
-            <div id="popup1" class="overlay">
-                <div class="popup">
-                    <h2>Change password:</h2>
-                    <a class="close" href="#">&times;</a>
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <div class="content">
-                            <label for="new-password"><strong>New Password:</strong></label>
-                            <input type="password" name="new-password" id="new-password" required>
-                            <input type="submit" value="Update Password">
-                        </div>
-                        <div class="content">
-                            <div class="left">
-                                <input type="text" id="generated_password" readonly>
-                            </div>
-                            <div class="right">
-                                <input type="button" id="copy" value="Copy">
-                            </div>
-                            <input type="button" id="generate_password" value="Generate Strong Password">
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -107,44 +78,6 @@
         };
 
         reader.readAsDataURL(file);
-    });
-</script>
-<script>
-    document.getElementById("generate_password").addEventListener("click", function () {
-        const generatedPassword = generatePassword();
-        document.getElementById("generated_password").value = generatedPassword;
-    });
-
-    function generatePassword() {
-        const length = 12;
-        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-        let password = "";
-
-        for (let i = 0; i < length; i++) {
-            const randomIndex = Math.floor(Math.random() * charset.length);
-            password += charset.charAt(randomIndex);
-        }
-
-        return password;
-    }
-</script>
-<script>
-    const copyButton = document.getElementById("copy");
-    const generatedPassword = document.getElementById("generated_password");
-
-    copyButton.addEventListener("click", function () {
-        // Select the text inside the input field
-        generatedPassword.select();
-        generatedPassword.setSelectionRange(0, 99999); // For mobile devices
-
-        // Copy the selected text to the clipboard
-        document.execCommand("copy");
-
-        // Change button text temporarily to indicate copied
-        copyButton.value = "Copied!";
-        setTimeout(function () {
-            copyButton.value = "Copy";
-        }, 2000); // Reset after 2 seconds
     });
 </script>
 {% endblock %}

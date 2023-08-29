@@ -278,14 +278,15 @@
                 <h2>Upload Images</h2>
                 <div class="form-group">
                     <label for="front-image">Front Image: <span class="required">*</span></label>
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName">Choose File</div>
-                            <div class="file-select-name" id="noFile">No file chosen...</div>
-                            <input type="file" name="front-image" id="front-image" required>
-                            <div id="fileError" class="error-message"></div>
-                        </div>
-                    </div>
+                    {% if profile.profile_picture %}
+                    <img src="{{profile.profile_picture.url}}" width="200px" height="200px" id="profile-pic">
+                    {% else %}
+                    <img src="../../static/assets/admin/imgs/dummy-profile.jpg" width="200px" height="200px"
+                        id="profile-pic" />
+                    {% endif %}
+                    <input type="file" name="profile-picture" id="profile-picture"
+                        accept="image/png, image/jpg, image/jpeg">
+                    <label for="profile-picture">Change</label>
                 </div>
                 <div class="form-group">
                     <label for="side-image">Side Image: <span class="required">*</span></label>
@@ -344,5 +345,20 @@
         }
     });
 
+</script>
+<script>
+    const profilePicInput = document.getElementById('profile-picture');
+    const profilePicPreview = document.getElementById('profile-pic');
+
+    profilePicInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            profilePicPreview.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+    });
 </script>
 {% endblock %}

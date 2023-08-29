@@ -36,11 +36,6 @@ class Property(models.Model):
         ("Renter", "Renter"),
     ]
 
-    FEATURED_CHOICES = [
-        ("Y", "Yes"),
-        ("N", "No"),
-    ]
-
     property_type = models.CharField(
         max_length=100, choices=TYPE_CHOICES, default="select"
     )
@@ -78,7 +73,7 @@ class Property(models.Model):
 
     image = models.ImageField(
         upload_to=image_validations,
-        blank=True,
+        blank=False,
     )
     image_side = models.ImageField(
         upload_to=image_validations,
@@ -114,7 +109,7 @@ class SellRequest(models.Model):
         ("House", "House"),
         ("Land", "Land"),
         ("Apartment", "Apartment"),
-        ("Commercial Property", "Commercial Property"),
+        ("Commercial", "Commercial"),
     ]
 
     FOR_CHOICES = [
@@ -148,6 +143,8 @@ class SellRequest(models.Model):
     # location
     province = models.CharField(max_length=15, blank=True)
     district = models.CharField(max_length=20, blank=True)
+    city = models.CharField(max_length=50, blank=True)
+    zip_code = models.CharField(max_length=20, blank=True)
     municipality = models.CharField(max_length=20, blank=True)
     ward_no = models.CharField(max_length=5, blank=True)
     tole = models.CharField(max_length=30, blank=True)

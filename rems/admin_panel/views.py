@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from app.models import CustomerMessage, Property, SellRequest
 from account.models import Profile
 from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 
 # Create your views here.
 
@@ -70,7 +71,7 @@ def Delete_CustomerMessage(request, msg_id):
 
 @login_required(login_url=login)
 def Customers(request):
-    users = User.objects.all()
+    users = User.objects.filter(is_superuser=False)
     context = {"users": users}
     return render(request, "admin/users.html", context)
 
@@ -397,57 +398,166 @@ def Sell_Request_View(request, sellrequest_id):
         tole = request.POST.get("tole")
         status = request.POST.get("status")
         featured = request.POST.get("featured", False)
-
         featured = featured == "on"
 
-        image_front = request.FILES.get("front-image")
-        image_side = request.FILES.get("side-image")
-        image_extra1 = request.FILES.get("extra1-image")
-        image_extra2 = request.FILES.get("extra2-image")
+        # image_front = request.FILES.get("front-image")
+        # image_side = request.FILES.get("side-image")
+        # image_extra1 = request.FILES.get("extra1-image")
+        # image_extra2 = request.FILES.get("extra2-image")
 
-        property = Property.objects.create(
-            property_type=property_type,
-            property_for=property_for,
-            flat_number=flat_number,
-            bedrooms=bedrooms,
-            bathrooms=bathrooms,
-            living_rooms=living_rooms,
-            kitchens=kitchens,
-            total_rooms=total_rooms,
-            parking=parking,
-            built_year=built_year,
-            built_area=built_area,
-            road_size=road_size,
-            land_area=land_area,
-            type=type,
-            facing_direction=facing_direction,
-            price=price,
-            price_per_unit=price_per_unit,
-            description=description,
-            province=province,
-            district=district,
-            zip_code=zip_code,
-            city=city,
-            municipality=municipality,
-            ward_no=ward_no,
-            tole=tole,
-            image=image_front,
-            image_side=image_side,
-            image_extra=image_extra1,
-            image_extra2=image_extra2,
-            status=status,
-            featured=featured,
-        )
-        messages.success(
-            request, f"Request approved and Property has been listed successfully."
-        )
+        image_front = sellrequest.image_front
+        image_side = sellrequest.image_side
+        image_extra = sellrequest.image_extra
+        image_extra2 = sellrequest.image_extra2
+
+        if sellrequest.property_type == "Land":
+            property = Property.objects.create(
+                property_type=property_type,
+                property_for=property_for,
+                road_size=road_size,
+                land_area=land_area,
+                type=type,
+                facing_direction=facing_direction,
+                price=price,
+                price_per_unit=price_per_unit,
+                description=description,
+                province=province,
+                district=district,
+                zip_code=zip_code,
+                city=city,
+                municipality=municipality,
+                ward_no=ward_no,
+                tole=tole,
+                image=image_front,
+                image_side=image_side,
+                image_extra=image_extra,
+                image_extra2=image_extra2,
+                status=status,
+                featured=featured,
+            )
+            messages.success(
+                request, f"Request approved and Property has been listed successfully."
+            )
+        else:
+            property = Property.objects.create(
+                property_type=property_type,
+                property_for=property_for,
+                flat_number=flat_number,
+                bedrooms=bedrooms,
+                bathrooms=bathrooms,
+                living_rooms=living_rooms,
+                kitchens=kitchens,
+                total_rooms=total_rooms,
+                parking=parking,
+                built_year=built_year,
+                built_area=built_area,
+                road_size=road_size,
+                land_area=land_area,
+                type=type,
+                facing_direction=facing_direction,
+                price=price,
+                price_per_unit=price_per_unit,
+                description=description,
+                province=province,
+                district=district,
+                zip_code=zip_code,
+                city=city,
+                municipality=municipality,
+                ward_no=ward_no,
+                tole=tole,
+                image=image_front,
+                image_side=image_side,
+                image_extra=image_extra,
+                image_extra2=image_extra2,
+                status=status,
+                featured=featured,
+            )
+            messages.success(
+                request, f"Request approved and Property has been listed successfully."
+            )
+        sellrequest.delete()
         return redirect("sell_request_list")
+
     context = {"sellrequest": sellrequest}
     return render(request, "admin/sellrequest_view.html", context)
 
 
-# @login_required(login_url=login)
-# def SellRequestDelete(request, sellrequest_id):
-#     sellrequest = get_object_or_404(SellRequest, id=sellrequest_id)
-#     sellrequest.delete()
-#     return render(request, "admin/sellrequest.html")
+@login_required(login_url=login)
+def SellRequestDelete(request, sellrequest_id):
+    sellrequest = get_object_or_404(SellRequest, id=sellrequest_id)
+    sellrequest.delete()
+    messages.success(request, f"Sell Request deleted successfully.")
+    return render(request, "admin/sellrequest.html")
+
+
+@login_required(login_url=login)
+def Settings(request):
+    user = request.user
+    profile, created = Profile.objects.get_or_create(
+        user=user, defaults={"fullname": "", "phone_number": "", "email": user.email}
+    )
+    context = {"profile": profile}
+    return render(request, "admin/setting.html", context)
+
+
+@login_required(login_url=login)
+def Update_OwnProfile(request):
+    user = request.user
+    profile = user.profile
+
+    if request.method == "POST":
+        full_name = request.POST.get("full-name")
+        email = request.POST.get("email")
+        phone_number = request.POST.get("phone")
+        profile_picture = request.FILES.get("profile-picture")
+
+        # Update the profile
+        profile.fullname = full_name
+        profile.email = email
+        profile.phone_number = phone_number
+        if profile_picture:
+            profile.profile_picture = profile_picture
+
+        profile.save()
+        messages.success(
+            request, f"The user @'{user}''s profile has been updated successfully."
+        )
+
+        return redirect("setting")
+    context = {"profile": profile}
+    return render(request, "admin/setting.html", context)
+
+
+@login_required(login_url=login)
+def Update_Password(request):
+    if request.method == "POST":
+        old_password = request.POST.get("old-password")
+        new_password = request.POST.get("new-password")
+        confirm_password = request.POST.get("confirm-password")
+
+        try:
+            validate_password(new_password)
+        except ValidationError as error:
+            error = (
+                "Your password must contain at least one special character (~!@#$%^&*()_+}{\":?><,./;') and one number.",
+            )
+            messages.error(request, f"'{error}'")
+            return render(request, "admin/update_password.html")
+
+        if not request.user.check_password(old_password):
+            messages.error(request, "Your old password is incorrect.")
+        elif new_password != confirm_password:
+            messages.error(
+                request, "The new password and confirmation password do not match."
+            )
+        else:
+            user = request.user
+            user.set_password(new_password)
+            user.save()
+            update_session_auth_hash(
+                request, user
+            )  # Update the session to prevent reauthentication
+            messages.success(request, "Your password has been successfully changed.")
+            return render(request, "admin/update_password.html")
+
+    return render(request, "admin/update_password.html")

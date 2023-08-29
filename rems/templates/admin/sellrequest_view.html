@@ -40,6 +40,7 @@
                             readonly>
                     </div>
                 </div>
+                {% if sellrequest.property_type != 'Land' %}
                 <div id="house-form">
                     <div class="form-group">
                         <div class="middle">
@@ -92,6 +93,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 <div class="form-group"></div>
                 <div id="land-form">
                     <div class="form-group">
@@ -177,51 +179,55 @@
                         <label for="doc-image">Document Preview:</label>
                         <a href="{{ sellrequest.doc_image.url }}" target="_blank">
                             <img src="{{ sellrequest.doc_image.url }}" width="200px" height="200px">
+
                         </a>
                     </div>
                 </div>
                 <div class="form-group">
                     <h2>Property Images</h2>
+                    {% if sellrequest.image_front %}
                     <div class="middle">
-                        {% if sellrequest.image_front %}
                         <div class="form-group">
-                            <label for="front-image">Front Image: <span class="required">*</span></label>
+                            <label for="front-image">Front Image:</label>
                             <a href="{{ sellrequest.image_front.url }}" target="_blank">
-                                <img src="{{ sellrequest.image_front.url }}" width="200px" height="200px"
-                                    name="front-image" id="front-image">
+                                <input type="image" src="{{ sellrequest.image_front.url }}" alt="Property Image"
+                                    name="front-image" width="230px" height="200px" />
                             </a>
                         </div>
                     </div>
                     {% endif %}
+                    {% if sellrequest.image_side %}
                     <div class="middle">
-                        {% if sellrequest.image_side %}
                         <div class="form-group">
-                            <label for="side-image">Side Image: <span class="required">*</span></label>
+                            <label for="side-image">Side Image:</label>
                             <a href="{{ sellrequest.image_side.url }}" target="_blank">
-                                <img src="{{ sellrequest.image_side.url }}" width="200px" height="200px"
-                                    name="side-image" id="side-image">
+                                <img src="{{ sellrequest.image_side.url }}" width="230px" height="200px">
+                                <input type="file" value="{{ sellrequest.image_front.url }}" name="side-image"
+                                    style="display: none;">
                             </a>
                         </div>
                     </div>
                     {% endif %}
+                    {% if sellrequest.image_extra %}
                     <div class="middle">
-                        {% if sellrequest.image_extra %}
                         <div class="form-group">
                             <label for="extra1-image">LivingRoom/Bedroom Image:</label>
                             <a href="{{ sellrequest.image_extra.url }}" target="_blank">
-                                <img src="{{ sellrequest.image_extra.url }}" width="200px" height="200px"
-                                    name="extra1-image" id="extra1-image">
+                                <img src="{{ sellrequest.image_extra.url }}" width="230px" height="200px">
+                                <input type="file" value="{{ sellrequest.image_extra.url }}" name="extra1-image"
+                                    style="display: none;">
                             </a>
                         </div>
                     </div>
                     {% endif %}
+                    {% if sellrequest.image_extra2 %}
                     <div class="middle">
-                        {% if sellrequest.image_extra2 %}
                         <div class="form-group">
                             <label for="extra2-image">Kitchen/Other Image:</label>
                             <a href="{{ sellrequest.image_extra2.url }}" target="_blank">
-                                <img src="{{ sellrequest.image_extra2.url }}" width="200px" height="200px"
-                                    name="extra2-image" id="extra2-image">
+                                <img src="{{ sellrequest.image_extra2.url }}" width="230px" height="200px">
+                                <input type="file" value="{{ sellrequest.image_extra2.url }}" name="extra2-image"
+                                    style="display: none;">
                             </a>
                         </div>
                     </div>
@@ -244,24 +250,4 @@
         </div>
     </div>
 </div>
-<script>
-    // getting references to the form and the two divs containing the fields
-    const form = document.querySelector('form');
-    const houseForm = document.getElementById('house-form');
-    const landForm = document.getElementById('land-form');
-
-    // add an event listener to the select element to show/hide the appropriate form fields
-    const select = document.getElementById('property-type');
-    select.addEventListener('change', (event) => {
-        if (event.target.value === 'Land') {
-            houseForm.style.display = 'none';
-            landForm.style.display = 'block';
-        }
-        else if (event.target.value === 'House' || 'Flat' || 'Apartment' || 'Commercial Property') {
-            houseForm.style.display = 'block';
-            landForm.style.display = 'block';
-        }
-    });
-
-</script>
 {% endblock %}
