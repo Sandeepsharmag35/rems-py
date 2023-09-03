@@ -243,7 +243,7 @@
                         <button type="submit" class="btn">Approve</button>
                     </div>
                     <div class="right" style="display: inline-flex;">
-                        <a href=" #" class="btn-delete">Decline</a>
+                        <a href="{% url 'delete-sellrequest' sellrequest.id %}" class="btn-delete">Decline</a>
                     </div>
                 </div>
             </form>

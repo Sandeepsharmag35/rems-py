@@ -8,6 +8,8 @@ from app.models import CustomerMessage, Property, SellRequest
 from account.models import Profile
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 
@@ -387,6 +389,9 @@ def Sell_Request_List(request):
 @login_required(login_url=login)
 def Sell_Request_View(request, sellrequest_id):
     sellrequest = get_object_or_404(SellRequest, id=sellrequest_id)
+    client_name = sellrequest.name
+    client_email = sellrequest.email
+
     if request.method == "POST":
         property_type = request.POST.get("property-type")
         property_for = request.POST.get("property-for")
@@ -492,6 +497,22 @@ def Sell_Request_View(request, sellrequest_id):
             messages.success(
                 request, f"Request approved and Property has been listed successfully."
             )
+
+        # forwarding mail about the status
+        subject = "Your Request Has Been Approved."
+        message = f"Hello {client_name},\nYour sell request for {property_type} on {property_for} has been approved and listed sucessfully! \n\n\n Regards,\n RealEstate Nawalpur"
+        sender = settings.EMAIL_HOST_USER
+
+        if subject and message and sender:
+            # Send email
+            send_mail(
+                subject,
+                message,
+                sender,
+                [client_email],
+                fail_silently=False,
+            )
+
         sellrequest.delete()
         return redirect("sell_request_list")
 
@@ -502,6 +523,25 @@ def Sell_Request_View(request, sellrequest_id):
 @login_required(login_url=login)
 def SellRequestDelete(request, sellrequest_id):
     sellrequest = get_object_or_404(SellRequest, id=sellrequest_id)
+    property_type = sellrequest.property_type
+    property_for = sellrequest.property_for
+
+    client_name = sellrequest.name
+    client_email = sellrequest.email
+    subject = "Your Request Has Been Declined."
+    message = f"Hello {client_name},\n Your sell request for {property_type} on {property_for} has been declined! \n\n\n Regards,\n RealEstate Nawalpur"
+    sender = settings.EMAIL_HOST_USER
+
+    if subject and message and sender:
+        # Send email
+        send_mail(
+            subject,
+            message,
+            sender,
+            [client_email],
+            fail_silently=False,
+        )
+
     sellrequest.delete()
     messages.success(request, f"Sell Request deleted successfully.")
     return render(request, "admin/sellrequest.html")

@@ -13,6 +13,13 @@
 <!-- banner -->
 
 <div class="container">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-success" role="alert">
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
   <div class="spacer">
     <div class="row contact">
       <div class="col-lg-6 col-sm-6 ">

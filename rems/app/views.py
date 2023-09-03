@@ -7,6 +7,8 @@ from django.views.generic import DetailView
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
 
 # Create your views here.
 
@@ -50,6 +52,33 @@ def rentpage(request):
 
 
 def contactpage(request):
+    full_name = request.POST.get("full-name")
+    message = request.POST.get("message")
+    sender = request.POST.get("email")
+    phone = request.POST.get("phone")
+    subject = f"New message from {full_name}."
+
+    if subject and message and sender:
+        email_message = (
+            f"Message: {message}\n\n\nSender Email: {sender}\nPhone Number: {phone}"
+        )
+        try:
+            # Send email
+            send_mail(
+                subject,
+                email_message,
+                sender,
+                [settings.EMAIL_HOST_USER],
+                fail_silently=False,
+            )
+            success_message = "Message sent successfully"
+            messages.success(request, success_message)
+            return redirect("contact")
+        except BadHeaderError:
+            error_message = "Message sent successfully"
+            messages.error(request, error_message)
+            return redirect("contact")
+
     return render(request, "contact.html")
 
 
