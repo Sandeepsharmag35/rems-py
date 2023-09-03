@@ -179,6 +179,8 @@ def Delete_Customer(request, profile_id):
 def Update_Customer_Password(request, profile_id):
     profile = get_object_or_404(Profile, id=profile_id)
     user = profile.user
+    client_email = user.email
+    client_name = profile.fullname
 
     if request.method == "POST":
         new_password = request.POST.get("new-password")
@@ -187,6 +189,20 @@ def Update_Customer_Password(request, profile_id):
         messages.success(
             request, f"The user @'{user}''s password has been changed successfully."
         )
+
+        subject = "Password Changed"
+        message = f"Hello {client_name},\nYour password has been changed sucessfully!\nYour new Password is: {new_password} \n\n Regards,\n RealEstate Nawalpur"
+        sender = settings.EMAIL_HOST_USER
+
+        if subject and message and sender:
+            # Send email
+            send_mail(
+                subject,
+                message,
+                sender,
+                [client_email],
+                fail_silently=False,
+            )
 
         return redirect("user-profile", user_id=user.id)
     context = {"profile": profile}
