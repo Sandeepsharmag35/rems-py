@@ -94,7 +94,7 @@ class Property(models.Model):
 
 class CustomerMessage(models.Model):
     fullname = models.CharField(max_length=50, blank=True)
-    email = models.EmailField(max_length=100, unique=True)
+    email = models.EmailField(max_length=100, blank=False)
     phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=True)
     message = models.TextField(max_length=200, blank=True)
     property = models.ForeignKey(Property, on_delete=models.CASCADE, blank=True)

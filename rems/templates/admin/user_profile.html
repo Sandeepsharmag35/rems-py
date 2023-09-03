@@ -72,23 +72,25 @@
                 <div class="popup">
                     <h2>Change password:</h2>
                     <a class="close" href="#">&times;</a>
-                    <form action="" method="post">
+                    <form action="{% url 'update-user-password' profile.id %}" method="post"
+                        enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="content">
                             <label for="new-password"><strong>New Password:</strong></label>
                             <input type="password" name="new-password" id="new-password" required>
                             <input type="submit" value="Update Password">
                         </div>
-                        <div class="content">
-                            <div class="left">
-                                <input type="text" id="generated_password" readonly>
-                            </div>
-                            <div class="right">
-                                <input type="button" id="copy" value="Copy">
-                            </div>
-                            <input type="button" id="generate_password" value="Generate Strong Password">
-                        </div>
                     </form>
+                    <div class="content">
+                        <div class="left">
+                            <input type="text" id="generated_password" readonly>
+                        </div>
+                        <div class="right">
+                            <input type="button" id="copy" value="Copy">
+                        </div>
+                        <input type="button" id="generate_password" value="Generate Strong Password">
+                    </div>
+
                 </div>
             </div>
         </div>

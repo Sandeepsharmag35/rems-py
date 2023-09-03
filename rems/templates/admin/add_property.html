@@ -277,51 +277,53 @@
                 <div class="form-group"></div>
                 <h2>Upload Images</h2>
                 <div class="form-group">
-                    <label for="front-image">Front Image: <span class="required">*</span></label>
-                    {% if profile.profile_picture %}
-                    <img src="{{profile.profile_picture.url}}" width="200px" height="200px" id="profile-pic">
-                    {% else %}
-                    <img src="../../static/assets/admin/imgs/dummy-profile.jpg" width="200px" height="200px"
-                        id="profile-pic" />
-                    {% endif %}
-                    <input type="file" name="profile-picture" id="profile-picture"
-                        accept="image/png, image/jpg, image/jpeg">
-                    <label for="profile-picture">Change</label>
-                </div>
-                <div class="form-group">
-                    <label for="side-image">Side Image: <span class="required">*</span></label>
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName">Choose File</div>
-                            <div class="file-select-name" id="noFile">No file chosen...</div>
-                            <input type="file" name="side-image" id="side-image" required>
-                            <div id="fileError" class="error-message"></div>
+                    <div class="form-group">
+                        <label for="front-image">Front Image: <span class="required">*</span></label>
+                        <div class="file-upload">
+                            <div class="file-select">
+                                <div class="file-select-button" id="fileName">Choose File</div>
+                                <div class="file-select-name" id="noFile">No file chosen...</div>
+                                <input type="file" name="front-image" id="front-image" required>
+                                <div id="fileError" class="error-message"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="extra1-image">LivingRoom/Bedroom Image:</label>
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName">Choose File</div>
-                            <div class="file-select-name" id="noFile">No file chosen...</div>
-                            <input type="file" name="extra1-image" id="extra1-image">
-                            <div id="fileError" class="error-message"></div>
+
+                    <div class="form-group">
+                        <label for="side-image">Side Image: <span class="required">*</span></label>
+                        <div class="file-upload">
+                            <div class="file-select">
+                                <div class="file-select-button" id="fileName">Choose File</div>
+                                <div class="file-select-name" id="noFile">No file chosen...</div>
+                                <input type="file" name="side-image" id="side-image" required>
+                                <div id="fileError" class="error-message"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="extra2-image">Kitchen/Other Image:</label>
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName">Choose File</div>
-                            <div class="file-select-name" id="noFile">No file chosen...</div>
-                            <input type="file" name="extra2-image" id="extra2-image">
-                            <div id="fileError" class="error-message"></div>
+                    <div class="form-group">
+                        <label for="extra1-image">Living Room/Bedroom Image:</label>
+                        <div class="file-upload">
+                            <div class="file-select">
+                                <div class="file-select-button" id="fileName">Choose File</div>
+                                <div class="file-select-name" id="noFile">No file chosen...</div>
+                                <input type="file" name="extra1-image" id="extra1-image">
+                                <div id="fileError" class="error-message"></div>
+                            </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="extra2-image">Kitchen/Other Image:</label>
+                        <div class="file-upload">
+                            <div class="file-select">
+                                <div class="file-select-button" id="fileName">Choose File</div>
+                                <div class="file-select-name" id="noFile">No file chosen...</div>
+                                <input type="file" name="extra2-image" id="extra2-image">
+                                <div id="fileError" class="error-message"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">Save</button>
                 </div>
-                <button type="submit">Save</button>
             </form>
         </div>
     </div>
@@ -347,18 +349,26 @@
 
 </script>
 <script>
-    const profilePicInput = document.getElementById('profile-picture');
-    const profilePicPreview = document.getElementById('profile-pic');
+    const imageInputs = document.querySelectorAll('input[type="file"]');
+    const imagePreviews = document.querySelectorAll('img');
 
-    profilePicInput.addEventListener('change', function (event) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
+    imageInputs.forEach((input, index) => {
+        input.addEventListener('change', function () {
+            const preview = imagePreviews[index];
+            const file = input.files[0];
 
-        reader.onload = function (e) {
-            profilePicPreview.src = e.target.result;
-        };
-
-        reader.readAsDataURL(file);
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+            }
+        });
     });
 </script>
 {% endblock %}

@@ -12,8 +12,8 @@
   <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.css' %}" />
   <link rel="stylesheet" href="{% static 'assets/style.css' %}" />
   <!-- for image upload field -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script> -->
   <!--end of for image upload field -->
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="{% static 'assets/bootstrap/js/bootstrap.js' %}"></script>
@@ -53,7 +53,7 @@
         </div>
 
         <!-- Nav Starts -->
-        <div class="navbar-collapse  collapse">
+        <div id="navbar" class="navbar-collapse  collapse">
           <ul class="nav navbar-nav navbar-right">
             {% block BeforeLogin %}
             <li class="active"><a href="{% url 'index' %}">Home</a></li>
@@ -99,39 +99,52 @@
   <div id="slider" class="sl-slider-wrapper">
 
     <div class="sl-slider">
-
+      {% if featured %}
+      {% for property in featured %}
+      {% if property.property_type != 'Land' %}
+      <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="10" data-slice2-rotation="-5"
+        data-slice1-scale="1.5" data-slice2-scale="1.5">
+        <div class="sl-slide-inner">
+          <div><img class="bg-img" src="{{ property.image.url }}"></div>
+          <h2>
+            {% if property.property_for == 'Buyer' %}
+            <a href="{% url 'property-details' 'buy' property.pk %}">
+              {{ property.beedrooms }} Bedrooms and {{ property.living_rooms }} Living Room
+              {{ property.property_type }}
+              For {{ property.property_for }}s
+            </a>
+            {% else %}
+            <a href="{% url 'property-details' 'rent' property.pk %}">
+              {{ property.beedrooms }} Bedrooms and {{ property.living_rooms }} Living Room
+              {{ property.property_type }}
+              For {{ property.property_for }}s
+            </a>
+            {% endif %}
+          </h2>
+          <blockquote>
+            <p class="location"><span class="glyphicon glyphicon-map-marker"></span>
+              {{ property.zip_code }} {{ property.city }}, {{ property.district }}</p>
+            <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
+            </p>
+            <cite>
+              {% if property.property_for == 'Buyer' %}
+              <a href="{% url 'property-details' 'buy' property.pk %}" style="text-decoration: none; color: white;">
+                Rs. {{ property.price }}</a>
+              {% else %}
+              <a href="{% url 'property-details' 'rent' property.pk %}" style="text-decoration: none; color: white;">
+                Rs. {{ property.price }}</a>
+              {% endif %}
+            </cite>
+          </blockquote>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% else %}
       <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25"
         data-slice1-scale="2" data-slice2-scale="2">
         <div class="sl-slide-inner">
           <div class="bg-img bg-img-1"></div>
-          <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
-          <blockquote>
-            <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 36000 Gaindakot, Nawalpur</p>
-            <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
-            </p>
-            <cite>Rs. 2,00,00,000</cite>
-          </blockquote>
-        </div>
-      </div>
-
-      <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15"
-        data-slice1-scale="1.5" data-slice2-scale="1.5">
-        <div class="sl-slide-inner">
-          <div class="bg-img bg-img-2"></div>
-          <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
-          <blockquote>
-            <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 34000 Pokhara, Kaski</p>
-            <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
-            </p>
-            <cite>Rs. 20,000,000</cite>
-          </blockquote>
-        </div>
-      </div>
-
-      <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3"
-        data-slice1-scale="2" data-slice2-scale="1">
-        <div class="sl-slide-inner">
-          <div class="bg-img bg-img-3"></div>
           <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
           <blockquote>
             <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 34500 Chitlang, Makwanpur</p>
@@ -141,37 +154,8 @@
           </blockquote>
         </div>
       </div>
-
-      <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="-5" data-slice2-rotation="25"
-        data-slice1-scale="2" data-slice2-scale="1">
-        <div class="sl-slide-inner">
-          <div class="bg-img bg-img-4"></div>
-          <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
-          <blockquote>
-            <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 37000 Birtamod, Jhapa</p>
-            <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
-            </p>
-            <cite>Rs. 20,000,000</cite>
-          </blockquote>
-        </div>
-      </div>
-
-      <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-5" data-slice2-rotation="10"
-        data-slice1-scale="2" data-slice2-scale="1">
-        <div class="sl-slide-inner">
-          <div class="bg-img bg-img-5"></div>
-          <h2><a href="#">2 Bed Rooms and 1 Dinning Room Aparment on Sale</a></h2>
-          <blockquote>
-            <p class="location"><span class="glyphicon glyphicon-map-marker"></span> 34500 Kalanki, Kathmandu</p>
-            <p>Until he extends the circle of his compassion to all living things, man will not himself find peace.
-            </p>
-            <cite>Rs. 20,000,000</cite>
-          </blockquote>
-        </div>
-      </div>
+      {% endif %}
     </div><!-- /sl-slider -->
-
-
 
     <nav id="nav-dots" class="nav-dots">
       <span class="nav-dot-current"></span>
@@ -179,10 +163,12 @@
       <span></span>
       <span></span>
       <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </nav>
 
   </div><!-- /slider-wrapper -->
-  </div>
 
 
 
@@ -245,21 +231,39 @@
         Listing</a>
       <h2>Featured Properties</h2>
       <div id="owl-example" class="owl-carousel">
+        {% if featured %}
+        {% for property in featured %}
         <div class="properties">
-          <div class="image-holder"><img src="{% static 'images/properties/1.jpg' %}" class="img-responsive"
-              alt="properties" />
-            <div class="status sold">Sold</div>
+          <div class="image-holder" class="img-responsive"><img src="{{ property.image.url }}" class="img-responsive"
+              alt="properties" style="height:170px; width: 100%;">
+            <div class="status sold">{{ property.status }}</div>
           </div>
-          <h4><a href="#">Royal Inn</a></h4>
-          <p class="price">Price: Rs. 234,900</p>
+          {% if property.property_for == 'Buyer' %}
+          <h4><a href="{% url 'property-details' 'buy' property.pk %}">{{ property }}</a></h4>
+          {% else %}
+          <h4><a href="{% url 'property-details' 'rent' property.pk %}">{{ property }}</a></h4>
+          {% endif %}
+          <p class="price">Price: Rs. {{ property.price }}</p>
           <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="#">View Details</a>
+              data-original-title="Bed Room">
+              {{ property.beedrooms }}
+            </span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">
+              {{ property.living_rooms }}
+            </span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Parking">
+              {{ property.bedrooms }}</span> <span data-toggle="tooltip" data-placement="bottom"
+              data-original-title="Kitchen">
+              {{ property.kitchens }}</span>
+          </div>
+          {% if property.property_for == 'Buyer' %}
+          <a class="btn btn-primary" href="{% url 'property-details' 'buy' property.pk %}">View Details</a>
+          {% else %}
+          <a class="btn btn-primary" href="{% url 'property-details' 'rent' property.pk %}">View Details</a>
+          {% endif %}
         </div>
-        <div class="properties">
+        {% endfor %}
+        {% endif %}
+
+        <!-- <div class="properties">
           <div class="image-holder"><img src="{% static 'images/properties/2.jpg' %}" class=" img-responsive"
               alt="properties" />
             <div class="status new">New</div>
@@ -272,121 +276,7 @@
               data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
               data-original-title="Kitchen">1</span> </div>
           <a class="btn btn-primary" href="#">View Details</a>
-        </div>
-        <div class="properties">
-          <div class="image-holder"><img src="{% static 'images/properties/3.jpg' %}" class=" img-responsive"
-              alt="properties" /></div>
-          <h4><a href="#">Royal Inn</a></h4>
-          <p class="price">Price: Rs. 234,900</p>
-          <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="#">View Details</a>
-        </div>
-        <div class="properties">
-          <div class="image-holder"><img src="{% static 'images/properties/4.jpg' %}" class=" img-responsive"
-              alt="properties" /></div>
-          <h4><a href="#">Royal Inn</a></h4>
-          <p class="price">Price: Rs. 234,900</p>
-          <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="#">View Details</a>
-        </div>
-        <div class="properties">
-          <div class="image-holder"><img src="{% static 'images/properties/1.jpg' %}" class=" img-responsive"
-              alt="properties" />
-            <div class="status sold">Sold</div>
-          </div>
-          <h4><a href="#">Royal Inn</a></h4>
-          <p class="price">Price: Rs. 234,900</p>
-          <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="#">View Details</a>
-        </div>
-        <div class="properties">
-          <div class="image-holder"><img src="{% static 'images/properties/2.jpg' %}" class=" img-responsive"
-              alt="properties" />
-            <div class="status sold">Sold</div>
-          </div>
-          <h4><a href="#">Royal Inn</a></h4>
-          <p class="price">Price: Rs. 234,900</p>
-          <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="#">View Details</a>
-        </div>
-        <div class="properties">
-          <div class="image-holder"><img src="{% static 'images/properties/3.jpg' %}" class=" img-responsive"
-              alt="properties" />
-            <div class="status new">New</div>
-          </div>
-          <h4><a href="#">Royal Inn</a></h4>
-          <p class="price">Price: Rs. 234,900</p>
-          <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="#">View Details</a>
-        </div>
-        <div class="properties">
-          <div class="image-holder"><img src="{% static 'images/properties/4.jpg' %}" class=" img-responsive"
-              alt="properties" /></div>
-          <h4><a href="#">Royal Inn</a></h4>
-          <p class="price">Price: Rs. 234,900</p>
-          <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="#">View Details</a>
-        </div>
-        <div class="properties">
-          <div class="image-holder"><img src="{% static 'images/properties/1.jpg' %}" class=" img-responsive"
-              alt="properties" /></div>
-          <h4><a href="#">Royal Inn</a></h4>
-          <p class="price">Price: Rs. 234,900</p>
-          <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="#">View Details</a>
-        </div>
-        <div class="properties">
-          <div class="image-holder"><img src="{% static 'images/properties/2.jpg' %}" class=" img-responsive"
-              alt="properties" /></div>
-          <h4><a href="#">Royal Inn</a></h4>
-          <p class="price">Price: Rs. 234,900</p>
-          <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="#">View Details</a>
-        </div>
-        <div class="properties">
-          <div class="image-holder"><img src="{% static 'images/properties/3.jpg' %}" class=" img-responsive"
-              alt="properties" /></div>
-          <h4><a href="#">Royal Inn</a></h4>
-          <p class="price">Price: Rs. 234,900</p>
-          <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Bed Room">5</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Living Room">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Parking">2</span> <span data-toggle="tooltip" data-placement="bottom"
-              data-original-title="Kitchen">1</span> </div>
-          <a class="btn btn-primary" href="#">View Details</a>
-        </div>
+        </div> -->
 
       </div>
     </div>
@@ -419,54 +309,43 @@
             </ol>
             <!-- Carousel items -->
             <div class="carousel-inner">
+              {% if featured %}
               <div class="item active">
                 <div class="row">
-                  <div class="col-lg-4"><img src="{% static 'images/properties/1.jpg' %}" class="img-responsive"
-                      alt="properties" />
+                  <div class="col-lg-4"><img src="{{ featured.0.image.url }}" class="img-responsive" alt="properties"
+                      style="height:140x; width: 100%;" />
                   </div>
                   <div class="col-lg-8">
-                    <h5><a href="#">Integer sed porta quam</a></h5>
-                    <p class="price">Rs. 300,000</p>
-                    <a href="#" class="more">More Detail</a>
+                    <h5><a href="#">{{ featured.0 }}</a></h5>
+                    <p class="price">Rs. {{ featured.0.price }}</p>
+                    {% if featured.0.property.property_for == 'Buyer' %}
+                    <a class="more" href="{% url 'property-details' 'buy' property.pk %}">More Details</a>
+                    {% endif %}
+                    {% if featured.0.property.property_for == 'Renter' %}
+                    <a class="more" href="{% url 'property-details' 'rent' property.pk %}">More Details</a>
+                    {% endif %}
                   </div>
                 </div>
               </div>
+              {% for property in featured|slice:"1:" %}
               <div class="item">
                 <div class="row">
-                  <div class="col-lg-4"><img src="{% static 'images/properties/2.jpg' %}" class="img-responsive"
-                      alt="properties" />
+                  <div class="col-lg-4"><img src="{{ property.image.url }}" class="img-responsive" alt="properties"
+                      style="height:140px; width: 100%;" />
                   </div>
                   <div class="col-lg-8">
-                    <h5><a href="#">Integer sed porta quam</a></h5>
-                    <p class="price">Rs. 300,000</p>
-                    <a href="#" class="more">More Detail</a>
+                    <h5><a href="#">{{ property }}</a></h5>
+                    <p class="price">Rs. {{ property.price }}</p>
+                    {% if property.property_for == 'Buyer' %}
+                    <a class="more" href="{% url 'property-details' 'buy' property.pk %}">More Details</a>
+                    {% else %}
+                    <a class="more" href="{% url 'property-details' 'rent' property.pk %}">More Details</a>
+                    {% endif %}
                   </div>
                 </div>
               </div>
-              <div class="item">
-                <div class="row">
-                  <div class="col-lg-4"><img src="{% static 'images/properties/3.jpg' %}" class="img-responsive"
-                      alt="properties" />
-                  </div>
-                  <div class="col-lg-8">
-                    <h5><a href="#">Integer sed porta quam</a></h5>
-                    <p class="price">Rs. 300,000</p>
-                    <a href="#" class="more">More Detail</a>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="row">
-                  <div class="col-lg-4"><img src="{% static 'images/properties/4.jpg' %}" class="img-responsive"
-                      alt="properties" />
-                  </div>
-                  <div class="col-lg-8">
-                    <h5><a href="#">Integer sed porta quam</a></h5>
-                    <p class="price">Rs. 300,000</p>
-                    <a href="#" class="more">More Detail</a>
-                  </div>
-                </div>
-              </div>
+              {% endfor %}
+              {% endif %}
             </div>
           </div>
         </div>

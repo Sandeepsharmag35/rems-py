@@ -31,19 +31,21 @@ def blogdetailspage(request):
 
 def buypage(request):
     properties = Property.objects.filter(property_for="Buyer")
-    paginator = Paginator(properties, 9)  # Show 9 properties per page
+    paginator = Paginator(properties, 12)  # Show 12 properties per page
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    context = {"page_obj": page_obj}
+    total_properties = properties.count()
+    context = {"page_obj": page_obj, "total_properties": total_properties}
     return render(request, "buy.html", context)
 
 
 def rentpage(request):
     properties = Property.objects.filter(property_for="Renter")
-    paginator = Paginator(properties, 9)  # Show 9 properties per page
+    paginator = Paginator(properties, 12)  # Show 12 properties per page
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    context = {"page_obj": page_obj}
+    total_properties = properties.count()
+    context = {"page_obj": page_obj, "total_properties": total_properties}
     return render(request, "rent.html", context)
 
 

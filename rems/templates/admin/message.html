@@ -28,7 +28,7 @@
         <tbody>
             {% for msg in message %}
             <tr>
-                <td>{{msg.id}}</td>
+                <td>{{forloop.counter}}</td>
                 <td>{{msg.fullname}}</td>
                 <td>{{msg.email}}</td>
                 <td>{{msg.phone_number}}</td>

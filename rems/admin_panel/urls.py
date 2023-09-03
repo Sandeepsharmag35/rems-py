@@ -36,6 +36,11 @@ urlpatterns = [
         views.Delete_Customer,
         name="delete_user",
     ),
+    path(
+        "update-user-password/<int:profile_id>/",
+        views.Update_Customer_Password,
+        name="update-user-password",
+    ),
     path("admins/", views.Admins, name="admins"),
     path(
         "remove_admin/<int:profile_id>/",

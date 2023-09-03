@@ -584,7 +584,7 @@ input[type="password"] {
   border-radius: 5px;
 }
 
-.animated-form>button {
+.animated-form button {
   width: 100%;
   padding: 10px;
   background-color: #4caf50;
@@ -594,8 +594,9 @@ input[type="password"] {
   cursor: pointer;
 }
 
-.animated-form>button:hover {
-  background-color: #45a049;
+.animated-form button:hover {
+  background-color: #0b570f;
+  transition: 1s;
 }
 
 /* ====================== Profile Page ========================== */
@@ -676,7 +677,7 @@ input[type="password"] {
 
 /* ====================== View Images of Property  ========================== */
 
-/* #profile-picture {
+/* #property-picture {
   display: none;
 }
 
@@ -693,6 +694,7 @@ input[type="password"] {
   color: white;
   border-radius: 5px;
 } */
+
 
 /* ====================== Choose file CSS ========================== */
 

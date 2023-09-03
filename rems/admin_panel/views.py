@@ -174,6 +174,23 @@ def Delete_Customer(request, profile_id):
     return redirect("users")
 
 
+def Update_Customer_Password(request, profile_id):
+    profile = get_object_or_404(Profile, id=profile_id)
+    user = profile.user
+
+    if request.method == "POST":
+        new_password = request.POST.get("new-password")
+        user.set_password(new_password)
+        user.save()
+        messages.success(
+            request, f"The user @'{user}''s password has been changed successfully."
+        )
+
+        return redirect("user-profile", user_id=user.id)
+    context = {"profile": profile}
+    return render(request, "admin/user_profile.html", context)
+
+
 @login_required(login_url=login)
 def Admins(request):
     profile = Profile.objects.filter(user__is_superuser=True)

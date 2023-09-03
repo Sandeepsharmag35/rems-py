@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from .models import Profile
+from app.models import Property
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 
@@ -12,7 +13,9 @@ from django.contrib.auth import update_session_auth_hash
 
 
 def Indexpage(request):
-    return render(request, "index.html")
+    featured = Property.objects.filter(featured=True)
+    context = {"featured": featured}
+    return render(request, "index.html", context)
 
 
 def RegisterPage(request):
@@ -90,7 +93,9 @@ def LogoutPage(request):
 
 @login_required(login_url=login)
 def Homepage(request):
-    return render(request, "home.html", {"user": request.user})
+    featured = Property.objects.filter(featured=True)
+    context = {"featured": featured, "user": request.user}
+    return render(request, "home.html", context)
 
 
 @login_required(login_url=login)

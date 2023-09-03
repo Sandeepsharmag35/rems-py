@@ -2,3 +2,29 @@
 {% load static %}
 {% block title %} Rent Property {% endblock %}
 {% block PageHeading %}Rent Properties {% endblock %}
+{% block cards %}
+<div class="row">
+    {% for property in page_obj %}
+    <!-- properties -->
+    <div class="col-lg-4 col-sm-6">
+        <div class="properties">
+            <div class="image-holder"><img src="{{property.image.url}}" class="img-responsive" alt="properties"
+                    style="width: 100%; height:200px;">
+                <div class=" status sold">{{property.status}}</div>
+            </div>
+            <h5><a href="{% url 'property-details' 'rent' property.pk %}">{{property}}</a></h5>
+            <p class="price">Price: Rs. {{property.price}}</p>
+            <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom"
+                    data-original-title="Bed Room">{{property.bedrooms}}</span> <span data-toggle="tooltip"
+                    data-placement="bottom" data-original-title="Living Room">{{property.living_rooms}}</span> <span
+                    data-toggle="tooltip" data-placement="bottom"
+                    data-original-title="Bathroom">{{property.bathrooms}}</span> <span data-toggle="tooltip"
+                    data-placement="bottom" data-original-title="Kitchen">{{property.kitchens}}</span> </div>
+            <a class="btn btn-primary" href="{% url 'property-details' 'rent' property.pk %}">View Details</a>
+        </div>
+    </div>
+    <!-- properties -->
+    {% endfor %}
+</div>
+
+{% endblock %}
