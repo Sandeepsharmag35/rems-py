@@ -29,65 +29,62 @@
                 {% if property %}
                 <div class="form-group">
                     <div class="left">
-                        <label for="property-type">Property Type:</label>
+                        <label for="property-type">Property Type: <span class="required">*</span></label>
                         <input type="text" value="{{ property.property_type }}" id="property-type" name="property-type"
-                            readonly>
+                            required>
                     </div>
                     <div class="right">
-                        <label for="property-for">Property For:</label>
-                        <input type="text" value="{{ property.property_for }}" id="property-for" name="property-for"
-                            readonly>
+                        <label for="property-for">Property For: <span class="required">*</span></label>
+                        <select value="{{ property.property_for }}" id="property-for" name="property-for" required>
+                            <option>{{ property.property_for }}</option>
+                            <option>Buyer</option>
+                            <option>Renter</option>
+                        </select>
                     </div>
                 </div>
                 <div id="house-form">
                     <div class="form-group">
                         <div class="middle">
                             <label for="flat-number">No of Flat:</label>
-                            <input type="text" value="{{ property.flat_number }}" id="flat-number" name="flat-number"
-                                readonly>
+                            <input type="text" value="{{ property.flat_number }}" id="flat-number" name="flat-number">
                         </div>
                         <div class="middle">
                             <label for="bed-number">Bedroom:</label>
-                            <input type="text" value="{{ property.bedrooms }}" id="bed-number" name="bed-number"
-                                readonly>
+                            <input type="text" value="{{ property.bedrooms }}" id="bed-number" name="bed-number">
                         </div>
                         <div class="middle">
                             <label for="bath-number">Bathroom:</label>
-                            <input type="text" value="{{ property.bathrooms }}" id="bath-number" name="bath-number"
-                                readonly>
+                            <input type="text" value="{{ property.bathrooms }}" id="bath-number" name="bath-number">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="middle">
                             <label for="living-number">Living Room:</label>
                             <input type="text" value="{{ property.living_rooms }}" id="living-number"
-                                name="living-number" readonly>
+                                name="living-number">
                         </div>
                         <div class="middle">
                             <label for="kitchen-number">Kitchen:</label>
-                            <input type="text" value="{{ property.kitchens }}" id="kitchen-number" name="kitchen-number"
-                                readonly>
+                            <input type="text" value="{{ property.kitchens }}" id="kitchen-number"
+                                name="kitchen-number">
                         </div>
                         <div class="middle">
                             <label for="total-number">Total Rooms:</label>
-                            <input type="text" value="{{ property.total_rooms }}" id="total-number" name="total-number"
-                                readonly>
+                            <input type="text" value="{{ property.total_rooms }}" id="total-number" name="total-number">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="middle">
                             <label for="parking">Parking</label>
-                            <input type="text" value="{{ property.parking }}" id="parking" name="parking" readonly>
+                            <input type="text" value="{{ property.parking }}" id="parking" name="parking">
                         </div>
                         <div class="middle">
                             <label for="built-year">Built Year:</label>
-                            <input type="text" value="{{ property.built_year }}" id="built-year" name="built-year"
-                                readonly>
+                            <input type="text" value="{{ property.built_year }}" id="built-year" name="built-year">
                         </div>
                         <div class="middle">
                             <label for="built-area">Built Area:</label>
-                            <input type="text" value="{{ property.built_area }}" id="built-area" name="built-area"
-                                readonly>
+                            <input type="text" value="{{ property.built_area }}" id="built-area" name="built-area">
                         </div>
                     </div>
                 </div>
@@ -97,73 +94,91 @@
                         <div class="middle">
                             <label for="road-size">Road Size: <span class="required">*</span></label>
                             <input type="text" value="{{ property.road_size }}" id="road-size" name="road-size"
-                                readonly>
+                                required>
                         </div>
                         <div class="middle">
-                            <label for="land-area">Land Area:</label>
-                            <input type="text" value="{{ property.land_area }}" id="land-area" name="land-area">
+                            <label for="land-area">Land Area: <span class="required">*</span></label>
+                            <input type="text" value="{{ property.land_area }}" id="land-area" name="land-area"
+                                required>
                         </div>
                         <div class="middle">
-                            <label for="type">Type: <span class="required">*</span></label>
-                            <input type="text" value="{{ property.type }}" id="type" name="type" readonly>
+                            <label for="type">Type:</label>
+                            <input type="text" value="{{ property.type }}" id="type" name="type">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="middle">
                             <label for="facing-direction">Facing Direction: <span class="required">*</span></label>
-                            <input type="text" value="{{ property.facing_direction }}" id="facing-direction"
-                                name="facing-direction" readonly>
+                            <select class="form-control" id="facing-direction" name="facing-direction" required>
+                                <option>{{ property.facing_direction }}</option>
+                                <option>East</option>
+                                <option>West</option>
+                                <option>North</option>
+                                <option>South</option>
+                                <option>South East</option>
+                                <option>North East</option>
+                                <option>South West</option>
+                                <option>North West</option>
+                            </select>
                         </div>
                         <div class="middle">
-                            <label for="property-price">Price:</label>
+                            <label for="property-price">Price: <span class="required">*</span></label>
                             <input type="text" value="{{ property.price }}" id="property-price" name="property-price"
                                 oninput="formatNumber(this)" required>
                         </div>
                         <div class="middle">
                             <label for="price-per-unit">Price Per Unit:</label>
                             <input type="text" value="{{ property.price_per_unit }}" id="price-per-unit"
-                                name="price-per-unit" readonly>
+                                name="price-per-unit">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description">Description:</label>
+                        <label for="description">Description:<span class="required">*</span></label>
                         <textarea id="description" name="description" rows="4"
-                            readonly>{{ property.full_description }}</textarea>
+                            required>{{ property.description }}</textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="middle">
                         <label for="province">Province: </label>
-                        <input type="text" value="{{ property.province }}" id="province" name="province" readonly>
+                        <select class="form-control" id="province" name="province">
+                            <option>{{ property.province }}</option>
+                            <option>Province 1</option>
+                            <option>Province 2</option>
+                            <option>Bagmati</option>
+                            <option>Gandaki</option>
+                            <option>Province 5</option>
+                            <option>Province 6</option>
+                            <option>Province 7</option>
+                        </select>
                     </div>
                     <div class="middle">
                         <label for="district">District: </label>
-                        <input type="text" value="{{ property.district }}" id="district" name="district" readonly>
+                        <input type="text" value="{{ property.district }}" id="district" name="district">
                     </div>
                     <div class="middle">
                         <label for="zip-code">Zip Code: </label>
-                        <input type="text" value="{{ property.zip_code }}" id="zip-code" name="zip-code" readonly>
+                        <input type="text" value="{{ property.zip_code }}" id="zip-code" name="zip-code" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="left">
                         <label for="city">City: </label>
-                        <input type="text" value="{{ property.city }}" id="city" name="city" readonly>
+                        <input type="text" value="{{ property.city }}" id="city" name="city" required>
                     </div>
                     <div class="right">
                         <label for="municipality">Municipality: </label>
-                        <input type="text" value="{{ property.municipality }}" id="municipality" name="municipality"
-                            readonly>
+                        <input type="text" value="{{ property.municipality }}" id="municipality" name="municipality">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="left">
                         <label for="ward-no">Ward No: </label>
-                        <input type="text" value="{{ property.ward_no }}" id="ward-no" name="ward-no" readonly>
+                        <input type="text" value="{{ property.ward_no }}" id="ward-no" name="ward-no">
                     </div>
                     <div class="right">
                         <label for="tole">Tole:</label>
-                        <input type="text" value="{{ property.tole }}" id="tole" name="tole" readonly>
+                        <input type="text" value="{{ property.tole }}" id="tole" name="tole">
                     </div>
                 </div>
                 <div class="form-group">
@@ -172,60 +187,89 @@
                 </div>
                 <div class="form-group">
                     <label for="featured">Featured: </label>
-                    <input type="checkbox" name="featured" id="featured" style="width: 20px; height: 20px;">
+                    <input type="checkbox" name="featured" id="featured" {% if property.featured %}checked{% endif %}
+                        style="width: 20px; height: 20px;">
                 </div>
                 <div class="form-group"></div>
                 <h2>Upload Images</h2>
                 <div class="form-group">
-                    <label for="front-image">Front Image: <span class="required">*</span></label>
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName">Choose File</div>
-                            <div class="file-select-name" id="noFile">No file chosen...</div>
-                            <input type="file" name="front-image" id="front-image" required>
-                            <div id="fileError" class="error-message"></div>
+                    <div class="form-group">
+                        <div class="left">
+                            <label for="front-image"><strong>Front image:</strong> <span
+                                    class="required">*</span></label>
+                            <div class="property-images">
+                                {% if property.image %}
+                                <img src="{{ property.image.url }}" width="300px" height="250px" id="front-pic">
+                                {% else %}
+                                <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px"
+                                    height="250px" id="front-pic" />
+                                {% endif %}
+                                <input type="file" name="front-image" id="front-image"
+                                    accept="image/png, image/jpg, image/jpeg" required>
+                                <label for="front-image">Upload</label>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <label for="front-image"><strong>Side image:</strong></label>
+                            <div class="property-images">
+                                {% if property.image_side %}
+                                <img src="{{ property.image_side.url }}" width="300px" height="250px" id="side-pic">
+                                {% else %}
+                                <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px"
+                                    height="250px" id="front-pic" />
+                                {% endif %}
+                                <input type="file" name="side-image" id="side-image"
+                                    accept="image/png, image/jpg, image/jpeg">
+                                <label for="side-image">Upload</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="left">
+                            <label for="front-image"><strong>Living Room/Bedroom Image:</strong></label>
+                            <div class="property-images">
+                                {% if property.image_extra %}
+                                <img src="{{ property.image_extra.url }}" width="300px" height="250px" id="extra-pic">
+                                {% else %}
+                                <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px"
+                                    height="250px" id="extra-pic" />
+                                {% endif %}
+                                <input type="file" name="extra-image" id="extra-image"
+                                    accept="image/png, image/jpg, image/jpeg">
+                                <label for="extra-image">Upload</label>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <label for="front-image"><strong>Kitchen/Other Image:</strong></label>
+                            <div class="property-images">
+                                {% if property.image_extra2 %}
+                                <img src="{{ property.image_extra2.url }}" width="300px" height="250px"
+                                    id="extra2-pic" />
+                                {% else %}
+                                <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px"
+                                    height="250px" id="extra2-pic" />
+                                {% endif %}
+                                <input type="file" name="extra2-image" id="extra2-image"
+                                    accept="image/png, image/jpg, image/jpeg">
+                                <label for="extra2-image">Upload</label>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="side-image">Side Image: <span class="required">*</span></label>
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName">Choose File</div>
-                            <div class="file-select-name" id="noFile">No file chosen...</div>
-                            <input type="file" name="side-image" id="side-image" required>
-                            <div id="fileError" class="error-message"></div>
-                        </div>
+                    <div class="left">
+                        <button type="submit" class="btn-update">Update</button>
+                    </div>
+                    <div class="right">
+                        <a href="{% url 'delete-property' property.id %}"
+                            onclick="return confirm('Are you sure you want to delete this property?');">Delete</a>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="extra1-image">LivingRoom/Bedroom Image:</label>
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName">Choose File</div>
-                            <div class="file-select-name" id="noFile">No file chosen...</div>
-                            <input type="file" name="extra1-image" id="extra1-image">
-                            <div id="fileError" class="error-message"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="extra2-image">Kitchen/Other Image:</label>
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName">Choose File</div>
-                            <div class="file-select-name" id="noFile">No file chosen...</div>
-                            <input type="file" name="extra2-image" id="extra2-image">
-                            <div id="fileError" class="error-message"></div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                <button type="submit">Update</button>
             </form>
         </div>
     </div>
 </div>
+<script src="{% static 'assets/admin/js/validate_image.js' %}"></script>
 <script>
     // getting references to the form and the two divs containing the fields
     const form = document.querySelector('form');

@@ -29,22 +29,27 @@
             {% for req in sell_requests %}
             <tr>
                 <td>{{forloop.counter}}</td>
-                <td><img src="{{req.image_front.url}}" width="75px" height="55px"></td>
+                <td><img src="{{req.image_front.url}}" width="75px" height="55px" /></td>
                 <td>{{req.property_title}}</td>
-                <td><img src="{{req.doc_image.url}}" width="75px" height="55px"></td>
+                <td><img src="{{req.doc_image.url}}" width="75px" height="55px" /></td>
                 <td>{{req.property_for}}</td>
                 <td>{{req.name}}</td>
                 <td>{{req.phone_number}}</td>
-                <td><a href="#" class="btn-update"><i class="fa fa-eye" style="color: #ffffff;"></i></a>
+                <td><a href="{% url 'sellrequest_view' req.id %}" class="btn-update">
+                        <i class="fa fa-eye" style="color: #ffffff;"></i>
+                    </a>
                 </td>
                 <td>
-                    <a href="#" class="btn-delete"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
-                </td></a>
-
+                    <a href="{% url 'delete-sellrequest' req.id %}" class="btn-delete"
+                        onclick="return confirm('Are you sure you want to delete this sell request?');">
+                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
         {% endif %}
     </table>
 </div>
+
 {% endblock %}

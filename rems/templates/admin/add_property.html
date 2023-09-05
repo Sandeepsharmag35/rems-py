@@ -2,7 +2,6 @@
 {% load static %}
 {% block title %}Add Property{% endblock %}
 {% block extracssjs %}
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 {% endblock %}
 {% block content %}
 <div class="go-back">
@@ -33,7 +32,7 @@
                             <option>House</option>
                             <option>Land</option>
                             <option>Apartment</option>
-                            <option>Commercial Property</option>
+                            <option>Commercial</option>
                         </select>
                     </div>
                     <div class="right">
@@ -278,47 +277,47 @@
                 <h2>Upload Images</h2>
                 <div class="form-group">
                     <div class="form-group">
-                        <label for="front-image">Front Image: <span class="required">*</span></label>
-                        <div class="file-upload">
-                            <div class="file-select">
-                                <div class="file-select-button" id="fileName">Choose File</div>
-                                <div class="file-select-name" id="noFile">No file chosen...</div>
-                                <input type="file" name="front-image" id="front-image" required>
-                                <div id="fileError" class="error-message"></div>
+                        <div class="left">
+                            <label for="front-image"><strong>Front image:</strong> <span
+                                    class="required">*</span></label>
+                            <div class="property-images">
+                                <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px"
+                                    height="250px" id="front-pic" />
+                                <input type="file" name="front-image" id="front-image"
+                                    accept="image/png, image/jpg, image/jpeg" required>
+                                <label for="front-image">Upload</label>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="side-image">Side Image: <span class="required">*</span></label>
-                        <div class="file-upload">
-                            <div class="file-select">
-                                <div class="file-select-button" id="fileName">Choose File</div>
-                                <div class="file-select-name" id="noFile">No file chosen...</div>
-                                <input type="file" name="side-image" id="side-image" required>
-                                <div id="fileError" class="error-message"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="extra1-image">Living Room/Bedroom Image:</label>
-                        <div class="file-upload">
-                            <div class="file-select">
-                                <div class="file-select-button" id="fileName">Choose File</div>
-                                <div class="file-select-name" id="noFile">No file chosen...</div>
-                                <input type="file" name="extra1-image" id="extra1-image">
-                                <div id="fileError" class="error-message"></div>
+                        <div class="right">
+                            <label for="front-image"><strong>Side image:</strong></label>
+                            <div class="property-images">
+                                <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px"
+                                    height="250px" id="side-pic" />
+                                <input type="file" name="side-image" id="side-image"
+                                    accept="image/png, image/jpg, image/jpeg">
+                                <label for="side-image">Upload</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="extra2-image">Kitchen/Other Image:</label>
-                        <div class="file-upload">
-                            <div class="file-select">
-                                <div class="file-select-button" id="fileName">Choose File</div>
-                                <div class="file-select-name" id="noFile">No file chosen...</div>
-                                <input type="file" name="extra2-image" id="extra2-image">
-                                <div id="fileError" class="error-message"></div>
+                        <div class="left">
+                            <label for="front-image"><strong>Living Room/Bedroom Image:</strong></label>
+                            <div class="property-images">
+                                <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px"
+                                    height="250px" id="extra-pic" />
+                                <input type="file" name="extra-image" id="extra-image"
+                                    accept="image/png, image/jpg, image/jpeg">
+                                <label for="extra-image">Upload</label>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <label for="front-image"><strong>Kitchen/Other Image:</strong></label>
+                            <div class="property-images">
+                                <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px"
+                                    height="250px" id="extra2-pic" />
+                                <input type="file" name="extra2-image" id="extra2-image"
+                                    accept="image/png, image/jpg, image/jpeg">
+                                <label for="extra2-image">Upload</label>
                             </div>
                         </div>
                     </div>
@@ -328,6 +327,7 @@
         </div>
     </div>
 </div>
+<script src="{% static 'assets/admin/js/validate_image.js' %}"></script>
 <script>
     // getting references to the form and the two divs containing the fields
     const form = document.querySelector('form');
@@ -349,26 +349,29 @@
 
 </script>
 <script>
-    const imageInputs = document.querySelectorAll('input[type="file"]');
-    const imagePreviews = document.querySelectorAll('img');
+    const PropertyFrontPicInput = document.getElementById('front-image');
+    const PropertyFrontPicPreview = document.getElementById('front-pic');
 
-    imageInputs.forEach((input, index) => {
-        input.addEventListener('change', function () {
-            const preview = imagePreviews[index];
-            const file = input.files[0];
+    const PropertySidePicInput = document.getElementById('side-image');
+    const PropertySidePicPreview = document.getElementById('side-pic');
 
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            } else {
-                preview.src = '#';
-                preview.style.display = 'none';
-            }
-        });
+    const PropertyExtraPicInput = document.getElementById('extra-image');
+    const PropertyExtraPicPreview = document.getElementById('extra-pic');
+
+    const PropertyExtra2PicInput = document.getElementById('extra2-image');
+    const PropertyExtra2PicPreview = document.getElementById('extra2-pic');
+
+    PropertyFrontPicInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            PropertyFrontPicPreview.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
     });
 </script>
+
+
 {% endblock %}

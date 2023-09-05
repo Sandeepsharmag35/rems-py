@@ -18,13 +18,12 @@
 </head>
 
 <body>
-
     {% block navigation %}
     <!-- =============== Navigation ================ -->
     <div class="main-container">
         <div class="navigation">
             <ul>
-                <li>
+                <li class="active">
                     <a href="{% url 'admin_dashboard' %}">
                         <span class="icon">
                             <ion-icon name="planet"></ion-icon>
@@ -296,7 +295,6 @@
                 count = 0;
             }
         }
-
         // Update the input value
         input.value = formattedValue;
     }

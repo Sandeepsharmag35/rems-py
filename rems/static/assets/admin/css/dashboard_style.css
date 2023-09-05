@@ -89,6 +89,18 @@ body {
   color: var(--white);
 }
 
+.navigation ul li .active {
+  position: absolute;
+  right: 0;
+  top: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px 35px 0 10px var(--white);
+  pointer-events: none;
+}
+
 .navigation ul li:hover a,
 .navigation ul li.hovered a {
   color: var(--blue);
@@ -133,7 +145,8 @@ body {
 }
 
 .navigation ul li:hover a::after,
-.navigation ul li.hovered a::after {
+.navigation ul li.hovered a::after,
+.navigation ul li .active {
   content: "";
   position: absolute;
   right: 0;
@@ -145,6 +158,7 @@ body {
   box-shadow: 35px -35px 0 10px var(--white);
   pointer-events: none;
 }
+
 
 /* ===================== Main ===================== */
 .main {
@@ -599,6 +613,37 @@ input[type="password"] {
   transition: 1s;
 }
 
+.form-group .left button {
+  width: 25%;
+  padding: 10px;
+  color: white;
+  background-color: #0a83fc;
+}
+
+.form-group .right a {
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  background-color: #d80606;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-group .left>button:hover {
+  background-color: #00376e;
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
+
+.form-group .right>a:hover {
+  transition: 1s;
+  background-color: #3f0000;
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
+
 /* ====================== Profile Page ========================== */
 .profile-form {
   margin-bottom: 30px;
@@ -677,139 +722,44 @@ input[type="password"] {
 
 /* ====================== View Images of Property  ========================== */
 
-/* #property-picture {
+#front-image,
+#side-image,
+#extra-image,
+#extra2-image {
   display: none;
+  overflow: hidden;
 }
 
-.profile-form .right-col img {
+.property-images img {
   border: 2px solid black;
+  position: relative;
+  overflow: hidden;
 }
 
-.profile-form>.right-col>label {
-  display: inline-block;
+.property-images img:hover {
+  transition: 1s;
+  transform: scale(1.02);
+}
+
+.property-images>label {
+  display: block;
   margin-top: 10px;
-  margin-left: 60px;
+  margin-right: 18%;
   padding: 9px;
   background-color: #0a83fc;
   color: white;
   border-radius: 5px;
-} */
-
-
-/* ====================== Choose file CSS ========================== */
-
-.file-upload {
-  display: block;
   text-align: center;
-  font-size: 16px;
 }
 
-.file-upload .file-select {
-  display: block;
-  border: 2px solid #dce4ec;
-  color: #34495e;
-  cursor: pointer;
-  height: 40px;
-  line-height: 40px;
-  text-align: left;
-  background: #ffffff;
-  overflow: hidden;
-  position: relative;
+.property-images>label:hover {
+  background-color: #004891;
+  transition: 0.8s;
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
 }
 
-.file-upload .file-select .file-select-button {
-  background: #dce4ec;
-  padding: 0 10px;
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-}
 
-.file-upload .file-select .file-select-name {
-  line-height: 40px;
-  display: inline-block;
-  padding: 0 10px;
-}
-
-.file-upload .file-select:hover {
-  border-color: #34495e;
-  transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-}
-
-.file-upload .file-select:hover .file-select-button {
-  background: #34495e;
-  color: #ffffff;
-  transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-}
-
-.file-upload.active .file-select {
-  border-color: #3fa46a;
-  transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-}
-
-.file-upload.active .file-select .file-select-button {
-  background: #3fa46a;
-  color: #ffffff;
-  transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-}
-
-.file-upload .file-select input[type="file"] {
-  z-index: 100;
-  cursor: pointer;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  filter: alpha(opacity=0);
-}
-
-.file-upload .file-select.file-select-disabled {
-  opacity: 0.65;
-}
-
-.file-upload .file-select.file-select-disabled:hover {
-  cursor: default;
-  display: block;
-  border: 2px solid #dce4ec;
-  color: #34495e;
-  cursor: pointer;
-  height: 40px;
-  line-height: 40px;
-  margin-top: 5px;
-  text-align: left;
-  background: #ffffff;
-  overflow: hidden;
-  position: relative;
-}
-
-.file-upload .file-select.file-select-disabled:hover .file-select-button {
-  background: #dce4ec;
-  color: #666666;
-  padding: 0 10px;
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-}
-
-.file-upload .file-select.file-select-disabled:hover .file-select-name {
-  line-height: 40px;
-  display: inline-block;
-  padding: 0 10px;
-}
 
 /* ====================== Popup Modal ========================== */
 

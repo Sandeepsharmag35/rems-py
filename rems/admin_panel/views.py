@@ -248,76 +248,58 @@ def PropertyList(request):
 def UpdateProperty(request, property_id):
     property = get_object_or_404(Property, id=property_id)
     if request.method == "POST":
-        property_type = request.POST.get("property-type")
-        property_for = request.POST.get("property-for")
-        flat_number = request.POST.get("flat-number")
-        bedrooms = request.POST.get("bed-number")
-        bathrooms = request.POST.get("bath-number")
-        living_rooms = request.POST.get("living-number")
-        kitchens = request.POST.get("kitchen-number")
-        total_rooms = request.POST.get("total-number")
-        parking = request.POST.get("parking")
-        built_year = request.POST.get("built-year")
-        built_area = request.POST.get("built-area")
-        road_size = request.POST.get("road-size")
-        land_area = request.POST.get("land-area")
-        type = request.POST.get("type")
-        facing_direction = request.POST.get("facing-direction")
-        price = request.POST.get("property-price")
-        price_per_unit = request.POST.get("price-per-unit")
-        description = request.POST.get("description")
-        province = request.POST.get("province")
-        district = request.POST.get("district")
-        zip_code = request.POST.get("zip-code")
-        city = request.POST.get("city")
-        municipality = request.POST.get("municipality")
-        ward_no = request.POST.get("ward-no")
-        tole = request.POST.get("tole")
-        status = request.POST.get("status")
-        featured = request.POST.get("featured")
-        image_front = request.FILES.get("front-image")
-        image_side = request.FILES.get("side-image")
-        image_extra1 = request.FILES.get("extra1-image")
-        image_extra2 = request.FILES.get("extra2-image")
+        property.property_type = request.POST.get("property-type")
+        property.property_for = request.POST.get("property-for")
+        property.flat_number = request.POST.get("flat-number")
+        property.bedrooms = request.POST.get("bed-number")
+        property.bathrooms = request.POST.get("bath-number")
+        property.living_rooms = request.POST.get("living-number")
+        property.kitchens = request.POST.get("kitchen-number")
+        property.total_rooms = request.POST.get("total-number")
+        property.parking = request.POST.get("parking")
+        property.built_year = request.POST.get("built-year")
+        property.built_area = request.POST.get("built-area")
+        property.road_size = request.POST.get("road-size")
+        property.land_area = request.POST.get("land-area")
+        property.type = request.POST.get("type")
+        property.facing_direction = request.POST.get("facing-direction")
+        property.price = request.POST.get("property-price")
+        property.price_per_unit = request.POST.get("price-per-unit")
+        property.description = request.POST.get("description")
+        property.province = request.POST.get("province")
+        property.district = request.POST.get("district")
+        property.zip_code = request.POST.get("zip-code")
+        property.city = request.POST.get("city")
+        property.municipality = request.POST.get("municipality")
+        property.ward_no = request.POST.get("ward-no")
+        property.tole = request.POST.get("tole")
+        property.status = request.POST.get("status")
+        featured = request.POST.get("featured", False)
+        property.featured = featured == "on"
 
-        property = Property(
-            property_type=property_type,
-            property_for=property_for,
-            flat_number=flat_number,
-            bedrooms=bedrooms,
-            bathrooms=bathrooms,
-            living_rooms=living_rooms,
-            kitchens=kitchens,
-            total_rooms=total_rooms,
-            parking=parking,
-            built_year=built_year,
-            built_area=built_area,
-            road_size=road_size,
-            land_area=land_area,
-            type=type,
-            facing_direction=facing_direction,
-            price=price,
-            price_per_unit=price_per_unit,
-            full_description=description,
-            province=province,
-            district=district,
-            zip_code=zip_code,
-            city=city,
-            municipality=municipality,
-            ward_no=ward_no,
-            tole=tole,
-            image_front=image_front,
-            image_side=image_side,
-            image_extra=image_extra1,
-            image_extra2=image_extra2,
-            status=status,
-            featured=featured,
-        )
+        if request.FILES.get("front-image"):
+            property.image = request.FILES.get("front-image")
+        if request.FILES.get("side-image"):
+            property.image_side = request.FILES.get("side-image")
+        if request.FILES.get("extra1-image"):
+            property.image_extra = request.FILES.get("extra1-image")
+        if request.FILES.get("extra2-image"):
+            property.image_extra2 = request.FILES.get("extra2-image")
+
         property.save()
         messages.success(request, f"Property has been updated successfully.")
-        return redirect("update-property")
+        return redirect("update-property", property_id=property.id)
+
     context = {"property": property}
     return render(request, "admin/listed_property_details.html", context)
+
+
+@login_required(login_url=login)
+def DeleteProperty(request, property_id):
+    property = get_object_or_404(Property, id=property_id)
+    property.delete()
+    messages.success(request, f"Property has been deleted successfully.")
+    return redirect("properties")
 
 
 @login_required(login_url=login)
@@ -349,10 +331,11 @@ def AddProperty(request):
         ward_no = request.POST.get("ward-no")
         tole = request.POST.get("tole")
         status = request.POST.get("status")
-        featured = request.POST.get("featured")
+        featured = request.POST.get("featured", False)
+        featured = featured == "on"
         image_front = request.FILES.get("front-image")
         image_side = request.FILES.get("side-image")
-        image_extra1 = request.FILES.get("extra1-image")
+        image_extra = request.FILES.get("extra-image")
         image_extra2 = request.FILES.get("extra2-image")
 
         property = Property(
@@ -373,7 +356,7 @@ def AddProperty(request):
             facing_direction=facing_direction,
             price=price,
             price_per_unit=price_per_unit,
-            full_description=description,
+            description=description,
             province=province,
             district=district,
             zip_code=zip_code,
@@ -381,9 +364,9 @@ def AddProperty(request):
             municipality=municipality,
             ward_no=ward_no,
             tole=tole,
-            image_front=image_front,
+            image=image_front,
             image_side=image_side,
-            image_extra=image_extra1,
+            image_extra=image_extra,
             image_extra2=image_extra2,
             status=status,
             featured=featured,

@@ -1,65 +1,56 @@
-// Function to handle the file selection
-function handleFileSelection() {
-    // Get the selected file input element
-    const fileInput = document.getElementById("property-image");
+const PropertyFrontPicInput = document.getElementById('front-image');
+const PropertyFrontPicPreview = document.getElementById('front-pic');
 
-    // Get the selected file
-    const file = fileInput.files[0];
+const PropertySidePicInput = document.getElementById('side-image');
+const PropertySidePicPreview = document.getElementById('side-pic');
 
-    // Get the file extension
-    const fileExtension = file ? getFileExtension(file.name) : "";
+const PropertyExtraPicInput = document.getElementById('extra-image');
+const PropertyExtraPicPreview = document.getElementById('extra-pic');
 
-    // Define the allowed file extensions
-    const allowedExtensions = ["jpg", "jpeg", "png"];
+const PropertyExtra2PicInput = document.getElementById('extra2-image');
+const PropertyExtra2PicPreview = document.getElementById('extra2-pic');
 
-    // Define the maximum file size in bytes (2 MB)
-    const maxSize = 2 * 1024 * 1024;
+PropertyFrontPicInput.addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
 
-    // Get the error message element
-    const fileError = document.getElementById("fileError");
+    reader.onload = function (e) {
+        PropertyFrontPicPreview.src = e.target.result;
+    };
 
-    // Check if a file is selected
-    if (file) {
-        // Check if the file extension is allowed
-        if (allowedExtensions.includes(fileExtension.toLowerCase())) {
-            // Check if the file size is within the allowed limit
-            if (file.size <= maxSize) {
-                // Update the selected file name display
-                document.getElementById("noFile").textContent = file.name;
+    reader.readAsDataURL(file);
+});
 
-                // Clear the error message
-                fileError.textContent = "";
-            } else {
-                // Clear the file input value
-                fileInput.value = "";
+PropertySidePicInput.addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
 
-                // Update the selected file name display
-                document.getElementById("noFile").textContent = "No file chosen...";
+    reader.onload = function (e) {
+        PropertySidePicPreview.src = e.target.result;
+    };
 
-                // Set the error message
-                fileError.textContent = "Please choose a file with a maximum size of 2 MB.";
-            }
-        } else {
-            // Clear the file input value
-            fileInput.value = "";
+    reader.readAsDataURL(file);
+});
 
-            // Update the selected file name display
-            document.getElementById("noFile").textContent = "No file chosen...";
+PropertyExtraPicInput.addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
 
-            // Set the error message
-            fileError.textContent = "Please choose a file with a valid image extension (jpg, jpeg, png).";
-        }
-    } else {
-        // No file selected, clear the file name display
-        document.getElementById("noFile").textContent = "No file chosen...";
+    reader.onload = function (e) {
+        PropertyExtraPicPreview.src = e.target.result;
+    };
 
-        // Clear the error message
-        fileError.textContent = "";
-    }
-}
+    reader.readAsDataURL(file);
+});
 
-// Function to get the file extension
-function getFileExtension(filename) {
-    return filename.split(".").pop();
-}
+PropertyExtra2PicInput.addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+        PropertyExtra2PicPreview.src = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
+});
 

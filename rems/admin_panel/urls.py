@@ -53,6 +53,11 @@ urlpatterns = [
         views.UpdateProperty,
         name="update-property",
     ),
+    path(
+        "delete-property/<int:property_id>/",
+        views.DeleteProperty,
+        name="delete-property",
+    ),
     path("add-property/", views.AddProperty, name="add-property"),
     path("sell-requests/", views.Sell_Request_List, name="sell_request_list"),
     path(

@@ -179,7 +179,6 @@
                         <label for="doc-image">Document Preview:</label>
                         <a href="{{ sellrequest.doc_image.url }}" target="_blank">
                             <img src="{{ sellrequest.doc_image.url }}" width="200px" height="200px">
-
                         </a>
                     </div>
                 </div>
@@ -190,8 +189,9 @@
                         <div class="form-group">
                             <label for="front-image">Front Image:</label>
                             <a href="{{ sellrequest.image_front.url }}" target="_blank">
-                                <input type="image" src="{{ sellrequest.image_front.url }}" alt="Property Image"
-                                    name="front-image" width="230px" height="200px" />
+                                <img src="{{ sellrequest.image_front.url }}" width="230px" height="200px">
+                                <input type="file" value="{{ sellrequest.image_front.url }}" name="side-image"
+                                    style="display: none;">
                             </a>
                         </div>
                     </div>
@@ -202,7 +202,7 @@
                             <label for="side-image">Side Image:</label>
                             <a href="{{ sellrequest.image_side.url }}" target="_blank">
                                 <img src="{{ sellrequest.image_side.url }}" width="230px" height="200px">
-                                <input type="file" value="{{ sellrequest.image_front.url }}" name="side-image"
+                                <input type="file" value="{{ sellrequest.image_side.url }}" name="side-image"
                                     style="display: none;">
                             </a>
                         </div>
@@ -243,7 +243,8 @@
                         <button type="submit" class="btn">Approve</button>
                     </div>
                     <div class="right" style="display: inline-flex;">
-                        <a href="{% url 'delete-sellrequest' sellrequest.id %}" class="btn-delete">Decline</a>
+                        <a href="{% url 'delete-sellrequest' sellrequest.id %}" class="btn-delete"
+                            onclick="return confirm('Are you sure you want to delete this sell request?');">Decline</a>
                     </div>
                 </div>
             </form>

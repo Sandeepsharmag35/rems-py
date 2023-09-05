@@ -19,3 +19,16 @@ toggle.onclick = function () {
   navigation.classList.toggle("active");
   main.classList.toggle("active");
 };
+
+
+const imageUploader = document.querySelector("input");
+const imagePreview = document.querySelector("img");
+
+function showImage() {
+  let reader = new FileReader();
+  reader.readAsDataURL(imageUploader.files[0]);
+  reader.onload = function (e) {
+    imagePreview.classList.add("show");
+    imagePreview.src = e.target.result;
+  };
+}
