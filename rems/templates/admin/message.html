@@ -12,37 +12,39 @@
         {% endfor %}
     </ul>
     {% endif %}
-    <table id="example" class="display">
-        <thead>
-            <th>SN</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Message</th>
-            <th>Property</th>
-            <th>Image</th>
-            <th>Received At</th>
-            <th>Action</th>
-        </thead>
-        {% if message %}
-        <tbody>
-            {% for msg in message %}
-            <tr>
-                <td>{{forloop.counter}}</td>
-                <td>{{msg.fullname}}</td>
-                <td>{{msg.email}}</td>
-                <td>{{msg.phone_number}}</td>
-                <td><textarea readonly>{{msg.message}}</textarea></td>
-                <td>{{msg.property}}</td>
-                <td><img src="{{msg.property.image.url}}" width="80px" height="50px"></td>
-                <td>{{msg.received_at}}</td>
-                <td>
-                    <a href="{% url 'delete_message' msg.id %}" class="btn-delete">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        {% endif %}
-    </table>
+    <div class="overflow-x">
+        <table id="example" class="display">
+            <thead>
+                <th>SN</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Message</th>
+                <th>Property</th>
+                <th>Image</th>
+                <th>Received At</th>
+                <th>Action</th>
+            </thead>
+            {% if message %}
+            <tbody>
+                {% for msg in message %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{msg.fullname}}</td>
+                    <td>{{msg.email}}</td>
+                    <td>{{msg.phone_number}}</td>
+                    <td><textarea readonly>{{msg.message}}</textarea></td>
+                    <td>{{msg.property}}</td>
+                    <td><img src="{{msg.property.image.url}}" width="80px" height="50px"></td>
+                    <td>{{msg.received_at}}</td>
+                    <td>
+                        <a href="{% url 'delete_message' msg.id %}" class="btn-delete">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        </table>
+    </div>
 </div>
 {% endblock %}

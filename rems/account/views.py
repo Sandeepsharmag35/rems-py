@@ -115,6 +115,7 @@ def ProfilePage(request):
         fullname = request.POST["full-name"]
         phone_number = request.POST["phone-number"]
         address = request.POST["address"]
+        profile_picture = request.FILES["profile-picture"]
 
         if is_new_profile:
             profile_data = Profile.objects.create(
@@ -123,12 +124,15 @@ def ProfilePage(request):
                 fullname=fullname,
                 phone_number=phone_number,
                 address=address,
+                profile_picture=profile_picture,
             )
             success_message = "Profile saved sucessfully."
         else:
             profile.fullname = fullname
             profile.phone_number = phone_number
             profile.address = address
+            profile.profile_picture = profile_picture
+
             profile.save()
             success_message = "Profile updated sucessfully."
         messages.success(request, success_message)

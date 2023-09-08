@@ -14,44 +14,46 @@
     {% endif %}
     <a href="{% url 'add-property' %}" class="btn-add">
         <i class="fa-solid fa-plus"></i>Add Property</a>
-    <table id="example" class="display">
-        <thead>
-            <th>SN</th>
-            <th>Image</th>
-            <th>Type</th>
-            <th>Price</th>
-            <th>District</th>
-            <th>City</th>
-            <th>Status</th>
-            <th>Property For</th>
-            <th>Edit</th>
-            <th>Remove</th>
+    <div class="overflow-x">
+        <table id="example" class="display">
+            <thead>
+                <th>SN</th>
+                <th>Image</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>District</th>
+                <th>City</th>
+                <th>Status</th>
+                <th>Property For</th>
+                <th>Edit</th>
+                <th>Remove</th>
 
-        </thead>
-        {% if properties %}
-        <tbody>
-            {% for property in properties %}
-            <tr>
-                <td>{{forloop.counter}}</td>
-                <td><img src="{{property.image.url}}" width="80px" height="50px"></td>
-                <td>{{property.property_type}}</td>
-                <td>{{property.price}}</td>
-                <td>{{property.district}}</td>
-                <td>{{property.city}}</td>
-                <td>{{property.status}}</td>
-                <td>{{property.property_for}}</td>
-                <th><a href="{% url 'update-property' property.id %}" class="btn-update">
-                        <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
-                </th>
-                <th><a href="{% url 'delete-property' property.id %}" class="btn-delete">
-                        <i class="fa-solid fa-trash" style="color: #ffffff;"
-                            onclick="return confirm('Are you sure you want to delete this property?');"></i>
-                    </a>
-                </th>
-            </tr>
-            {% endfor %}
-        </tbody>
-        {% endif %}
-    </table>
+            </thead>
+            {% if properties %}
+            <tbody>
+                {% for property in properties %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><img src="{{property.image.url}}" width="80px" height="50px"></td>
+                    <td>{{property.property_type}}</td>
+                    <td>{{property.price}}</td>
+                    <td>{{property.district}}</td>
+                    <td>{{property.city}}</td>
+                    <td>{{property.status}}</td>
+                    <td>{{property.property_for}}</td>
+                    <th><a href="{% url 'update-property' property.id %}" class="btn-update">
+                            <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
+                    </th>
+                    <th><a href="{% url 'delete-property' property.id %}" class="btn-delete">
+                            <i class="fa-solid fa-trash" style="color: #ffffff;"
+                                onclick="return confirm('Are you sure you want to delete this property?');"></i>
+                        </a>
+                    </th>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        </table>
+    </div>
 </div>
 {% endblock %}

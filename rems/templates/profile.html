@@ -23,7 +23,7 @@
     {% endif %}
   </div>
   <div class="spacer">
-    <form method="post" role="form">
+    <form method="post" role="form" enctype="multipart/form-data">
       {% csrf_token %}
       {% if is_new_profile %}
       <div class="row">
@@ -62,13 +62,35 @@
         </div>
         {% endif %}
         <div class="col-lg-6 col-sm-6">
-          <h2>Upload Image</h2>
-          <label for="old-password">Profile Picture:</label>
-          <input type="file" class="form-control" id="old-password" name="old-password">
+          <h2>Profile Picture</h2>
+          <div class="profile-image">
+            {% if profile.profile_picture %}
+            <img src="{{profile.profile_picture.url}}" width="200px" height="200px" id="profile-pic">
+            {% else %}
+            <img src="../../static/assets/admin/imgs/dummy-profile.jpg" width="200px" height="200px" id="profile-pic" />
+            {% endif %}
+            <input type="file" name="profile-picture" id="profile-picture" accept="image/png, image/jpg, image/jpeg">
+            <label for="profile-picture">Change</label>
+          </div>
         </div>
       </div>
     </form>
   </div>
   <div class="spacer"></div>
 </div>
+<script>
+  const profilePicInput = document.getElementById('profile-picture');
+  const profilePicPreview = document.getElementById('profile-pic');
+
+  profilePicInput.addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      profilePicPreview.src = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  });
+</script>
 {% endblock %}

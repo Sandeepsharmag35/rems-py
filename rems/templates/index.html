@@ -11,10 +11,7 @@
 
   <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.css' %}" />
   <link rel="stylesheet" href="{% static 'assets/style.css' %}" />
-  <!-- for image upload field -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script> -->
-  <!--end of for image upload field -->
+
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="{% static 'assets/bootstrap/js/bootstrap.js' %}"></script>
   <script src="{% static 'assets/script.js' %}"></script>
@@ -24,7 +21,6 @@
   <link rel="stylesheet" href="{% static 'assets/owl-carousel/owl.theme.css' %}">
   <script src="{% static 'assets/owl-carousel/owl.carousel.js' %}"></script>
   <!-- Owl stylesheet -->
-
 
   <!-- slitslider -->
   <link rel="stylesheet" type="text/css" href="{% static 'assets/slitslider/css/style.css' %}" />
@@ -58,7 +54,7 @@
             {% block BeforeLogin %}
             <li class="active"><a href="{% url 'index' %}">Home</a></li>
             {% endblock %}
-            <li><a href="{% url 'about' %}">About</a></li>
+            <li class=""><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'agents' %}">Agents</a></li>
             <li><a href="{% url 'blog' %}">Blog</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
@@ -312,17 +308,16 @@
               {% if featured %}
               <div class="item active">
                 <div class="row">
-                  <div class="col-lg-4"><img src="{{ featured.0.image.url }}" class="img-responsive" alt="properties"
-                      style="height:140x; width: 100%;" />
+                  <div class="col-lg-4"><img src="{{ featured.0.image.url }}" class="img-responsive" alt="properties" />
                   </div>
                   <div class="col-lg-8">
                     <h5><a href="#">{{ featured.0 }}</a></h5>
                     <p class="price">Rs. {{ featured.0.price }}</p>
-                    {% if featured.0.property.property_for == 'Buyer' %}
-                    <a class="more" href="{% url 'property-details' 'buy' property.pk %}">More Details</a>
+                    {% if featured.0.property_for == 'Buyer' %}
+                    <a class="more" href="{% url 'property-details' 'buy' featured.0.pk %}">More Details</a>
                     {% endif %}
-                    {% if featured.0.property.property_for == 'Renter' %}
-                    <a class="more" href="{% url 'property-details' 'rent' property.pk %}">More Details</a>
+                    {% if featured.0.property_for == 'Renter' %}
+                    <a class="more" href="{% url 'property-details' 'rent' featured.0.pk %}">More Details</a>
                     {% endif %}
                   </div>
                 </div>
@@ -330,8 +325,7 @@
               {% for property in featured|slice:"1:" %}
               <div class="item">
                 <div class="row">
-                  <div class="col-lg-4"><img src="{{ property.image.url }}" class="img-responsive" alt="properties"
-                      style="height:140px; width: 100%;" />
+                  <div class="col-lg-4"><img src="{{ property.image.url }}" class="img-responsive" alt="properties" />
                   </div>
                   <div class="col-lg-8">
                     <h5><a href="#">{{ property }}</a></h5>

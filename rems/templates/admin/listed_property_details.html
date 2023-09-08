@@ -1,9 +1,7 @@
 {% extends 'admin/dashboard.html' %}
 {% load static %}
 {% block title %}Add Property{% endblock %}
-{% block extracssjs %}
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-{% endblock %}
+{% block extracssjs %}{% endblock %}
 {% block content %}
 <div class="go-back">
     <a href="javascript:void(0);" onclick="window.history.back();">
@@ -15,23 +13,26 @@
 <div class="insider">
     <div class="row">
         <div class="cardHeader">
-            <form action="{% url 'update-property' property.id %}" method="post" class="animated-form"
-                enctype="multipart/form-data">
-                {% csrf_token %}
-                <h2>Property Details</h2>
-                {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul><br>
-                {% endif %}
-                {% if property %}
+            <h2>Property Details</h2>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul><br>
+            {% endif %}
+            <form action="{% url 'update-property' property.id %}" method="POST" enctype="multipart/form-data"
+                class="animated-form">
                 <div class="form-group">
                     <div class="left">
                         <label for="property-type">Property Type: <span class="required">*</span></label>
-                        <input type="text" value="{{ property.property_type }}" id="property-type" name="property-type"
-                            required>
+                        <select id="property-type" name="property-type" required>
+                            <option>{{ property.property_type }}</option>
+                            <option>House</option>
+                            <option>Land</option>
+                            <option>Apartment</option>
+                            <option>Commercial</option>
+                        </select>
                     </div>
                     <div class="right">
                         <label for="property-for">Property For: <span class="required">*</span></label>
@@ -183,7 +184,12 @@
                 </div>
                 <div class="form-group">
                     <label for="status">Status: </label>
-                    <input type="text" value="Available" id="status" name="status" readonly>
+                    <select id="status" name="status">
+                        <option>{{ property.status }}</option>
+                        <option>Available</option>
+                        <option>Sold</option>
+                        <option>Rented</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="featured">Featured: </label>
@@ -192,67 +198,64 @@
                 </div>
                 <div class="form-group"></div>
                 <h2>Upload Images</h2>
+                <div class="form-group"></div>
                 <div class="form-group">
-                    <div class="form-group">
-                        <div class="left">
-                            <label for="front-image"><strong>Front image:</strong> <span
-                                    class="required">*</span></label>
-                            <div class="property-images">
-                                {% if property.image %}
-                                <img src="{{ property.image.url }}" width="300px" height="250px" id="front-pic">
-                                {% else %}
-                                <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px"
-                                    height="250px" id="front-pic" />
-                                {% endif %}
-                                <input type="file" name="front-image" id="front-image"
-                                    accept="image/png, image/jpg, image/jpeg" required>
-                                <label for="front-image">Upload</label>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <label for="front-image"><strong>Side image:</strong></label>
-                            <div class="property-images">
-                                {% if property.image_side %}
-                                <img src="{{ property.image_side.url }}" width="300px" height="250px" id="side-pic">
-                                {% else %}
-                                <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px"
-                                    height="250px" id="front-pic" />
-                                {% endif %}
-                                <input type="file" name="side-image" id="side-image"
-                                    accept="image/png, image/jpg, image/jpeg">
-                                <label for="side-image">Upload</label>
-                            </div>
+                    <div class="left">
+                        <label for="front-image"><strong>Front image:</strong> <span class="required">*</span></label>
+                        <div class="property-images">
+                            {% if property.image %}
+                            <img src="{{ property.image.url }}" width="300px" height="250px" id="front-pic">
+                            {% else %}
+                            <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px" height="250px"
+                                id="front-pic" />
+                            {% endif %}
+                            <input type="file" name="front-image" id="front-image"
+                                accept="image/png, image/jpg, image/jpeg" required>
+                            <label for="front-image">Upload</label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="left">
-                            <label for="front-image"><strong>Living Room/Bedroom Image:</strong></label>
-                            <div class="property-images">
-                                {% if property.image_extra %}
-                                <img src="{{ property.image_extra.url }}" width="300px" height="250px" id="extra-pic">
-                                {% else %}
-                                <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px"
-                                    height="250px" id="extra-pic" />
-                                {% endif %}
-                                <input type="file" name="extra-image" id="extra-image"
-                                    accept="image/png, image/jpg, image/jpeg">
-                                <label for="extra-image">Upload</label>
-                            </div>
+                    <div class="right">
+                        <label for="side-image"><strong>Side image:</strong></label>
+                        <div class="property-images">
+                            {% if property.image_side %}
+                            <img src="{{ property.image_side.url }}" width="300px" height="250px" id="side-pic">
+                            {% else %}
+                            <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px" height="250px"
+                                id="side-pic" />
+                            {% endif %}
+                            <input type="file" name="side-image" id="side-image"
+                                accept="image/png, image/jpg, image/jpeg">
+                            <label for="side-image">Upload</label>
                         </div>
-                        <div class="right">
-                            <label for="front-image"><strong>Kitchen/Other Image:</strong></label>
-                            <div class="property-images">
-                                {% if property.image_extra2 %}
-                                <img src="{{ property.image_extra2.url }}" width="300px" height="250px"
-                                    id="extra2-pic" />
-                                {% else %}
-                                <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px"
-                                    height="250px" id="extra2-pic" />
-                                {% endif %}
-                                <input type="file" name="extra2-image" id="extra2-image"
-                                    accept="image/png, image/jpg, image/jpeg">
-                                <label for="extra2-image">Upload</label>
-                            </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="left">
+                        <label for="extra-image"><strong>Living Room/Bedroom Image:</strong></label>
+                        <div class="property-images">
+                            {% if property.image_extra %}
+                            <img src="{{ property.image_extra.url }}" width="300px" height="250px" id="extra-pic">
+                            {% else %}
+                            <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px" height="250px"
+                                id="extra-pic" />
+                            {% endif %}
+                            <input type="file" name="extra-image" id="extra-image"
+                                accept="image/png, image/jpg, image/jpeg">
+                            <label for="extra-image">Upload</label>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <label for="extra2-image"><strong>Kitchen/Other Image:</strong></label>
+                        <div class="property-images">
+                            {% if property.image_extra2 %}
+                            <img src="{{ property.image_extra2.url }}" width="300px" height="250px" id="extra2-pic" />
+                            {% else %}
+                            <img src="{% static 'assets/admin/imgs/dummy-property.png' %}" width="300px" height="250px"
+                                id="extra2-pic" />
+                            {% endif %}
+                            <input type="file" name="extra2-image" id="extra2-image"
+                                accept="image/png, image/jpg, image/jpeg">
+                            <label for="extra2-image">Upload</label>
                         </div>
                     </div>
                 </div>
@@ -269,6 +272,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="{% static 'assets/admin/js/validate_image.js' %}"></script>
 <script>
     // getting references to the form and the two divs containing the fields
@@ -283,11 +287,11 @@
             houseForm.style.display = 'none';
             landForm.style.display = 'block';
         }
-        else if (event.target.value === 'House' || 'Flat' || 'Apartment' || 'Commercial Property') {
+        else if (event.target.value === 'House' || 'Flat' || 'Apartment' || 'Commercial') {
             houseForm.style.display = 'block';
             landForm.style.display = 'block';
         }
     });
-
 </script>
+<script src="{% static 'assets/admin/js/validate_image.js' %}"></script>
 {% endblock %}

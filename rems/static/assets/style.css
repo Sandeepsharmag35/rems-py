@@ -454,6 +454,35 @@ table {
 }
 
 
+.profile-image label {
+    margin-bottom: 5px;
+}
+
+#profile-picture {
+    display: none;
+}
+
+.profile-image img {
+    border: 2px solid black;
+}
+
+.profile-image>label {
+    display: block;
+    text-align: center;
+    width: 37%;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #0a83fc;
+    color: white;
+    border-radius: 5px;
+}
+
+.profile-image>label:hover {
+    background-color: #00376e;
+    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+    transform: translateY(-0.25em);
+}
+
 
 /*footer*/
 .footer {
