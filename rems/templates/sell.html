@@ -36,7 +36,7 @@
       <div class="row">
         <div class="col-lg-6 col-sm-6 ">
           <label for="property-type">Property Type:</label>
-          <select class="form-control" id="property-type" name="property-type">
+          <select class="form-control" id="property-type" name="property-type" required>
             <option value="select">Select</option>
             <option value="House">House</option>
             <option value="Apartment">Apartment</option>
@@ -49,7 +49,7 @@
       <div class="row">
         <div class="col-lg-6 col-sm-6 ">
           <label for="property-for">Sale / Rent:</label>
-          <select class="form-control" id="property-for" name="property-for">
+          <select class="form-control" id="property-for" name="property-for" required>
             <option>Sale</option>
             <option>Rent</option>
           </select>
@@ -198,7 +198,7 @@
             </div>
             <div class="col-lg-6 col-sm-6">
               <label for="price">Price:</label>
-              <input type="number" class="form-control" placeholder="eg. 5000000" id="price" name="price">
+              <input type="number" class="form-control" placeholder="eg. 5000000" id="price" name="price" required>
             </div>
             <div class="col-lg-6 col-sm-6 ">
               <label for="price-per-unit">Price Per Unit:</label>
@@ -245,15 +245,19 @@
             <label for="zip-code">Zip Code:</label>
             <input type="text" class="form-control" placeholder="eg. 36000" id="zip-code" name="zip-code">
           </div>
-          <div class="col-lg-4 col-sm-4">
+          <div class="col-lg-3 col-sm-3">
             <label for="municipality">Municipality:</label>
             <input type="text" class="form-control" placeholder="eg. Bharatpur" id="municipality" name="municipality">
           </div>
-          <div class="col-lg-4 col-sm-4">
+          <div class="col-lg-3 col-sm-3">
+            <label for="city">City:</label>
+            <input type="text" class="form-control" placeholder="eg. Bharatpur" id="city" name="city">
+          </div>
+          <div class="col-lg-3 col-sm-3">
             <label for="ward-no">Ward No:</label>
             <input type="number" class="form-control" placeholder="Ward Number" id="ward-no" name="ward-no">
           </div>
-          <div class="col-lg-4 col-sm-4">
+          <div class="col-lg-3 col-sm-3">
             <label for="tole">Tole:</label>
             <input type="text" class="form-control" placeholder="Tole Name" id="tole" name="tole">
           </div>

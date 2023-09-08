@@ -33,21 +33,31 @@ def blogdetailspage(request):
 
 def buypage(request):
     properties = Property.objects.filter(property_for="Buyer")
+    latest_properties = Property.objects.order_by("-id")[:9]
     paginator = Paginator(properties, 12)  # Show 12 properties per page
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     total_properties = properties.count()
-    context = {"page_obj": page_obj, "total_properties": total_properties}
+    context = {
+        "page_obj": page_obj,
+        "total_properties": total_properties,
+        "latest_properties": latest_properties,
+    }
     return render(request, "buy.html", context)
 
 
 def rentpage(request):
     properties = Property.objects.filter(property_for="Renter")
+    latest_properties = Property.objects.order_by("-id")[:9]
     paginator = Paginator(properties, 12)  # Show 12 properties per page
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     total_properties = properties.count()
-    context = {"page_obj": page_obj, "total_properties": total_properties}
+    context = {
+        "page_obj": page_obj,
+        "total_properties": total_properties,
+        "latest_properties": latest_properties,
+    }
     return render(request, "rent.html", context)
 
 
@@ -106,6 +116,7 @@ def sellpage(request):
         full_description = request.POST.get("description")
         province = request.POST.get("province")
         district = request.POST.get("district")
+        city = request.POST.get("city")
         municipality = request.POST.get("municipality")
         ward_no = request.POST.get("ward-no")
         tole = request.POST.get("tole")
@@ -141,6 +152,7 @@ def sellpage(request):
             full_description=full_description,
             province=province,
             district=district,
+            city=city,
             municipality=municipality,
             ward_no=ward_no,
             tole=tole,
@@ -194,8 +206,15 @@ class propertyDetailsPage(DetailView):
         )
         # saving the instance to the database
         inquiry.save()
-        sucess = "Message sent Sucessfully."
-        context = {"property": property, "sucess": sucess}
+        success = "Message sent Sucessfully."
+
+        latest_properties = Property.objects.order_by("-id")[:4]
+
+        context = {
+            "property": property,
+            "success": success,
+            "latest_properties": latest_properties,
+        }
         return render(request, self.template_name, context)
 
 

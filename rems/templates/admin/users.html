@@ -5,8 +5,6 @@
 {% block content %}
 <div class="cardHeader">
     <h2>Users</h2>
-    <a href="{% url 'add_user' %}" class="btn-add">
-        <i class="fa-solid fa-plus"></i>Add User</a>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -14,26 +12,30 @@
         {% endfor %}
     </ul>
     {% endif %}
-    <table id="example" class="display">
-        <thead>
-            <th>S.N.</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>View Profile</th>
-        </thead>
-        {% if users %}
-        <tbody>
-            {% for user in users %}
-            <tr>
-                <td>{{forloop.counter}}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
-                <td><a href="{% url 'user-profile' user.id %}" class="btn-update"><i class="fa fa-eye"
-                            style="color: #ffffff;"></i></a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        {% endif %}
-    </table>
+    <div class="overflow-x">
+        <a href="{% url 'add_user' %}" class="btn-add">
+            <i class="fa-solid fa-plus"></i>Add User</a>
+        <table id="example" class="display">
+            <thead>
+                <th>S.N.</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>View Profile</th>
+            </thead>
+            {% if users %}
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td><a href="{% url 'user-profile' user.id %}" class="btn-update"><i class="fa fa-eye"
+                                style="color: #ffffff;"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        </table>
+    </div>
 </div>
 {% endblock %}

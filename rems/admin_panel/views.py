@@ -259,45 +259,80 @@ def PropertyList(request):
 @login_required(login_url=login)
 def UpdateProperty(request, property_id):
     property = get_object_or_404(Property, id=property_id)
+
     if request.method == "POST":
-        property.property_type = request.POST.get("property-type")
-        property.property_for = request.POST.get("property-for")
-        property.flat_number = request.POST.get("flat-number")
-        property.bedrooms = request.POST.get("bed-number")
-        property.bathrooms = request.POST.get("bath-number")
-        property.living_rooms = request.POST.get("living-number")
-        property.kitchens = request.POST.get("kitchen-number")
-        property.total_rooms = request.POST.get("total-number")
-        property.parking = request.POST.get("parking")
-        property.built_year = request.POST.get("built-year")
-        property.built_area = request.POST.get("built-area")
-        property.road_size = request.POST.get("road-size")
-        property.land_area = request.POST.get("land-area")
-        property.type = request.POST.get("type")
-        property.facing_direction = request.POST.get("facing-direction")
-        property.price = request.POST.get("property-price")
-        property.price_per_unit = request.POST.get("price-per-unit")
-        property.description = request.POST.get("description")
-        property.province = request.POST.get("province")
-        property.district = request.POST.get("district")
-        property.zip_code = request.POST.get("zip-code")
-        property.city = request.POST.get("city")
-        property.municipality = request.POST.get("municipality")
-        property.ward_no = request.POST.get("ward-no")
-        property.tole = request.POST.get("tole")
-        property.status = request.POST.get("status")
+        property_type = request.POST.get("property-type")
+        property_for = request.POST.get("property-for")
+        flat_number = request.POST.get("flat-number")
+        bedrooms = request.POST.get("bed-number")
+        bathrooms = request.POST.get("bath-number")
+        living_rooms = request.POST.get("living-number")
+        kitchens = request.POST.get("kitchen-number")
+        total_rooms = request.POST.get("total-number")
+        parking = request.POST.get("parking")
+        built_year = request.POST.get("built-year")
+        built_area = request.POST.get("built-area")
+        road_size = request.POST.get("road-size")
+        land_area = request.POST.get("land-area")
+        type = request.POST.get("type")
+        facing_direction = request.POST.get("facing-direction")
+        price = request.POST.get("property-price")
+        price_per_unit = request.POST.get("price-per-unit")
+        description = request.POST.get("description")
+        province = request.POST.get("province")
+        district = request.POST.get("district")
+        zip_code = request.POST.get("zip-code")
+        city = request.POST.get("city")
+        municipality = request.POST.get("municipality")
+        ward_no = request.POST.get("ward-no")
+        tole = request.POST.get("tole")
+        status = request.POST.get("status")
         featured = request.POST.get("featured", False)
-        property.featured = featured == "on"
+        featured = featured == "on"
 
-        if request.FILES.get("front-image"):
-            property.image = request.FILES.get("front-image")
-        if request.FILES.get("side-image"):
-            property.image_side = request.FILES.get("side-image")
-        if request.FILES.get("extra1-image"):
-            property.image_extra = request.FILES.get("extra1-image")
-        if request.FILES.get("extra2-image"):
-            property.image_extra2 = request.FILES.get("extra2-image")
+        image = request.FILES.get("front-image")
+        image_side = request.FILES.get("side-image")
+        image_extra = request.FILES.get("extra1-image")
+        image_extra2 = request.FILES.get("extra2-image")
 
+        property.property_type = property_type
+        property.property_for = property_for
+        property.flat_number = flat_number
+        property.bedrooms = bedrooms
+        property.bathrooms = bathrooms
+        property.living_rooms = living_rooms
+        property.kitchens = kitchens
+        property.total_rooms = total_rooms
+        property.parking = parking
+        property.built_year = built_year
+        property.built_area = built_area
+        property.road_size = road_size
+        property.land_area = land_area
+        property.type = type
+        property.facing_direction = facing_direction
+        property.price = price
+        property.price_per_unit = price_per_unit
+        property.description = description
+        property.province = province
+        property.district = district
+        property.zip_code = zip_code
+        property.city = city
+        property.municipality = municipality
+        property.ward_no = ward_no
+        property.tole = tole
+        property.status = status
+        property.featured = featured
+
+        if image:
+            property.image = image
+        if image_side:
+            property.image_side = image_side
+        if image_extra:
+            property.image_extra = image_extra
+        if image_extra2:
+            property.image_extra2 = image_extra2
+
+        # Save the updated property
         property.save()
         messages.success(request, f"Property has been updated successfully.")
         return redirect("update-property", property_id=property.id)
@@ -540,7 +575,7 @@ def SellRequestDelete(request, sellrequest_id):
     client_name = sellrequest.name
     client_email = sellrequest.email
     subject = "Your Request Has Been Declined."
-    message = f"Hello {client_name},\n Your sell request for {property_type} on {property_for} has been declined! \n\n\n Regards,\n RealEstate Nawalpur"
+    message = f"Hello {client_name},\nYour sell request for {property_type} on {property_for} has been declined! \n\n\nRegards,\nRealEstate Nawalpur"
     sender = settings.EMAIL_HOST_USER
 
     if subject and message and sender:
@@ -562,7 +597,7 @@ def SellRequestDelete(request, sellrequest_id):
 def Settings(request):
     user = request.user
     profile, created = Profile.objects.get_or_create(
-        user=user, defaults={"fullname": "", "phone_number": "", "email": user.email}
+        user=user, defaults={"fullname": "", "phone_number": "", "address": ""}
     )
     context = {"profile": profile}
     return render(request, "admin/setting.html", context)
@@ -571,22 +606,21 @@ def Settings(request):
 @login_required(login_url=login)
 def Update_OwnProfile(request):
     user = request.user
-    profile = user.profile
+    profile = Profile.objects.get(user=user)
 
     if request.method == "POST":
-        username = request.POST.get("username")  # Use request.POST.get for text input
-        full_name = request.POST.get("full-name")
+        # Retrieve form data
+        username = request.POST.get("username")
         email = request.POST.get("email")
-        phone_number = request.POST.get("phone")
+        fullname = request.POST.get("full-name")
         address = request.POST.get("address")
-        profile_picture = request.FILES.get("profile-picture")
+        phone_number = request.POST.get("phone")
 
-        # Check if the username is provided and not equal to the current user's username
-        if not username:
-            messages.error(request, "Username cannot be empty.")
-            return redirect("setting")
-
-        if username != user and User.objects.filter(username=username).exists():
+        # Check if the provided username is already taken by other users
+        if (
+            username != user.username
+            and User.objects.filter(username=username).exists()
+        ):
             messages.error(request, "Username already taken, try another.")
             return redirect("setting")
 
@@ -595,20 +629,19 @@ def Update_OwnProfile(request):
             messages.error(request, "This email address is already registered.")
             return redirect("setting")
 
+        # Update the user's information
         user.username = username
         user.email = email
         user.save()
 
-        profile.fullname = full_name
+        # Update the admin's profile
+        profile.fullname = fullname
         profile.phone_number = phone_number
         profile.address = address
-        if profile_picture:
-            profile.profile_picture = profile_picture
-
         profile.save()
-        messages.success(request, "Your profile has been updated successfully.")
-        return redirect("setting")
 
+        messages.success(request, "Profile updated successfully.")
+        return redirect("setting")
     context = {"profile": profile}
     return render(request, "admin/setting.html", context)
 

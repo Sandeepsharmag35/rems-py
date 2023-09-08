@@ -38,7 +38,8 @@
                     <td><img src="{{msg.property.image.url}}" width="80px" height="50px"></td>
                     <td>{{msg.received_at}}</td>
                     <td>
-                        <a href="{% url 'delete_message' msg.id %}" class="btn-delete">Delete</a>
+                        <a href="{% url 'delete_message' msg.id %}" class="btn-delete"
+                            onclick="return confirm('Are you sure you want to delete this message?');">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}

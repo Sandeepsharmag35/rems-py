@@ -1,6 +1,6 @@
 {% extends 'admin/dashboard.html' %}
 {% load static %}
-{% block title %}Add Property{% endblock %}
+{% block title %}Property Details{% endblock %}
 {% block extracssjs %}{% endblock %}
 {% block content %}
 <div class="go-back">
@@ -21,8 +21,8 @@
                 {% endfor %}
             </ul><br>
             {% endif %}
-            <form action="{% url 'update-property' property.id %}" method="POST" enctype="multipart/form-data"
-                class="animated-form">
+            <form method="post" action="{% url 'update-property' property.id %}" class="animated-form"
+                enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="left">
                         <label for="property-type">Property Type: <span class="required">*</span></label>
@@ -272,8 +272,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="{% static 'assets/admin/js/validate_image.js' %}"></script>
 <script>
     // getting references to the form and the two divs containing the fields
     const form = document.querySelector('form');
