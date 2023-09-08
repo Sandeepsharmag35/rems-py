@@ -43,7 +43,11 @@
                     </div>
                     <div class="left-col">
                         <label for="email">Email:</label>
-                        <input type="email" name="email" id="email" value="{{profile.email}}">
+                        <input type="email" name="email" id="email" value="{{profile.user.email}}">
+                    </div>
+                    <div class="left-col">
+                        <label for="address">Address:</label>
+                        <input type="text" name="address" id="address" value="{{profile.address}}">
                     </div>
                     <div class="left-col">
                         <label for="phone">Phone:</label>
@@ -70,6 +74,7 @@
                     </div>
                 </div>
             </form>
+
             <div id="popup1" class="overlay">
                 <div class="popup">
                     <h2>Change password:</h2>

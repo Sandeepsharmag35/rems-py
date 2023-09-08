@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from app.models import CustomerMessage, Property, SellRequest
@@ -82,7 +82,7 @@ def Customers(request):
 def CustomersProfile(request, user_id):
     user = get_object_or_404(User, id=user_id)
     profile, created = Profile.objects.get_or_create(
-        user=user, defaults={"fullname": "", "phone_number": "", "email": user.email}
+        user=user, defaults={"fullname": "", "phone_number": ""}
     )
     context = {"profile": profile}
     return render(request, "admin/user_profile.html", context)
@@ -137,18 +137,30 @@ def AddUser(request):
 def Update_Customer(request, profile_id):
     profile = get_object_or_404(Profile, id=profile_id)
     user = profile.user
-    username = user.username
 
     if request.method == "POST":
+        username = request.POST.get("username")
         full_name = request.POST.get("full-name")
         email = request.POST.get("email")
         phone_number = request.POST.get("phone")
+        address = request.POST.get("address")
         profile_picture = request.FILES.get("profile-picture")
+
+        if username != user and User.objects.filter(username=username).exists():
+            messages.error(request, "Username already taken, try another.")
+            return redirect("user-profile", user_id=user.id)
+
+        if email != user.email and User.objects.filter(email=email).exists():
+            messages.error(request, "This email address is already registered.")
+            return redirect("user-profile", user_id=user.id)
+        user.username = username
+        user.email = email
+        user.save()
 
         # Update the user's profile
         profile.fullname = full_name
-        profile.email = email
         profile.phone_number = phone_number
+        profile.address = address
         profile.profile_picture = profile_picture
 
         profile.save()
@@ -562,24 +574,41 @@ def Update_OwnProfile(request):
     profile = user.profile
 
     if request.method == "POST":
+        username = request.POST.get("username")  # Use request.POST.get for text input
         full_name = request.POST.get("full-name")
         email = request.POST.get("email")
         phone_number = request.POST.get("phone")
+        address = request.POST.get("address")
         profile_picture = request.FILES.get("profile-picture")
 
-        # Update the profile
+        # Check if the username is provided and not equal to the current user's username
+        if not username:
+            messages.error(request, "Username cannot be empty.")
+            return redirect("setting")
+
+        if username != user and User.objects.filter(username=username).exists():
+            messages.error(request, "Username already taken, try another.")
+            return redirect("setting")
+
+        # Check if the provided email is already registered by other users
+        if email != user.email and User.objects.filter(email=email).exists():
+            messages.error(request, "This email address is already registered.")
+            return redirect("setting")
+
+        user.username = username
+        user.email = email
+        user.save()
+
         profile.fullname = full_name
-        profile.email = email
         profile.phone_number = phone_number
+        profile.address = address
         if profile_picture:
             profile.profile_picture = profile_picture
 
         profile.save()
-        messages.success(
-            request, f"The user @'{user}''s profile has been updated successfully."
-        )
-
+        messages.success(request, "Your profile has been updated successfully.")
         return redirect("setting")
+
     context = {"profile": profile}
     return render(request, "admin/setting.html", context)
 

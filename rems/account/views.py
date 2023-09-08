@@ -73,9 +73,9 @@ def RegisterPage(request):
 
 def Loginpage(request):
     if request.method == "POST":
-        usrname = request.POST["user_name"]
+        username = request.POST["user_name"]
         passw = request.POST["user_password"]
-        user = authenticate(request, username=usrname, password=passw)
+        user = authenticate(request, username=username, password=passw)
 
         if user is not None:
             login(request, user)
@@ -101,45 +101,62 @@ def Homepage(request):
 @login_required(login_url=login)
 def ProfilePage(request):
     user = request.user
+
     try:
         profile = Profile.objects.get(user=user)
         is_new_profile = False
     except Profile.DoesNotExist:
         profile = None
         is_new_profile = True
+
     success_message = None
 
     if request.method == "POST":
-        user = request.user
-        email = request.POST["email"]
-        fullname = request.POST["full-name"]
-        phone_number = request.POST["phone-number"]
-        address = request.POST["address"]
-        profile_picture = request.FILES["profile-picture"]
+        # Get form data using request.POST.get() to avoid potential errors
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        fullname = request.POST.get("full-name")
+        phone_number = request.POST.get("phone-number")
+        address = request.POST.get("address")
+        profile_picture = request.FILES.get("profile-picture")
+
+        # Check if the username and email is already registered
+        if username != user and User.objects.filter(username=username).exists():
+            messages.error(request, "Username already taken, try another.")
+            return redirect("profile")
+
+        if email != user.email and User.objects.filter(email=email).exists():
+            messages.error(request, "This email address is already registered.")
+            return redirect("profile")
+        user.username = username
+        user.email = email
+        user.save()
 
         if is_new_profile:
             profile_data = Profile.objects.create(
                 user=user,
-                email=email,
                 fullname=fullname,
                 phone_number=phone_number,
                 address=address,
                 profile_picture=profile_picture,
             )
-            success_message = "Profile saved sucessfully."
+            success_message = "Profile saved successfully."
         else:
             profile.fullname = fullname
             profile.phone_number = phone_number
             profile.address = address
-            profile.profile_picture = profile_picture
+            if profile_picture:
+                profile.profile_picture = profile_picture
 
             profile.save()
-            success_message = "Profile updated sucessfully."
+
+            success_message = "Profile updated successfully."
+
         messages.success(request, success_message)
         return redirect("profile")
 
     context = {
-        "user": request.user,
+        "user": user,
         "profile": profile,
         "is_new_profile": is_new_profile,
     }
