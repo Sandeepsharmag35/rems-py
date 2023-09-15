@@ -1,7 +1,8 @@
 {% extends 'admin/dashboard.html' %}
 {% load static %}
 {% block title %}Property Details{% endblock %}
-{% block extracssjs %}{% endblock %}
+{% block extracssjs %}
+{% endblock %}
 {% block content %}
 <div class="go-back">
     <a href="javascript:void(0);" onclick="window.history.back();">
@@ -13,21 +14,22 @@
 <div class="insider">
     <div class="row">
         <div class="cardHeader">
-            <h2>Property Details</h2>
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul><br>
-            {% endif %}
-            <form method="post" action="{% url 'update-property' property.id %}" class="animated-form"
-                enctype="multipart/form-data">
+            <form method="post" action="{% url 'update-property' property.id %}" enctype="multipart/form-data"
+                class="animated-form">
+                {% csrf_token %}
+                <h2>Property Details</h2>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul><br>
+                {% endif %}
                 <div class="form-group">
                     <div class="left">
                         <label for="property-type">Property Type: <span class="required">*</span></label>
                         <select id="property-type" name="property-type" required>
-                            <option>{{ property.property_type }}</option>
+                            <option selected>{{ property.property_type }}</option>
                             <option>House</option>
                             <option>Land</option>
                             <option>Apartment</option>
@@ -37,7 +39,7 @@
                     <div class="right">
                         <label for="property-for">Property For: <span class="required">*</span></label>
                         <select value="{{ property.property_for }}" id="property-for" name="property-for" required>
-                            <option>{{ property.property_for }}</option>
+                            <option selected>{{ property.property_for }}</option>
                             <option>Buyer</option>
                             <option>Renter</option>
                         </select>
@@ -111,7 +113,7 @@
                         <div class="middle">
                             <label for="facing-direction">Facing Direction: <span class="required">*</span></label>
                             <select class="form-control" id="facing-direction" name="facing-direction" required>
-                                <option>{{ property.facing_direction }}</option>
+                                <option selected>{{ property.facing_direction }}</option>
                                 <option>East</option>
                                 <option>West</option>
                                 <option>North</option>
@@ -143,7 +145,7 @@
                     <div class="middle">
                         <label for="province">Province: </label>
                         <select class="form-control" id="province" name="province">
-                            <option>{{ property.province }}</option>
+                            <option selected>{{ property.province }}</option>
                             <option>Province 1</option>
                             <option>Province 2</option>
                             <option>Bagmati</option>
@@ -185,7 +187,7 @@
                 <div class="form-group">
                     <label for="status">Status: </label>
                     <select id="status" name="status">
-                        <option>{{ property.status }}</option>
+                        <option selected>{{ property.status }}</option>
                         <option>Available</option>
                         <option>Sold</option>
                         <option>Rented</option>
@@ -261,7 +263,7 @@
                 </div>
                 <div class="form-group">
                     <div class="left">
-                        <button type="submit" class="btn-update">Update</button>
+                        <button type="submit"> Update</button>
                     </div>
                     <div class="right">
                         <a href="{% url 'delete-property' property.id %}"
