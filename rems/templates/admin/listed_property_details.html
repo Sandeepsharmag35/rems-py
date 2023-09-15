@@ -212,7 +212,7 @@
                                 id="front-pic" />
                             {% endif %}
                             <input type="file" name="front-image" id="front-image"
-                                accept="image/png, image/jpg, image/jpeg" required>
+                                accept="image/png, image/jpg, image/jpeg">
                             <label for="front-image">Upload</label>
                         </div>
                     </div>
@@ -294,4 +294,16 @@
     });
 </script>
 <script src="{% static 'assets/admin/js/validate_image.js' %}"></script>
+<script>
+    const PropertyForm = document.querySelector('form');
+    const PropertyFrontPicInput = document.getElementById('front-image');
+
+    form.addEventListener('submit', function (event) {
+        if (!PropertyFrontPicInput.files[0]) {
+            event.preventDefault(); // Prevent form submission if the front image is not selected.
+            alert('Please select a front image.');
+        }
+    });
+
+</script>
 {% endblock %}
