@@ -85,7 +85,7 @@ def contactpage(request):
             messages.success(request, success_message)
             return redirect("contact")
         except BadHeaderError:
-            error_message = "Message sent successfully"
+            error_message = "Message failed to send"
             messages.error(request, error_message)
             return redirect("contact")
 
