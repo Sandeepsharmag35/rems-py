@@ -29,8 +29,8 @@
   <script type="text/javascript" src="{% static 'assets/slitslider/js/jquery.ba-cond.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'assets/slitslider/js/jquery.slitslider.js' %}"></script>
   <!-- slitslider -->
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel=icon href="/favicon.ico" sizes="20x20" type="image/.ico" />
+  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+  <link rel=icon href="{% static 'favicon.ico' %}" sizes="20x20" type="image/.ico" />
 </head>
 
 <body>
@@ -78,8 +78,11 @@
 
     <!-- Header Starts -->
     <div class="header">
+      {% if user.is_authenticated %}
       <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Realestate"></a>
-
+      {% else %}
+      <a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Realestate"></a>
+      {% endif %}
       <ul class="pull-right">
         <li><a href="{% url 'buy' %}">Buy</a></li>
         <li><a href="{% url 'sell' %}">Sell</a></li>
