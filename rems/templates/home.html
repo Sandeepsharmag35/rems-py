@@ -12,12 +12,6 @@
 
 {% endblock %}
 
-{% block sellpage %}
-{% if user.is_authenticated %}
-<li><a href="{% url 'sell' %}">Sell</a></li>
-{% endif %}
-{% endblock %}
-
 {% block loginstatus %}
 {% if user.is_authenticated %}
 <li class="nav-item dropdown">

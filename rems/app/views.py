@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -91,7 +91,7 @@ def contactpage(request):
 
     return render(request, "contact.html")
 
-
+@login_required(login_url='login')
 def sellpage(request):
     if request.method == "POST":
         # Retrieve form field values
