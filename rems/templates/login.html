@@ -7,7 +7,11 @@
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
+    {% if user.is_authenticated %}
     <span class="pull-right"><a href="{% url 'index' %}">Home</a> / Login</span>
+    {% else %}
+    <span class="pull-right"><a href="{% url 'index' %}">Home</a> / Login</span>
+    {% endif %}
     <h2>Login</h2>
   </div>
 </div>

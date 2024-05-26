@@ -68,7 +68,11 @@
                                     Look like you're lost
                                 </h2>
                                 <p>The page you are looking for not avaible!</p>
+                                {% if user.is_authenticated %}
                                 <a href="{% url 'home' %}" class="link_404">Go to Home</a>
+                                {% else %}
+                                <a href="{% url 'index' %}" class="link_404">Go to Home</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

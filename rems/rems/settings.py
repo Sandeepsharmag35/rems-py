@@ -28,7 +28,13 @@ SECRET_KEY = 'django-insecure-a!*^(xv(c85-4h*yqu+ua#_!c$&46&lmv7f@y&26j!(thw6cts
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://rems.sharmasandip.com.np', '*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://sharmasandip.com',
+    'https://www.sharmasandip.com',
+    'https://rems.sharmasandip.com.np'
+]
 
 
 # Application definition

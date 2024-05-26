@@ -6,7 +6,11 @@
 <!-- banner -->
 <div class="inside-banner">
   <div class="container">
+    {% if user.is_authenticated %}
     <span class="pull-right"><a href="{% url 'home' %}">Home</a> / Contact Us</span>
+    {% else %}
+    <span class="pull-right"><a href="{% url 'index' %}">Home</a> / Contact Us</span>
+    {% endif %}
     <h2>Contact Us</h2>
   </div>
 </div>

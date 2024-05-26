@@ -7,10 +7,18 @@
 <div class="inside-banner">
   <div class="container">
     {% if property.property_for == 'Buyer' %}
+    {% if user.is_authenticated %}
     <span class="pull-right"><a href="{% url 'home' %}">Home</a> / Buy</span>
+    {% else %}
+    <span class="pull-right"><a href="{% url 'index' %}">Home</a> / Buy</span>
+    {% endif %}
     <h2>Buy</h2>
     {% else %}
+    {% if user.is_authenticated %}
     <span class="pull-right"><a href="{% url 'home' %}">Home</a> / Rent</span>
+    {% else %}
+    <span class="pull-right"><a href="{% url 'index' %}">Home</a> / Rent</span>
+    {% endif %}
     <h2>Rent</h2>
     {% endif %}
   </div>
