@@ -36,7 +36,6 @@ CSRF_TRUSTED_ORIGINS = [
     'https://rems.sharmasandip.com.np'
 ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
