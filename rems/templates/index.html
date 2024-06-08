@@ -103,7 +103,8 @@
       <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="10" data-slice2-rotation="-5"
         data-slice1-scale="1.5" data-slice2-scale="1.5">
         <div class="sl-slide-inner">
-          <div><img class="bg-img" src="{{ property.image.url }}" style="aspect-ratio: 16/9;"></div>
+          <div><img class="bg-img" src="{{ property.image.url }}" style="aspect-ratio: 16/9;">
+          </div>
           <h2>
             {% if property.property_for == 'Buyer' %}
             <a href="{% url 'property-details' 'buy' property.pk %}">
